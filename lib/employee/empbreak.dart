@@ -1,5 +1,10 @@
 import 'dart:async';
+import 'dart:math';
 
+import 'package:animated_icon/animated_icon.dart';
+import 'package:elegant_notification/elegant_notification.dart';
+import 'package:elegant_notification/resources/arrays.dart';
+import 'package:elegant_notification/resources/stacked_options.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/emp_model/breaktimemodel.dart';
 import 'package:employee_management/getx/getx.dart';
@@ -173,29 +178,18 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                                   endbreak: _endTime.toString(),
                                   timetaken: _difference.toString());
                               getx.timebreaklist.add(btm);
-                              // Get.showSnackbar(GetSnackBar(
-                              //   isDismissible: true,
-                              //   snackPosition: SnackPosition.TOP,
-                              //   // title: 'Time break added successfully',
-                              //   titleText: Text('Break Time'),
-                              //   // message: 'jjj',
-                              //   messageText:
-                              //       Text('Time break added successfully'),
-                              //   backgroundColor: Colors.green,
-                              // ));
-                              Get.snackbar(
-                                  // barBlur: 20,
-                                  backgroundColor:
-                                      Color.fromARGB(255, 16, 137, 20),
-                                  colorText: Colors.white,
-                                  'Break Time',
-                                  'Time break added successfully',
-                                  snackPosition: SnackPosition.values[0]);
+
+                              ElegantNotification.success(
+                                width: 360,
+                                title: const Text("Update"),
+                                description:
+                                    const Text("Your data has been updated"),
+                              ).show(context);
                             },
                             child: Container(
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     // borderRadius: BorderRadius.circular(10),
-                                    gradient: const LinearGradient(colors: [
+                                    gradient: LinearGradient(colors: [
                                   Color.fromARGB(255, 249, 17, 5),
                                   Colors.red,
                                 ])),
@@ -281,6 +275,16 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                       borderRadius: BorderRadius.circular(15),
                     ))),
               ),
+            ),
+            // CircleAvatar()
+            AnimateIcon(
+              key: UniqueKey(),
+              onTap: () {},
+              iconType: IconType.continueAnimation,
+              height: 70,
+              width: 70,
+              color: ColorPage.buttoncolor1,
+              animateIcon: AnimateIcons.bell,
             )
           ],
         ),

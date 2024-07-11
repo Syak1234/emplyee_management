@@ -1,5 +1,7 @@
+import 'package:employee_management/employee/empattendance.dart';
 import 'package:employee_management/employee/empbreak.dart';
 import 'package:employee_management/employee/empdrawer.dart';
+import 'package:employee_management/employee/empleave.dart';
 import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,13 +29,9 @@ class _EmpDashboardState extends State<EmpDashboard> {
       Container(
         child: Text('data'),
       ),
-      Container(
-        child: Text('data'),
-      ),
+      EmpAttendance(),
       const EmpBreakTime(),
-      Container(
-        child: Text('data'),
-      ),
+      EmpLeave(),
       Container(
         child: Text('data'),
       ),
@@ -57,7 +55,10 @@ class _EmpDashboardState extends State<EmpDashboard> {
       appBar: isSmallScreen
           ? AppBar(
               backgroundColor: canvasColor,
-              title: Text('ABC'),
+              title: Text(
+                'ABC',
+                style: TextStyle(color: Colors.white),
+              ),
               leading: IconButton(
                 onPressed: () {
                   // if (!Platform.isAndroid && !Platform.isIOS) {

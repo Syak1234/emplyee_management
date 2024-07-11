@@ -71,9 +71,15 @@ class ExampleSidebarX extends StatelessWidget {
       headerBuilder: (context, extended) {
         return SizedBox(
           height: 100,
-          child: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: CircleAvatar(child: Icon(Icons.person)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircleAvatar(child: Icon(Icons.person)),
+              Text(
+                ' Nexa CRM',
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              )
+            ],
           ),
         );
       },
