@@ -1,3 +1,4 @@
+import 'package:employee_management/admin/admin_model/adminEmpAdd.dart';
 import 'package:employee_management/employee/emp_model/attendancemodel.dart';
 import 'package:employee_management/employee/emp_model/breaktimemodel.dart';
 import 'package:employee_management/employee/emp_model/leavemodel.dart';
@@ -13,4 +14,11 @@ class Getx extends GetxController {
   List<LeaveModel> leavelist = <LeaveModel>[].obs;
   RxString breaktimer = "".obs;
   RxBool showloginpage = false.obs;
+  RxString projecttype = "Type".obs;
+
+  //Employee
+  RxList<AdminEmpAdd> empaddList = <AdminEmpAdd>[].obs;
+  RxString adminEmpselectedbutton = "SEO".obs;
+
+
 }

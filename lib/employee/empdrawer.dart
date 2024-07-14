@@ -68,21 +68,12 @@ class ExampleSidebarX extends StatelessWidget {
         ),
       ),
       footerDivider: divider,
-      headerBuilder: (context, extended) {
-        return SizedBox(
-          height: 100,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircleAvatar(child: Icon(Icons.person)),
-              Text(
-                ' Nexa CRM',
-                style: TextStyle(color: Colors.white, fontSize: 25),
-              )
-            ],
-          ),
-        );
-      },
+      // showToggleButton: false,
+
+      headerDivider: Padding(
+        padding: EdgeInsets.only(bottom: 10),
+      ),
+
       items: [
         SidebarXItem(
           icon: Icons.home,
@@ -146,71 +137,71 @@ class ExampleSidebarX extends StatelessWidget {
   }
 }
 
-class ScreensExample extends StatelessWidget {
-  const ScreensExample({
-    Key? key,
-    required this.controller,
-  }) : super(key: key);
+// class ScreensExample extends StatelessWidget {
+//   const ScreensExample({
+//     Key? key,
+//     required this.controller,
+//   }) : super(key: key);
 
-  final SidebarXController controller;
+//   final SidebarXController controller;
 
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return AnimatedBuilder(
-      animation: controller,
-      builder: (context, child) {
-        final pageTitle = getTitleByIndex(controller.selectedIndex, context);
-        switch (controller.selectedIndex) {
-          case 0:
-            return ListView.builder(
-              padding: const EdgeInsets.only(top: 10),
-              itemBuilder: (context, index) => Container(
-                height: 100,
-                width: double.infinity,
-                margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Theme.of(context).canvasColor,
-                  boxShadow: const [BoxShadow()],
-                ),
-              ),
-            );
-          default:
-            return Text(
-              pageTitle.toString(),
-              style: theme.textTheme.headlineSmall,
-            );
-        }
-      },
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final theme = Theme.of(context);
+//     return AnimatedBuilder(
+//       animation: controller,
+//       builder: (context, child) {
+//         final pageTitle = getTitleByIndex(controller.selectedIndex, context);
+//         switch (controller.selectedIndex) {
+//           case 0:
+//             return ListView.builder(
+//               padding: const EdgeInsets.only(top: 10),
+//               itemBuilder: (context, index) => Container(
+//                 height: 100,
+//                 width: double.infinity,
+//                 margin: const EdgeInsets.only(bottom: 10, right: 10, left: 10),
+//                 decoration: BoxDecoration(
+//                   borderRadius: BorderRadius.circular(20),
+//                   color: Theme.of(context).canvasColor,
+//                   boxShadow: const [BoxShadow()],
+//                 ),
+//               ),
+//             );
+//           default:
+//             return Text(
+//               pageTitle.toString(),
+//               style: theme.textTheme.headlineSmall,
+//             );
+//         }
+//       },
+//     );
+//   }
+// }
 
-Object getTitleByIndex(int index, BuildContext context) {
-  switch (index) {
-    case 0:
-      return showDialog(
-          context: context,
-          builder: (context) {
-            return EmpBreakTime();
-          });
-    case 1:
-      return 'Search';
-    case 2:
-      return 'People';
-    case 3:
-      return 'Favorites';
-    case 4:
-      return 'Custom iconWidget';
-    case 5:
-      return 'Profile';
-    case 6:
-      return 'Settings';
-    default:
-      return 'Not found page';
-  }
-}
+// Object getTitleByIndex(int index, BuildContext context) {
+//   switch (index) {
+//     case 0:
+//       return showDialog(
+//           context: context,
+//           builder: (context) {
+//             return EmpBreakTime();
+//           });
+//     case 1:
+//       return 'Search';
+//     case 2:
+//       return 'People';
+//     case 3:
+//       return 'Favorites';
+//     case 4:
+//       return 'Custom iconWidget';
+//     case 5:
+//       return 'Profile';
+//     case 6:
+//       return 'Settings';
+//     default:
+//       return 'Not found page';
+//   }
+// }
 
 const primaryColor = Color(0xFF685BFF);
 const canvasColor = Color.fromARGB(255, 24, 31, 50);

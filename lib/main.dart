@@ -1,3 +1,5 @@
+import 'package:employee_management/admin/adminEmpList.dart';
+import 'package:employee_management/admin/admindashboard.dart';
 import 'package:employee_management/employee/empbreak.dart';
 import 'package:employee_management/employee/empdashboard.dart';
 import 'package:employee_management/employee/empsignup.dart';
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const EmpSignUp(),
+      home: const AdminEmpList(),
     );
   }
 }
