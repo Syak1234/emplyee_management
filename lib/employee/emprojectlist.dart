@@ -64,6 +64,7 @@ class _EmpProjectListState extends State<EmpProjectList> {
                         )),
                   ),
                 ),
+               
                 Flexible(
                   flex: 2,
                   child: Card(

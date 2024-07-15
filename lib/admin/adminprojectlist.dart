@@ -1,3 +1,4 @@
+import 'package:board_datetime_picker/board_datetime_picker.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class AdminProjectList extends StatefulWidget {
 
 class _AdminProjectListState extends State<AdminProjectList> {
   Getx getx = Get.put(Getx());
+  TextEditingController datePickerController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,152 +29,81 @@ class _AdminProjectListState extends State<AdminProjectList> {
                   flex: 2,
                   child: Card(
                     elevation: 4,
-                    child: DropdownButtonFormField<String>(
-                      decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        // prefixIcon: Icon(
-                        //   Icons.type_specimen,
-                        //   color: Colors.grey,
-                        // ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 0.5, color: Colors.grey),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 0.5, color: Colors.grey),
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 0.5, color: Colors.grey),
-                        ),
-                      ),
-                      hint: Text('Keyword'.toUpperCase()),
-                      items: <String>[
-                        'Abc'
-                            "Classified ads",
-                        "Business Listing",
-                        "Infographic Submission",
-                        "Image Submission",
-                        "PDF Submission",
-                        "PPT Submission",
-                        "Guest Posting",
-                        "Blog Submission",
-                        "Article Submission",
-                        "Comment Posting",
-                        "Q&A Submission",
-                        "Web Blog Submission",
-                        "Video Submission",
-                        "Map Listing",
-                        "Directory Submission",
-                        "Ping Submission",
-                        "Social Bookmarking",
-                        "GMB Posting",
-                        "Profile Creation",
-                        "Press Release",
-                        "Forum Submission",
-                        "Event Submission",
-                        "Other Listings",
-                        "Website Audit",
-                        "Competitor Analysis",
-                        "Keyword Research",
-                        "Meta Setup"
-                      ].map<DropdownMenuItem<String>>((String e) {
-                        return DropdownMenuItem(
-                          value: e,
-                          child: Text(
-                            e,
-                            overflow: TextOverflow.ellipsis,
+                    child: Container(
+                        // decoration: decoration,
+                        alignment: Alignment.center,
+                        // width: 200,
+                        // padding: EdgeInsets.all(8),
+                        child: TextFormField(
+                          maxLines: 1,
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: ColorPage.white,
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 0.5, color: Colors.grey)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 0.5, color: Colors.grey)),
+                            border: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 0.5, color: Colors.grey)),
+                            // prefixIcon: Icon(
+                            //   Icons.link,
+                            //   // color: Colors.white,
+                            // ),
+                            // hintStyle: TextStyle(color: Colors.black),
+                            hintText: 'KEYWORD',
+                            // helperText: '',
                           ),
-                        );
-                      }).toList(),
-                      onChanged: (v) {
-                        getx.adminprojectlistselectedkeywordbutton.value = v!;
-                      },
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Cannot be null';
-                        }
-                        return null;
-                      },
-                    ),
+                        )),
                   ),
                 ),
                 Flexible(
                   flex: 2,
                   child: Card(
                     elevation: 4,
-                    child: DropdownButtonFormField<String>(
-                      decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        // prefixIcon: Icon(
-                        //   Icons.type_specimen,
-                        //   color: Colors.grey,
-                        // ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 0.5, color: Colors.grey),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 0.5, color: Colors.grey),
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 0.5, color: Colors.grey),
-                        ),
-                      ),
-                      hint: Text('Filter'.toUpperCase()),
-                      items: <String>[
-                        'Date Wise'
-                            "Classified ads",
-                        "Business Listing",
-                        "Infographic Submission",
-                        "Image Submission",
-                        "PDF Submission",
-                        "PPT Submission",
-                        "Guest Posting",
-                        "Blog Submission",
-                        "Article Submission",
-                        "Comment Posting",
-                        "Q&A Submission",
-                        "Web Blog Submission",
-                        "Video Submission",
-                        "Map Listing",
-                        "Directory Submission",
-                        "Ping Submission",
-                        "Social Bookmarking",
-                        "GMB Posting",
-                        "Profile Creation",
-                        "Press Release",
-                        "Forum Submission",
-                        "Event Submission",
-                        "Other Listings",
-                        "Website Audit",
-                        "Competitor Analysis",
-                        "Keyword Research",
-                        "Meta Setup"
-                      ].map<DropdownMenuItem<String>>((String e) {
-                        return DropdownMenuItem(
-                          value: e,
-                          child: Text(
-                            e,
-                            overflow: TextOverflow.ellipsis,
+                    child: Container(
+                        // decoration: decoration,
+                        alignment: Alignment.center,
+                        // width: 200,
+                        // padding: EdgeInsets.all(8),
+                        child: TextFormField(
+                          maxLines: 1,
+                          controller: datePickerController,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: ColorPage.white,
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 0.5, color: Colors.grey)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 0.5, color: Colors.grey)),
+                            border: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 0.5, color: Colors.grey)),
+                            suffixIcon: IconButton(
+                              onPressed: () async {
+                                final result =
+                                    await showBoardDateTimeMultiPicker(
+                                  context: context,
+                                  pickerType: DateTimePickerType.datetime,
+                                );
+                                datePickerController.text =
+                                    '${result?.start}${result!.end}';
+                                setState(() {});
+                              },
+                              icon: Icon(
+                                Icons.date_range,
+                                // color: Colors.white,
+                              ),
+                            ),
+                            // hintStyle: TextStyle(color: Colors.black),
+                            hintText: 'DATE',
+                            // helperText: '',
                           ),
-                        );
-                      }).toList(),
-                      onChanged: (v) {
-                        getx.adminprojectlistselectedfilterbutton.value = v!;
-                      },
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Cannot be null';
-                        }
-                        return null;
-                      },
-                    ),
+                        )),
                   ),
                 ),
                 Flexible(
@@ -426,7 +357,7 @@ class _AdminProjectListState extends State<AdminProjectList> {
                         alignment: Alignment.center,
                         // width: 200,
                         child: Text(
-                          'Submit',
+                          'Search',
                           style: TextStyle(
                               color: ColorPage.white,
                               fontSize: 20,
