@@ -1,3 +1,4 @@
+import 'package:employee_management/admin/admindashboard.dart';
 import 'package:employee_management/employee/empdashboard.dart';
 import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/cupertino.dart';
@@ -186,8 +187,7 @@ class _EmpSignUpState extends State<EmpSignUp> {
                                               width: MediaQuery.sizeOf(context)
                                                       .width -
                                                   1100,
-                                              child: 
-                                              TextFormField(
+                                              child: TextFormField(
                                                 decoration:
                                                     const InputDecoration(
                                                   filled: true,
@@ -204,7 +204,6 @@ class _EmpSignUpState extends State<EmpSignUp> {
                                                   // helperText: '',
                                                 ),
                                               ))
-                                        
                                         ],
                                       ),
                                     ),
@@ -585,8 +584,7 @@ class _EmpSignUpState extends State<EmpSignUp> {
                                                     MediaQuery.sizeOf(context)
                                                             .width -
                                                         1100,
-                                                child:
-                                                 DropdownButtonFormField<
+                                                child: DropdownButtonFormField<
                                                     String>(
                                                   decoration:
                                                       const InputDecoration(
@@ -629,8 +627,6 @@ class _EmpSignUpState extends State<EmpSignUp> {
                                                     return null;
                                                   },
                                                 )),
-                                          
-                                          
                                           )
                                         ],
                                       ),
@@ -738,7 +734,7 @@ class _EmpSignUpState extends State<EmpSignUp> {
                                                   // if (gk.currentState!
                                                   //     .validate()) {
                                                   Get.to(() =>
-                                                      const EmpDashboard());
+                                                      const AdminDashboard());
                                                 },
                                                 child: Text(
                                                   'Login'.toUpperCase(),

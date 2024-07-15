@@ -1,15 +1,10 @@
-import 'package:animated_icon/animated_icon.dart';
 import 'package:employee_management/color/color.dart';
-import 'package:employee_management/employee/empdrawer.dart';
 import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:sidebarx/sidebarx.dart';
 
 class EmpProjectList extends StatefulWidget {
   EmpProjectList({super.key});
-
   @override
   State<EmpProjectList> createState() => _EmpProjectListState();
 }
@@ -19,13 +14,10 @@ class _EmpProjectListState extends State<EmpProjectList> {
 
   Getx getx = Get.put(Getx());
   BoxDecoration decoration = const BoxDecoration(
-      // borderRadius: BorderRadius.circular(10),
       gradient: LinearGradient(colors: [
     Color.fromARGB(255, 5, 103, 249),
     Colors.blue,
-  ])
-      // color: Color.fromARGB(81, 14, 14, 28),
-      );
+  ]));
   @override
   Widget build(BuildContext context) {
     // final isSmallScreen = MediaQuery.of(context).size.width < 700;
@@ -181,7 +173,6 @@ class _EmpProjectListState extends State<EmpProjectList> {
                     ),
                   ),
                 ),
-               
                 Flexible(
                   flex: 1,
                   child: Card(
@@ -293,8 +284,10 @@ class _EmpProjectListState extends State<EmpProjectList> {
                         )),
                   ),
                 ),
+             
               ],
             ),
+            
             Padding(
               padding: const EdgeInsets.only(top: 20, bottom: 10),
               child: Container(
@@ -421,7 +414,6 @@ class _EmpProjectListState extends State<EmpProjectList> {
                 ),
               ),
             ),
-            
             Expanded(
               child: ListView.builder(
                   shrinkWrap: true,
@@ -441,8 +433,7 @@ class _EmpProjectListState extends State<EmpProjectList> {
                         padding:
                             EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                         // width: 200,
-                        child:
-                         Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Flexible(
@@ -598,7 +589,6 @@ class _EmpProjectListState extends State<EmpProjectList> {
                             ),
                           ],
                         ));
-                  
                   }),
             ),
           ],

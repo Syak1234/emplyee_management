@@ -1,23 +1,22 @@
-import 'package:animated_icon/animated_icon.dart';
+import 'package:employee_management/admin/adminProjectDrawer.dart';
+import 'package:employee_management/admin/adminprojectshow.dart';
 import 'package:employee_management/color/color.dart';
-import 'package:employee_management/employee/empattendance.dart';
-import 'package:employee_management/employee/empbreak.dart';
 import 'package:employee_management/employee/empdrawer.dart';
-import 'package:employee_management/employee/empleave.dart';
-import 'package:employee_management/employee/empproject.dart';
-import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:sidebarx/sidebarx.dart';
 
-class EmpDashboard extends StatefulWidget {
-  const EmpDashboard({super.key});
+import '../getx/getx.dart';
+
+class AdminHomePage extends StatefulWidget {
+  const AdminHomePage({super.key});
 
   @override
-  State<EmpDashboard> createState() => _EmpDashboardState();
+  State<AdminHomePage> createState() => _AdminHomePageState();
 }
 
-class _EmpDashboardState extends State<EmpDashboard> {
+class _AdminHomePageState extends State<AdminHomePage> {
   Getx getx = Get.put(Getx());
   final _controller = SidebarXController(selectedIndex: 0, extended: true);
   final _key = GlobalKey<ScaffoldState>();
@@ -27,16 +26,7 @@ class _EmpDashboardState extends State<EmpDashboard> {
   @override
   void initState() {
     page = [
-      EmpProject(),
-      EmpAttendance(),
-      const EmpBreakTime(),
-      EmpLeave(),
-      Container(
-        child: Text('data'),
-      ),
-      Container(
-        child: Text('data'),
-      ),
+      AdminprojectShow(),
       Container(
         child: Text('data'),
       ),
@@ -51,13 +41,11 @@ class _EmpDashboardState extends State<EmpDashboard> {
 
     return Scaffold(
       key: _key,
-      appBar:
-       !isSmallScreen
-          ? 
-          AppBar(
+      appBar: !isSmallScreen
+          ? AppBar(
               toolbarHeight: 65,
               automaticallyImplyLeading: false,
-              backgroundColor: canvasColor,
+              backgroundColor: ColorPage.canvasColor,
               title: Row(
                 children: [
                   CircleAvatar(
@@ -74,21 +62,44 @@ class _EmpDashboardState extends State<EmpDashboard> {
                 ],
               ),
               actions: [
-                // CircleAvatar()
-                AnimateIcon(
-                  key: UniqueKey(),
-                  onTap: () {},
-                  iconType: IconType.continueAnimation,
-                  height: 70,
-                  width: 70,
-                  color: ColorPage.buttoncolor1,
-                  animateIcon: AnimateIcons.bell,
+                CircleAvatar(
+                  backgroundColor: Colors.blue,
+                  child: Icon(Icons.person),
+                ),
+                Text(
+                  '  Sayak Mishra  ',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10, left: 0),
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.logout,
+                      color: Colors.red,
+                    ),
+                  ),
                 )
+                // ElevatedButton.icon(
+                //     style: ButtonStyle(
+                //         padding: MaterialStatePropertyAll(EdgeInsets.all(20)),
+                //         backgroundColor: MaterialStatePropertyAll(Colors.green),
+                //         shape: MaterialStatePropertyAll(
+                //             ContinuousRectangleBorder())),
+                //     onPressed: () {},
+                //     icon: Icon(
+                //       Icons.logout,
+                //       color: Colors.white,
+                //     ),
+                //     label: Text(
+                //       'Log Out',
+                //       style: TextStyle(color: Colors.white),
+                //     ))
               ],
             )
           : AppBar(
               toolbarHeight: 65,
-              backgroundColor: canvasColor,
+              backgroundColor: ColorPage.canvasColor,
               iconTheme: IconThemeData(color: Colors.white),
               title: Row(
                 children: [
@@ -106,14 +117,14 @@ class _EmpDashboardState extends State<EmpDashboard> {
                 ],
               ),
             ),
-      drawer: ExampleSidebarX(controller: _controller),
+      drawer: AdminProjectDrawer(controller: _controller),
       body: Obx(
         () => Row(
           children: [
-            if (!isSmallScreen) ExampleSidebarX(controller: _controller),
+            if (!isSmallScreen) AdminProjectDrawer(controller: _controller),
             Expanded(
                 child: Center(
-              child: page[getx.slidebox.value],
+              child: page[getx.adminprojectslidebox.value],
             ))
           ],
         ),
