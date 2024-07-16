@@ -106,6 +106,7 @@ class _AdminProjectListState extends State<AdminProjectList> {
                         )),
                   ),
                 ),
+               
                 Flexible(
                   flex: 2,
                   child: Card(

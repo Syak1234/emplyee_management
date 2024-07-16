@@ -1,9 +1,12 @@
+import 'package:employee_management/admin/adminEmpadd.dart';
 import 'package:employee_management/admin/adminhomepage.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+
+import 'adminEmphomepage.dart';
 
 class AdminDashboard extends StatefulWidget {
   const AdminDashboard({super.key});
@@ -43,25 +46,30 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 padding: const EdgeInsets.all(8.0),
                 child: Card(
                   elevation: 40,
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Employee',
-                      style: TextStyle(color: Colors.white),
-                      textScaler: TextScaler.linear(1.5),
-                    ),
-                    width: 200,
-                    // color: Colors.red,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: const LinearGradient(
-                        colors: [
-                          ColorPage.colortheme,
-                          Color.fromARGB(255, 61, 61, 69),
-                        ],
+                  child: InkWell(
+                    onTap: () {
+                      Get.to(() => AdminEmphomePage());
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Employee',
+                        style: TextStyle(color: Colors.white),
+                        textScaler: TextScaler.linear(1.5),
                       ),
+                      width: 200,
+                      // color: Colors.red,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        gradient: const LinearGradient(
+                          colors: [
+                            ColorPage.colortheme,
+                            Color.fromARGB(255, 61, 61, 69),
+                          ],
+                        ),
+                      ),
+                      height: 200,
                     ),
-                    height: 200,
                   ),
                 ),
               ),

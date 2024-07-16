@@ -1,4 +1,4 @@
-import 'package:employee_management/admin/adminEmpList.dart';
+import 'package:employee_management/admin/adminEmpadd.dart';
 import 'package:employee_management/admin/admindashboard.dart';
 import 'package:employee_management/employee/empbreak.dart';
 import 'package:employee_management/employee/empdashboard.dart';

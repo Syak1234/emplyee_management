@@ -1,23 +1,22 @@
-import 'package:employee_management/admin/adminProjectDrawer.dart';
-import 'package:employee_management/admin/adminprojectcreate.dart';
-import 'package:employee_management/admin/adminprojectshow.dart';
 import 'package:employee_management/color/color.dart';
-import 'package:employee_management/employee/empdrawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 import '../getx/getx.dart';
+import 'adminEmpDrawer.dart';
+import 'adminEmpadd.dart';
+import 'adminEmpfilter.dart';
 
-class AdminHomePage extends StatefulWidget {
-  const AdminHomePage({super.key});
+class AdminEmphomePage extends StatefulWidget {
+  const AdminEmphomePage({super.key});
 
   @override
-  State<AdminHomePage> createState() => _AdminHomePageState();
+  State<AdminEmphomePage> createState() => _AdminEmphomePageState();
 }
 
-class _AdminHomePageState extends State<AdminHomePage> {
+class _AdminEmphomePageState extends State<AdminEmphomePage> {
   Getx getx = Get.put(Getx());
   final _controller = SidebarXController(selectedIndex: 0, extended: true);
   final _key = GlobalKey<ScaffoldState>();
@@ -26,7 +25,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
   @override
   void initState() {
-    page = [AdminprojectShow(), AdminProjectCreate()];
+    page = [AdminEmpFilter(), AdminEmpList(), Container()];
     // TODO: implement initState
     super.initState();
   }
@@ -113,14 +112,14 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 ],
               ),
             ),
-      drawer: AdminProjectDrawer(controller: _controller),
+      drawer: AdminEmpDrawer(controller: _controller),
       body: Obx(
         () => Row(
           children: [
-            if (!isSmallScreen) AdminProjectDrawer(controller: _controller),
+            if (!isSmallScreen) AdminEmpDrawer(controller: _controller),
             Expanded(
                 child: Center(
-              child: page[getx.adminprojectslidebox.value],
+              child: page[getx.adminEmpslidebox.value],
             ))
           ],
         ),

@@ -268,6 +268,7 @@ class _AdminEmpListState extends State<AdminEmpList> {
                 ),
               ),
             ),
+            
             Padding(
               padding: const EdgeInsets.only(top: 20, bottom: 10),
               child: Container(
