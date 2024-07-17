@@ -1,30 +1,60 @@
+import 'package:flutter/material.dart';
 import 'package:employee_management/admin/admin_model/adminEmpAdd.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/getx/getx.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AdminEmpList extends StatefulWidget {
-  const AdminEmpList({super.key});
+class AdminUserCreate extends StatefulWidget {
+  AdminUserCreate({super.key});
 
   @override
-  State<AdminEmpList> createState() => _AdminEmpListState();
+  State<AdminUserCreate> createState() => _AdminUserCreateState();
 }
 
-class _AdminEmpListState extends State<AdminEmpList> {
-  Getx getx = Get.put(Getx());
-  GlobalKey<FormState> gk = GlobalKey();
-  TextEditingController fullname = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-  BoxDecoration decoration = const BoxDecoration(
-      gradient: LinearGradient(colors: [
-    Color.fromARGB(255, 5, 103, 249),
-    Colors.blue,
-  ]));
+class _AdminUserCreateState extends State<AdminUserCreate> {
+  final Getx getx = Get.put(Getx());
+
+  final GlobalKey<FormState> gk = GlobalKey();
+
+  final TextEditingController fullname = TextEditingController();
+
+  final TextEditingController email = TextEditingController();
+
+  final TextEditingController password = TextEditingController();
+
+  final TextEditingController phone = TextEditingController();
+
+  final BoxDecoration decoration = const BoxDecoration(
+    gradient: LinearGradient(colors: [
+      Color.fromARGB(255, 5, 103, 249),
+      Colors.blue,
+    ]),
+  );
+
+  final RxBool checkbox = false.obs;
+
+  final RxList<int> selectedIndices = <int>[].obs;
+  @override
+  void initState() {
+    d();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  d() {
+    AdminEmpAdd empAdd = AdminEmpAdd(
+      fullname: 'Sayak Mishra',
+      email: 'sayakmishra@gmail.com',
+      emprole: 'Developer',
+      password: '123456',
+    );
+    for (int i = 0; i < 10; i++) getx.empaddList.add(empAdd);
+  }
 
   @override
   Widget build(BuildContext context) {
+    // Mock data for demonstration
+
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -40,7 +70,7 @@ class _AdminEmpListState extends State<AdminEmpList> {
                   child: Row(
                     children: [
                       Text(
-                        'Add Employee',
+                        'Add Admin',
                         style: TextStyle(fontSize: isSmallScreen ? 16 : 24),
                       ),
                     ],
@@ -76,15 +106,14 @@ class _AdminEmpListState extends State<AdminEmpList> {
                                 return null;
                               },
                             ),
-                            buildDropdownFormField(
-                              hintText: 'Type',
-                              items: ["SEO", "Developer", "Content writer"],
-                              onChanged: (v) {
-                                getx.projecttype.value = v!;
-                              },
+                            buildTextFormField(
+                              controller: password,
+                              hintText: 'Phone No',
+                              icon: Icons.phone,
+                              isPassword: true,
                               validator: (value) {
-                                if (value == null) {
-                                  return 'Cannot be null';
+                                if (value == null || value.isEmpty) {
+                                  return "Cannot be blank";
                                 }
                                 return null;
                               },
@@ -108,17 +137,20 @@ class _AdminEmpListState extends State<AdminEmpList> {
                     ),
                   ),
                 ),
-               
                 Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 10),
                   child: Container(
-                    color: const Color.fromARGB(255, 57, 161, 247),
+                    color: Color.fromARGB(255, 57, 161, 247),
                     child: ResponsiveRow(
                       children: [
                         buildHeaderCell('User Name'),
                         buildHeaderCell('Email'),
                         buildHeaderCell('Employee Role'),
                         buildHeaderCell('Password'),
+                        buildHeaderSmallCell('Status'),
+                        buildHeaderSmallCell('Edit'),
+                        buildHeaderSmallCell('Delete'),
+                        buildHeaderSmallCell('Block'),
                       ],
                     ),
                   ),
@@ -129,20 +161,73 @@ class _AdminEmpListState extends State<AdminEmpList> {
                       itemCount: getx.empaddList.length,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
+                        bool isSelected = selectedIndices.contains(index);
                         return Container(
                           decoration: BoxDecoration(
                             border: Border(
-                              bottom: BorderSide(width: 0.3),
+                              bottom: BorderSide(
+                                width: 0.5,
+                              ),
                             ),
                           ),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                           child: ResponsiveRow(
                             children: [
                               buildDataCell(getx.empaddList[index].fullname),
                               buildDataCell(getx.empaddList[index].email),
                               buildDataCell(getx.empaddList[index].emprole),
                               buildDataCell(getx.empaddList[index].password),
+                              buildDataSmallCell(
+                                Text(
+                                  'Active',
+                                  style: TextStyle(color: Colors.green),
+                                ),
+                                index,
+                              ),
+                              buildDataSmallCell(
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.edit,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                                index,
+                              ),
+                              buildDataSmallCell(
+                                IconButton(
+                                  onPressed: () {
+                                    print(index);
+                                  },
+                                  icon: Icon(
+                                    Icons.delete_forever,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                                index,
+                              ),
+                              buildDataSmallCell(
+                                Checkbox(
+                                  value: isSelected,
+                                  onChanged: (value) {
+                                    if (value != null) {
+                                      isSelected = value;
+                                      if (isSelected) {
+                                        selectedIndices.add(index);
+                                      } else {
+                                        selectedIndices.remove(index);
+                                      }
+                                    }
+                                    setState(() {});
+                                  },
+                                  checkColor: isSelected ? Colors.white : null,
+                                  fillColor: MaterialStateProperty.all(
+                                    isSelected
+                                        ? Colors.red
+                                        : Colors.transparent,
+                                  ),
+                                ),
+                                index,
+                              ),
                             ],
                           ),
                         );
@@ -197,49 +282,6 @@ class _AdminEmpListState extends State<AdminEmpList> {
     );
   }
 
-  Flexible buildDropdownFormField({
-    required String hintText,
-    required List<String> items,
-    required void Function(String?) onChanged,
-    required String? Function(String?) validator,
-  }) {
-    return Flexible(
-      flex: 1,
-      child: Card(
-        elevation: 4,
-        child: DropdownButtonFormField<String>(
-          decoration: const InputDecoration(
-            filled: true,
-            fillColor: Colors.white,
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Colors.grey),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Colors.grey),
-            ),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Colors.grey),
-            ),
-          ),
-          hint: Text(hintText),
-          items: items.map<DropdownMenuItem<String>>((String e) {
-            return DropdownMenuItem(
-              value: e,
-              child: Text(
-                e,
-                overflow: TextOverflow.ellipsis,
-              ),
-            );
-          }).toList(),
-          onChanged: onChanged,
-          validator: validator,
-        ),
-      ),
-    );
-  }
-
-
-
   Flexible buildAddUserButton() {
     return Flexible(
       flex: 1,
@@ -281,6 +323,28 @@ class _AdminEmpListState extends State<AdminEmpList> {
 
   Flexible buildHeaderCell(String text) {
     return Flexible(
+      flex: 2,
+      child: Card(
+        elevation: 10,
+        child: Container(
+          decoration: decoration,
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(8),
+          child: Text(
+            text,
+            style: TextStyle(
+              color: ColorPage.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Flexible buildHeaderSmallCell(String text) {
+    return Flexible(
       flex: 1,
       child: Card(
         elevation: 10,
@@ -301,20 +365,32 @@ class _AdminEmpListState extends State<AdminEmpList> {
     );
   }
 
-
   Flexible buildDataCell(String text) {
+    return Flexible(
+      flex: 2,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(right: BorderSide(width: 0.3)),
+        ),
+        padding: EdgeInsets.all(0),
+        alignment: Alignment.center,
+        child: Text(
+          text,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
+    );
+  }
+
+  Flexible buildDataSmallCell(Widget icon, int index) {
     return Flexible(
       flex: 1,
       child: Container(
         decoration: BoxDecoration(
           border: Border(right: BorderSide(width: 0.3)),
         ),
-        padding: EdgeInsets.all(8),
         alignment: Alignment.center,
-        child: Text(
-          text,
-          overflow: TextOverflow.ellipsis,
-        ),
+        child: icon,
       ),
     );
   }

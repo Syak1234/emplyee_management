@@ -26,4 +26,5 @@ class Getx extends GetxController {
   RxString adminprojectlistselectedtypebutton = "Abc".obs;
   RxString adminprojectlistselectedstatusbutton = "Abc".obs;
   RxString adminprojectlistselectedemployeebutton = "Abc".obs;
+  // RxBool adminEmpAttendence = false.obs;
 }
