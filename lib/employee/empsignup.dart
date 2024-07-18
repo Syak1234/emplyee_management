@@ -21,15 +21,15 @@ class _EmpSignUpState extends State<EmpSignUp> {
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
     return Scaffold(
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Card(
-                // elevation: 50,
-                child: Container(
+      body: SingleChildScrollView(
+        child: Container(
+          width: MediaQuery.sizeOf(context).width,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 30),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
                   height: 700,
                   // padding: EdgeInsets.symmetric(vertical: 100),
                   // color: Colors.blue,
@@ -754,11 +754,11 @@ class _EmpSignUpState extends State<EmpSignUp> {
                       ),
                     ],
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
-        ],
+        ),
       ),
     );
   }

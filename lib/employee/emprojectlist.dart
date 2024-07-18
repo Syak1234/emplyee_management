@@ -1,7 +1,15 @@
+import 'dart:io';
+
+import 'package:csv/csv.dart';
 import 'package:employee_management/color/color.dart';
+import 'package:employee_management/export/csvexport.dart';
+import 'package:employee_management/export/excelexport.dart';
 import 'package:employee_management/getx/getx.dart';
+import 'package:excel/excel.dart' as excelsheet;
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 
 class EmpProjectList extends StatefulWidget {
   EmpProjectList({super.key});
@@ -18,10 +26,9 @@ class _EmpProjectListState extends State<EmpProjectList> {
     Color.fromARGB(255, 5, 103, 249),
     Colors.blue,
   ]));
+
   @override
   Widget build(BuildContext context) {
-    // final isSmallScreen = MediaQuery.of(context).size.width < 700;
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -64,7 +71,6 @@ class _EmpProjectListState extends State<EmpProjectList> {
                         )),
                   ),
                 ),
-               
                 Flexible(
                   flex: 2,
                   child: Card(
@@ -285,10 +291,105 @@ class _EmpProjectListState extends State<EmpProjectList> {
                         )),
                   ),
                 ),
-             
               ],
             ),
-            
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: exportButton(
+                    ElevatedButton.icon(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStatePropertyAll(Colors.red),
+                            shape: MaterialStatePropertyAll(
+                                ContinuousRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8)))),
+                        onPressed: () {
+                          createExcel();
+                        },
+                        icon: Icon(
+                          Icons.file_present_rounded,
+                          color: Colors.white,
+                        ),
+                        label: Text(
+                          'Excel',
+                          style: TextStyle(color: Colors.white),
+                        )),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: exportButton(
+                    ElevatedButton.icon(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStatePropertyAll(Colors.red),
+                            shape: MaterialStatePropertyAll(
+                                ContinuousRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8)))),
+                        onPressed: () {
+                          createCSV();
+                        },
+                        icon: Icon(
+                          Icons.file_present_rounded,
+                          color: Colors.white,
+                        ),
+                        label: Text(
+                          'CSV',
+                          style: TextStyle(color: Colors.white),
+                        )),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: exportButton(
+                    ElevatedButton.icon(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStatePropertyAll(Colors.red),
+                            shape: MaterialStatePropertyAll(
+                                ContinuousRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8)))),
+                        onPressed: () {
+                          // createCSV();
+                        },
+                        icon: Icon(
+                          Icons.file_present_rounded,
+                          color: Colors.white,
+                        ),
+                        label: Text(
+                          'PDF',
+                          style: TextStyle(color: Colors.white),
+                        )),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: exportButton(
+                    ElevatedButton.icon(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStatePropertyAll(Colors.red),
+                            shape: MaterialStatePropertyAll(
+                                ContinuousRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8)))),
+                        onPressed: () {
+                          createCSV();
+                        },
+                        icon: Icon(
+                          Icons.file_present_rounded,
+                          color: Colors.white,
+                        ),
+                        label: Text(
+                          'Printer',
+                          style: TextStyle(color: Colors.white),
+                        )),
+                  ),
+                ),
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 20, bottom: 10),
               child: Container(
@@ -595,6 +696,12 @@ class _EmpProjectListState extends State<EmpProjectList> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget exportButton(Widget button) {
+    return Container(
+      child: Card(child: button),
     );
   }
 }

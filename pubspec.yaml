@@ -38,6 +38,10 @@ dependencies:
   board_datetime_picker: ^2.0.0
   on_popup_window_widget: ^0.0.13
   drop_down_search_field: ^1.0.4
+  excel: ^4.0.3
+  path_provider: ^2.1.3
+  file_picker:
+  csv: ^6.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
