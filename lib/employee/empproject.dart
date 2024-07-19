@@ -1,5 +1,6 @@
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/emprojectlist.dart';
+import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -95,7 +96,7 @@ class ProjectCard extends StatefulWidget {
 
 class _ProjectCardState extends State<ProjectCard> {
   bool _isHovered = false;
-
+  Getx getx = Get.put(Getx());
   @override
   Widget build(BuildContext context) {
     return Flexible(

@@ -410,7 +410,7 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                                           fontWeight: FontWeight.bold),
                                     )),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),

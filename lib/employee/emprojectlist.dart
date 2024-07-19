@@ -177,6 +177,7 @@ class _EmpProjectListState extends State<EmpProjectList> {
                         }
                         return null;
                       },
+                      isExpanded: true,
                     ),
                   ),
                 ),

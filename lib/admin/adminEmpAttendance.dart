@@ -169,32 +169,37 @@ class _AdminEmpAttendanceState extends State<AdminEmpAttendance> {
       flex: 1,
       child: Card(
         elevation: 4,
-        child: DropdownButtonFormField<String>(
-          decoration: const InputDecoration(
-            filled: true,
-            fillColor: Colors.white,
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Colors.grey),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Colors.grey),
-            ),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Colors.grey),
-            ),
-          ),
-          hint: Text(hintText),
-          items: items.map<DropdownMenuItem<String>>((String e) {
-            return DropdownMenuItem(
-              value: e,
-              child: Text(
-                e,
-                overflow: TextOverflow.ellipsis,
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            return DropdownButtonFormField<String>(
+              decoration: const InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(width: 0.5, color: Colors.grey),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(width: 0.5, color: Colors.grey),
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(width: 0.5, color: Colors.grey),
+                ),
               ),
+              hint: Text(hintText),
+              items: items.map<DropdownMenuItem<String>>((String e) {
+                return DropdownMenuItem(
+                  value: e,
+                  child: Text(
+                    e,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                );
+              }).toList(),
+              onChanged: onChanged,
+              validator: validator,
+              isExpanded: true, // Ensure the dropdown button takes full width
             );
-          }).toList(),
-          onChanged: onChanged,
-          validator: validator,
+          },
         ),
       ),
     );

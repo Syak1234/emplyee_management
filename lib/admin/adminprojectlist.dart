@@ -106,7 +106,6 @@ class _AdminProjectListState extends State<AdminProjectList> {
                         )),
                   ),
                 ),
-               
                 Flexible(
                   flex: 2,
                   child: Card(
@@ -180,6 +179,7 @@ class _AdminProjectListState extends State<AdminProjectList> {
                         }
                         return null;
                       },
+                      isExpanded: true,
                     ),
                   ),
                 ),
@@ -256,6 +256,7 @@ class _AdminProjectListState extends State<AdminProjectList> {
                         }
                         return null;
                       },
+                      isExpanded: true,
                     ),
                   ),
                 ),
@@ -332,6 +333,7 @@ class _AdminProjectListState extends State<AdminProjectList> {
                         }
                         return null;
                       },
+                      isExpanded: true,
                     ),
                   ),
                 ),
@@ -339,31 +341,26 @@ class _AdminProjectListState extends State<AdminProjectList> {
                   flex: 1,
                   child: InkWell(
                     onTap: () {},
-                    child: Container(
+                    child: Card(
+                      margin: EdgeInsets.all(0),
+                      elevation: 4,
+                      child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: Colors.green,
                         ),
-
-                        // decoration: BoxDecoration(
-                        //     // borderRadius: BorderRadius.circular(10),
-                        //     gradient: const LinearGradient(colors: [
-                        //   Color.fromARGB(255, 249, 46, 5),
-                        //   Colors.red,
-                        // ])
-                        //     // color: Color.fromARGB(81, 14, 14, 28),
-                        //     ),
-                        // color: ColorPage.buttoncolor1,
                         padding: EdgeInsets.symmetric(vertical: 14),
                         alignment: Alignment.center,
-                        // width: 200,
                         child: Text(
-                          'Search',
+                          'Submit',
                           style: TextStyle(
-                              color: ColorPage.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        )),
+                            color: ColorPage.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],

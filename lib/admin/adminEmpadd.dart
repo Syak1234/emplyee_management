@@ -108,7 +108,6 @@ class _AdminEmpListState extends State<AdminEmpList> {
                     ),
                   ),
                 ),
-               
                 Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 10),
                   child: Container(
@@ -207,38 +206,41 @@ class _AdminEmpListState extends State<AdminEmpList> {
       flex: 1,
       child: Card(
         elevation: 4,
-        child: DropdownButtonFormField<String>(
-          decoration: const InputDecoration(
-            filled: true,
-            fillColor: Colors.white,
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Colors.grey),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Colors.grey),
-            ),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Colors.grey),
-            ),
-          ),
-          hint: Text(hintText),
-          items: items.map<DropdownMenuItem<String>>((String e) {
-            return DropdownMenuItem(
-              value: e,
-              child: Text(
-                e,
-                overflow: TextOverflow.ellipsis,
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            return DropdownButtonFormField<String>(
+              decoration: const InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(width: 0.5, color: Colors.grey),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(width: 0.5, color: Colors.grey),
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(width: 0.5, color: Colors.grey),
+                ),
               ),
+              hint: Text(hintText),
+              items: items.map<DropdownMenuItem<String>>((String e) {
+                return DropdownMenuItem(
+                  value: e,
+                  child: Text(
+                    e,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                );
+              }).toList(),
+              onChanged: onChanged,
+              validator: validator,
+              isExpanded: true, // Ensure the dropdown button takes full width
             );
-          }).toList(),
-          onChanged: onChanged,
-          validator: validator,
+          },
         ),
       ),
     );
   }
-
-
 
   Flexible buildAddUserButton() {
     return Flexible(
@@ -301,7 +303,6 @@ class _AdminEmpListState extends State<AdminEmpList> {
     );
   }
 
-
   Flexible buildDataCell(String text) {
     return Flexible(
       flex: 1,
@@ -331,7 +332,12 @@ class ResponsiveRow extends StatelessWidget {
 
     return isSmallScreen
         ? Column(
-            children: children,
+            children: children.map((child) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: child,
+              );
+            }).toList(),
           )
         : Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

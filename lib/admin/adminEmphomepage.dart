@@ -32,7 +32,7 @@ class _AdminEmphomePageState extends State<AdminEmphomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final isSmallScreen = MediaQuery.of(context).size.width < 700;
+    final isSmallScreen = MediaQuery.of(context).size.width < 900;
 
     return Scaffold(
       key: _key,
