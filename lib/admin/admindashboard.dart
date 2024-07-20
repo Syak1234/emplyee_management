@@ -61,7 +61,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                       // color: Colors.red,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        gradient: const LinearGradient(
+                        gradient: LinearGradient(
                           colors: [
                             ColorPage.colortheme,
                             Color.fromARGB(255, 61, 61, 69),

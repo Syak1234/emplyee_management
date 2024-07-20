@@ -67,14 +67,17 @@ class ProjectsListScreen extends StatelessWidget {
               shrinkWrap: true,
               itemCount: 7,
               itemBuilder: (context, index) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ProjectCard(index: index),
-                    ProjectCard(index: index),
-                    ProjectCard(index: index),
-                    ProjectCard(index: index),
-                  ],
+                return Container(
+                  margin: EdgeInsets.symmetric(vertical: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ProjectCard(index: index),
+                      ProjectCard(index: index),
+                      ProjectCard(index: index),
+                      ProjectCard(index: index),
+                    ],
+                  ),
                 );
               },
             ),
@@ -97,35 +100,46 @@ class ProjectCard extends StatefulWidget {
 class _ProjectCardState extends State<ProjectCard> {
   bool _isHovered = false;
   Getx getx = Get.put(Getx());
+
   @override
   Widget build(BuildContext context) {
     return Flexible(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Card(
-          elevation: 10,
-          child: InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => EmpProjectList(),
-                  ));
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(width: 0.5, color: Colors.grey),
-                color: Color.fromARGB(255, 244, 242, 242),
-              ),
-              padding: const EdgeInsets.all(8),
-              alignment: Alignment.center,
-              height: 60,
-              child: Text(
-                'Project ${widget.index}',
-                style: TextStyle(
-                  color: ColorPage.colortheme,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+        padding: const EdgeInsets.symmetric(horizontal: 15),
+        child: MouseRegion(
+          onEnter: (_) => setState(() => _isHovered = true),
+          onExit: (_) => setState(() => _isHovered = false),
+          child: Card(
+            elevation: ColorPage.elevation,
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EmpProjectList(),
+                    ));
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 0.5,
+                    color: _isHovered ? Colors.white : ColorPage.buttoncolor1,
+                  ),
+                  color: _isHovered
+                      ? ColorPage.buttoncolor1
+                      : Color.fromARGB(255, 244, 242, 242),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                padding: const EdgeInsets.all(8),
+                alignment: Alignment.center,
+                height: 45,
+                child: Text(
+                  'Project ${widget.index}',
+                  style: TextStyle(
+                    color: _isHovered ? Colors.white : ColorPage.colortheme,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),

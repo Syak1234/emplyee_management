@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:animated_icon/animated_icon.dart';
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:elegant_notification/resources/stacked_options.dart';
@@ -307,7 +306,7 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                             textScaler: TextScaler.linear(2),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(right: 10),
+                            padding: const EdgeInsets.only(right: 0),
                             child: ElevatedButton(
                               onPressed: () {
                                 showBreaktimeDilaog(context);
@@ -320,7 +319,7 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                                   padding: MaterialStatePropertyAll(
                                       EdgeInsets.all(15)),
                                   backgroundColor:
-                                      MaterialStatePropertyAll(Colors.red),
+                                      MaterialStatePropertyAll(ColorPage.red),
                                   shape: MaterialStatePropertyAll(
                                       ContinuousRectangleBorder(
                                     borderRadius: BorderRadius.circular(0),
@@ -340,9 +339,8 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Flexible(
-                              child:
-                               Card(
-                                elevation: 10,
+                              child: Card(
+                                elevation: ColorPage.elevation,
                                 child: Container(
                                     decoration: decoration,
                                     alignment: Alignment.center,
@@ -359,7 +357,7 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                             ),
                             Flexible(
                               child: Card(
-                                elevation: 10,
+                                elevation: 2,
                                 child: Container(
                                     decoration: decoration,
                                     // color: ColorPage.buttoncolor1,
@@ -377,7 +375,7 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                             ),
                             Flexible(
                               child: Card(
-                                elevation: 10,
+                                elevation: ColorPage.elevation,
                                 child: Container(
                                     decoration: decoration,
                                     // color: ColorPage.buttoncolor1,
@@ -395,7 +393,7 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                             ),
                             Flexible(
                               child: Card(
-                                elevation: 10,
+                                elevation: ColorPage.elevation,
                                 child: Container(
                                     decoration: decoration,
                                     // color: ColorPage.buttoncolor1,
@@ -529,7 +527,6 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                             }),
                       ),
                     ),
-                  
                   ],
                 ),
               )

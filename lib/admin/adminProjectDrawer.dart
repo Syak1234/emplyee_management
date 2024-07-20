@@ -1,3 +1,4 @@
+import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/empbreak.dart';
 import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/cupertino.dart';
@@ -42,7 +43,7 @@ class AdminProjectDrawer extends StatelessWidget {
           border: Border.all(
             color: actionColor.withOpacity(0.37),
           ),
-          gradient: const LinearGradient(
+          gradient:  LinearGradient(
             colors: [accentCanvasColor, canvasColor],
           ),
           boxShadow: [
@@ -61,7 +62,7 @@ class AdminProjectDrawer extends StatelessWidget {
           size: 20,
         ),
       ),
-      extendedTheme: const SidebarXTheme(
+      extendedTheme:  SidebarXTheme(
         width: 200,
         decoration: BoxDecoration(
           color: canvasColor,
@@ -172,7 +173,7 @@ class AdminProjectDrawer extends StatelessWidget {
 // }
 
 const primaryColor = Color(0xFF685BFF);
-const canvasColor = Color.fromARGB(255, 24, 31, 50);
+var canvasColor = ColorPage.colortheme;
 const scaffoldBackgroundColor = Color(0xFF464667);
 const accentCanvasColor = Color(0xFF3E3E61);
 const white = Colors.white;

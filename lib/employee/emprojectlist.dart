@@ -19,13 +19,14 @@ class EmpProjectList extends StatefulWidget {
 
 class _EmpProjectListState extends State<EmpProjectList> {
   TextEditingController datePickerController = TextEditingController();
+  bool _isHovered = false;
 
   Getx getx = Get.put(Getx());
-  BoxDecoration decoration = const BoxDecoration(
-      gradient: LinearGradient(colors: [
-    Color.fromARGB(255, 5, 103, 249),
-    Colors.blue,
-  ]));
+  // BoxDecoration decoration = const BoxDecoration(
+  //     gradient: LinearGradient(colors: [
+  //   Color.fromARGB(255, 5, 103, 249),
+  //   Colors.blue,
+  // ]));
 
   @override
   Widget build(BuildContext context) {
@@ -263,136 +264,159 @@ class _EmpProjectListState extends State<EmpProjectList> {
                 ),
                 Flexible(
                   flex: 1,
-                  child: InkWell(
-                    onTap: () {},
-                    child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.green,
-                        ),
+                  child: MouseRegion(
+                    onEnter: (_) => setState(() => _isHovered = true),
+                    onExit: (_) => setState(() => _isHovered = false),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: _isHovered
+                                ? ColorPage.buttoncolor1
+                                : Colors.green,
+                          ),
 
-                        // decoration: BoxDecoration(
-                        //     // borderRadius: BorderRadius.circular(10),
-                        //     gradient: const LinearGradient(colors: [
-                        //   Color.fromARGB(255, 249, 46, 5),
-                        //   Colors.red,
-                        // ])
-                        //     // color: Color.fromARGB(81, 14, 14, 28),
-                        //     ),
-                        // color: ColorPage.buttoncolor1,
-                        padding: EdgeInsets.symmetric(vertical: 14),
-                        alignment: Alignment.center,
-                        // width: 200,
-                        child: Text(
-                          'Submit',
-                          style: TextStyle(
-                              color: ColorPage.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        )),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: exportButton(
-                    ElevatedButton.icon(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(Colors.red),
-                            shape: MaterialStatePropertyAll(
-                                ContinuousRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)))),
-                        onPressed: () {
-                          createExcel();
-                        },
-                        icon: Icon(
-                          Icons.file_present_rounded,
-                          color: Colors.white,
-                        ),
-                        label: Text(
-                          'Excel',
-                          style: TextStyle(color: Colors.white),
-                        )),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: exportButton(
-                    ElevatedButton.icon(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(Colors.red),
-                            shape: MaterialStatePropertyAll(
-                                ContinuousRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)))),
-                        onPressed: () {
-                          createCSV();
-                        },
-                        icon: Icon(
-                          Icons.file_present_rounded,
-                          color: Colors.white,
-                        ),
-                        label: Text(
-                          'CSV',
-                          style: TextStyle(color: Colors.white),
-                        )),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: exportButton(
-                    ElevatedButton.icon(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(Colors.red),
-                            shape: MaterialStatePropertyAll(
-                                ContinuousRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)))),
-                        onPressed: () {
-                          // createCSV();
-                        },
-                        icon: Icon(
-                          Icons.file_present_rounded,
-                          color: Colors.white,
-                        ),
-                        label: Text(
-                          'PDF',
-                          style: TextStyle(color: Colors.white),
-                        )),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: exportButton(
-                    ElevatedButton.icon(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(Colors.red),
-                            shape: MaterialStatePropertyAll(
-                                ContinuousRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)))),
-                        onPressed: () {
-                          createCSV();
-                        },
-                        icon: Icon(
-                          Icons.file_present_rounded,
-                          color: Colors.white,
-                        ),
-                        label: Text(
-                          'Printer',
-                          style: TextStyle(color: Colors.white),
-                        )),
+                          // decoration: BoxDecoration(
+                          //     // borderRadius: BorderRadius.circular(10),
+                          //     gradient: const LinearGradient(colors: [
+                          //   Color.fromARGB(255, 249, 46, 5),
+                          //   Colors.red,
+                          // ])
+                          //     // color: Color.fromARGB(81, 14, 14, 28),
+                          //     ),
+                          // color: ColorPage.buttoncolor1,
+                          padding: EdgeInsets.symmetric(vertical: 14),
+                          alignment: Alignment.center,
+                          // width: 200,
+                          child: Text(
+                            'Submit',
+                            style: TextStyle(
+                                color: ColorPage.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          )),
+                    ),
                   ),
                 ),
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20, bottom: 10),
+              padding: const EdgeInsets.only(top: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: exportButton(
+                      ElevatedButton.icon(
+                          style: ButtonStyle(
+                              padding: MaterialStatePropertyAll(
+                                EdgeInsets.all(15),
+                              ),
+                              backgroundColor:
+                                  MaterialStatePropertyAll(ColorPage.red),
+                              shape: MaterialStatePropertyAll(
+                                  ContinuousRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)))),
+                          onPressed: () {
+                            createExcel();
+                          },
+                          icon: Icon(
+                            Icons.file_present_rounded,
+                            color: Colors.white,
+                          ),
+                          label: Text(
+                            'Excel',
+                            style: TextStyle(color: Colors.white),
+                          )),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      right: 8,
+                    ),
+                    child: exportButton(
+                      ElevatedButton.icon(
+                          style: ButtonStyle(
+                              padding: MaterialStatePropertyAll(
+                                EdgeInsets.all(15),
+                              ),
+                              backgroundColor:
+                                  MaterialStatePropertyAll(ColorPage.red),
+                              shape: MaterialStatePropertyAll(
+                                  ContinuousRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)))),
+                          onPressed: () {
+                            createCSV();
+                          },
+                          icon: Icon(
+                            Icons.file_present_rounded,
+                            color: Colors.white,
+                          ),
+                          label: Text(
+                            'CSV',
+                            style: TextStyle(color: Colors.white),
+                          )),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: exportButton(
+                      ElevatedButton.icon(
+                          style: ButtonStyle(
+                              padding: MaterialStatePropertyAll(
+                                EdgeInsets.all(15),
+                              ),
+                              backgroundColor:
+                                  MaterialStatePropertyAll(ColorPage.red),
+                              shape: MaterialStatePropertyAll(
+                                  ContinuousRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)))),
+                          onPressed: () {
+                            // createCSV();
+                          },
+                          icon: Icon(
+                            Icons.file_present_rounded,
+                            color: Colors.white,
+                          ),
+                          label: Text(
+                            'PDF',
+                            style: TextStyle(color: Colors.white),
+                          )),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 0),
+                    child: exportButton(
+                      ElevatedButton.icon(
+                          style: ButtonStyle(
+                              padding: MaterialStatePropertyAll(
+                                EdgeInsets.all(15),
+                              ),
+                              backgroundColor:
+                                  MaterialStatePropertyAll(ColorPage.red),
+                              shape: MaterialStatePropertyAll(
+                                  ContinuousRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)))),
+                          onPressed: () {
+                            createCSV();
+                          },
+                          icon: Icon(
+                            Icons.file_present_rounded,
+                            color: Colors.white,
+                          ),
+                          label: Text(
+                            'Print',
+                            style: TextStyle(color: Colors.white),
+                          )),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 5, bottom: 10),
               child: Container(
                 color: const Color.fromARGB(255, 57, 161, 247),
                 // decoration: decoration,
@@ -403,9 +427,9 @@ class _EmpProjectListState extends State<EmpProjectList> {
                     Flexible(
                       flex: 3,
                       child: Card(
-                        elevation: 10,
+                        elevation: ColorPage.elevation,
                         child: Container(
-                            decoration: decoration,
+                            decoration: ColorPage.decoration,
                             alignment: Alignment.center,
                             // width: 200,
                             padding: EdgeInsets.all(8),
@@ -421,9 +445,9 @@ class _EmpProjectListState extends State<EmpProjectList> {
                     Flexible(
                       flex: 1,
                       child: Card(
-                        elevation: 10,
+                        elevation: ColorPage.elevation,
                         child: Container(
-                            decoration: decoration,
+                            decoration: ColorPage.decoration,
                             // color: ColorPage.buttoncolor1,
                             padding: EdgeInsets.all(8),
                             alignment: Alignment.center,
@@ -440,9 +464,9 @@ class _EmpProjectListState extends State<EmpProjectList> {
                     Flexible(
                       flex: 1,
                       child: Card(
-                        elevation: 10,
+                        elevation: ColorPage.elevation,
                         child: Container(
-                            decoration: decoration,
+                            decoration: ColorPage.decoration,
                             // color: ColorPage.buttoncolor1,
                             alignment: Alignment.center,
                             padding: EdgeInsets.all(8),
@@ -459,9 +483,9 @@ class _EmpProjectListState extends State<EmpProjectList> {
                     Flexible(
                       flex: 1,
                       child: Card(
-                        elevation: 10,
+                        elevation: ColorPage.elevation,
                         child: Container(
-                            decoration: decoration,
+                            decoration: ColorPage.decoration,
                             // color: ColorPage.buttoncolor1,
                             padding: EdgeInsets.all(8),
                             alignment: Alignment.center,
@@ -478,9 +502,9 @@ class _EmpProjectListState extends State<EmpProjectList> {
                     Flexible(
                       flex: 1,
                       child: Card(
-                        elevation: 10,
+                        elevation: ColorPage.elevation,
                         child: Container(
-                            decoration: decoration,
+                            decoration: ColorPage.decoration,
                             // color: ColorPage.buttoncolor1,
                             padding: EdgeInsets.all(8),
                             alignment: Alignment.center,
@@ -497,9 +521,9 @@ class _EmpProjectListState extends State<EmpProjectList> {
                     Flexible(
                       flex: 1,
                       child: Card(
-                        elevation: 10,
+                        elevation: ColorPage.elevation,
                         child: Container(
-                            decoration: decoration,
+                            decoration: ColorPage.decoration,
                             // color: ColorPage.buttoncolor1,
                             padding: EdgeInsets.all(8),
                             alignment: Alignment.center,

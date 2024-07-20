@@ -1,3 +1,4 @@
+import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/empbreak.dart';
 import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/cupertino.dart';
@@ -100,24 +101,17 @@ class ExampleSidebarX extends StatelessWidget {
           onTap: () => getx.slidebox.value = 3,
         ),
         SidebarXItem(
-          icon: Icons.query_builder,
-          // label: 'Apply for Leave',
-          // selectable: false,
-          onTap: () => getx.slidebox.value = 4,
-          label: 'FAQ',
-        ),
-        SidebarXItem(
           icon: Icons.help,
           // label: 'Apply for Leave',
           selectable: false,
-          onTap: () => getx.slidebox.value = 5,
+          onTap: () => getx.slidebox.value = 4,
           label: 'Help Videos',
         ),
         SidebarXItem(
           icon: Icons.logout,
           // label: 'Apply for Leave',
           selectable: false,
-          onTap: () => getx.slidebox.value = 6,
+          onTap: () => getx.slidebox.value = 5,
           label: 'Logout',
         ),
       ],
@@ -204,7 +198,7 @@ class ExampleSidebarX extends StatelessWidget {
 // }
 
 const primaryColor = Color(0xFF685BFF);
-const canvasColor = Color.fromARGB(255, 24, 31, 50);
+const canvasColor = Color.fromRGBO(30, 31, 31, 1);
 const scaffoldBackgroundColor = Color(0xFF464667);
 const accentCanvasColor = Color(0xFF3E3E61);
 const white = Colors.white;

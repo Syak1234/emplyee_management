@@ -1,3 +1,5 @@
+import 'package:employee_management/color/color.dart';
+import 'package:employee_management/employee/empdrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sidebarx/sidebarx.dart';
@@ -19,7 +21,7 @@ class AdminEmpDrawer extends StatelessWidget {
     return SidebarX(
       controller: _controller,
       theme: SidebarXTheme(
-        margin: const EdgeInsets.all(10),
+        margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: canvasColor,
           borderRadius: BorderRadius.circular(20),
@@ -42,7 +44,7 @@ class AdminEmpDrawer extends StatelessWidget {
           border: Border.all(
             color: actionColor.withOpacity(0.37),
           ),
-          gradient: const LinearGradient(
+          gradient: LinearGradient(
             colors: [accentCanvasColor, canvasColor],
           ),
           boxShadow: [
@@ -61,10 +63,10 @@ class AdminEmpDrawer extends StatelessWidget {
           size: 20,
         ),
       ),
-      extendedTheme: const SidebarXTheme(
+      extendedTheme: SidebarXTheme(
         width: 200,
         decoration: BoxDecoration(
-          color: canvasColor,
+          color: ColorPage.colortheme,
         ),
       ),
       footerDivider: divider,
@@ -97,3 +99,11 @@ class AdminEmpDrawer extends StatelessWidget {
     );
   }
 }
+
+const primaryColor = Color(0xFF685BFF);
+var canvasColor = ColorPage.colortheme;
+const scaffoldBackgroundColor = Color(0xFF464667);
+const accentCanvasColor = Color(0xFF3E3E61);
+const white = Colors.white;
+final actionColor = const Color(0xFF5F5FA7).withOpacity(0.6);
+final divider = Divider(color: white.withOpacity(0.3), height: 1);

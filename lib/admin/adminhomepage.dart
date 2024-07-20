@@ -41,41 +41,20 @@ class _AdminHomePageState extends State<AdminHomePage> {
           ? AppBar(
               toolbarHeight: 65,
               automaticallyImplyLeading: false,
-              backgroundColor: ColorPage.canvasColor,
+              backgroundColor: ColorPage.colortheme,
               title: Row(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage('assets/app_icon/exa1.jpg'),
-                    radius: 28,
-                  ),
-                  Container(
-                    // width: 300,
-                    child: Text(
-                      ' Nexa CRM',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                  ),
+                  Image.asset('assets/app_icon/app_icon.jpg'),
                 ],
               ),
               actions: [
                 CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  child: Icon(Icons.person),
-                ),
-                Text(
-                  '  Sayak Mishra  ',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 10, left: 0),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.logout,
-                      color: Colors.red,
-                    ),
+                  backgroundColor: Color.fromRGBO(221, 221, 221, 1),
+                  child: Text(
+                    'SM',
                   ),
-                )
+                ),
+
                 // ElevatedButton.icon(
                 //     style: ButtonStyle(
                 //         padding: MaterialStatePropertyAll(EdgeInsets.all(20)),
@@ -95,21 +74,11 @@ class _AdminHomePageState extends State<AdminHomePage> {
             )
           : AppBar(
               toolbarHeight: 65,
-              backgroundColor: ColorPage.canvasColor,
+              backgroundColor: ColorPage.colortheme,
               iconTheme: IconThemeData(color: Colors.white),
               title: Row(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage('assets/app_icon/exa1.jpg'),
-                    radius: 28,
-                  ),
-                  Container(
-                    // width: 300,
-                    child: Text(
-                      ' Nexa CRM',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                  ),
+                  Image.asset('assets/app_icon/app_icon.jpg'),
                 ],
               ),
             ),

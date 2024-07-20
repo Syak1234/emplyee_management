@@ -167,7 +167,7 @@ class _AdminEmpListState extends State<AdminEmpList> {
     return Flexible(
       flex: 1,
       child: Card(
-        elevation: 4,
+        elevation: ColorPage.elevation,
         child: Container(
           alignment: Alignment.center,
           child: TextFormField(
@@ -205,7 +205,7 @@ class _AdminEmpListState extends State<AdminEmpList> {
     return Flexible(
       flex: 1,
       child: Card(
-        elevation: 4,
+        elevation: ColorPage.elevation,
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
             return DropdownButtonFormField<String>(
@@ -242,37 +242,42 @@ class _AdminEmpListState extends State<AdminEmpList> {
     );
   }
 
+  bool _isHovered = false;
   Flexible buildAddUserButton() {
     return Flexible(
       flex: 1,
-      child: InkWell(
-        onTap: () {
-          if (gk.currentState!.validate()) {
-            AdminEmpAdd add = AdminEmpAdd(
-              fullname: fullname.text,
-              email: email.text,
-              emprole: getx.projecttype.value,
-              password: password.text,
-            );
-            getx.empaddList.add(add);
-          }
-        },
-        child: Card(
-          margin: EdgeInsets.all(0),
-          elevation: 4,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.green,
-            ),
-            padding: EdgeInsets.symmetric(vertical: 14),
-            alignment: Alignment.center,
-            child: Text(
-              'Add User',
-              style: TextStyle(
-                color: ColorPage.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+      child: MouseRegion(
+        onEnter: (_) => setState(() => _isHovered = true),
+        onExit: (_) => setState(() => _isHovered = false),
+        child: InkWell(
+          onTap: () {
+            if (gk.currentState!.validate()) {
+              AdminEmpAdd add = AdminEmpAdd(
+                fullname: fullname.text,
+                email: email.text,
+                emprole: getx.projecttype.value,
+                password: password.text,
+              );
+              getx.empaddList.add(add);
+            }
+          },
+          child: Card(
+            margin: EdgeInsets.all(0),
+            elevation: ColorPage.elevation,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: _isHovered ? ColorPage.buttoncolor1 : Colors.green,
+              ),
+              padding: EdgeInsets.symmetric(vertical: 14),
+              alignment: Alignment.center,
+              child: Text(
+                'Add User',
+                style: TextStyle(
+                  color: ColorPage.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),

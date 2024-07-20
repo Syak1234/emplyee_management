@@ -35,15 +35,8 @@ class _EmpLeaveState extends State<EmpLeave> {
     }
   }
 
+  bool _isHovered = false;
   Getx getx = Get.put(Getx());
-  BoxDecoration decoration = const BoxDecoration(
-      // borderRadius: BorderRadius.circular(10),
-      gradient: LinearGradient(colors: [
-    Color.fromARGB(255, 5, 103, 249),
-    Colors.blue,
-  ])
-      // color: Color.fromARGB(81, 14, 14, 28),
-      );
 
   TextEditingController datePickerController = TextEditingController();
   onTapFunction({required BuildContext context}) async {
@@ -91,14 +84,13 @@ class _EmpLeaveState extends State<EmpLeave> {
                 // color: const Color.fromARGB(255, 57, 161, 247),
                 // decoration: decoration,
                 // color: Color.fromARGB(255, 19, 7, 240),
-                child:
-                 Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
                       flex: 3,
                       child: Card(
-                        elevation: 4,
+                        elevation: ColorPage.elevation,
                         child: Container(
                             // decoration: decoration,
                             alignment: Alignment.center,
@@ -132,7 +124,7 @@ class _EmpLeaveState extends State<EmpLeave> {
                     Flexible(
                       flex: 1,
                       child: Card(
-                        elevation: 4,
+                        elevation: ColorPage.elevation,
                         child: Container(
                             // decoration: decoration,
                             // color: ColorPage.buttoncolor1,
@@ -182,7 +174,7 @@ class _EmpLeaveState extends State<EmpLeave> {
                     Flexible(
                       flex: 1,
                       child: Card(
-                        elevation: 4,
+                        elevation: ColorPage.elevation,
                         child: Container(
                             // decoration: decoration,
                             // color: ColorPage.buttoncolor1,
@@ -211,45 +203,49 @@ class _EmpLeaveState extends State<EmpLeave> {
                     ),
                     Flexible(
                       // flex: 1,
-                      child: InkWell(
-                        onTap: () {},
-                        child: Card(
-                          margin: EdgeInsets.all(0),
-                          elevation: 4,
-                          child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.green,
-                              ),
+                      child: MouseRegion(
+                        onEnter: (_) => setState(() => _isHovered = true),
+                        onExit: (_) => setState(() => _isHovered = false),
+                        child: InkWell(
+                          onTap: () {},
+                          child: Card(
+                            margin: EdgeInsets.all(0),
+                            elevation: ColorPage.elevation,
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: _isHovered
+                                      ? ColorPage.buttoncolor1
+                                      : Colors.green,
+                                ),
 
-                              // decoration: BoxDecoration(
-                              //     // borderRadius: BorderRadius.circular(10),
-                              //     gradient: const LinearGradient(colors: [
-                              //   Color.fromARGB(255, 249, 46, 5),
-                              //   Colors.red,
-                              // ])
-                              //     // color: Color.fromARGB(81, 14, 14, 28),
-                              //     ),
-                              // color: ColorPage.buttoncolor1,
-                              padding: EdgeInsets.symmetric(vertical: 14),
-                              alignment: Alignment.center,
-                              // width: 200,
-                              child: Text(
-                                'Submit',
-                                style: TextStyle(
-                                    color: ColorPage.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              )),
+                                // decoration: BoxDecoration(
+                                //     // borderRadius: BorderRadius.circular(10),
+                                //     gradient: const LinearGradient(colors: [
+                                //   Color.fromARGB(255, 249, 46, 5),
+                                //   Colors.red,
+                                // ])
+                                //     // color: Color.fromARGB(81, 14, 14, 28),
+                                //     ),
+                                // color: ColorPage.buttoncolor1,
+                                padding: EdgeInsets.symmetric(vertical: 14),
+                                alignment: Alignment.center,
+                                // width: 200,
+                                child: Text(
+                                  'Submit',
+                                  style: TextStyle(
+                                      color: ColorPage.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
-             
               ),
             ),
-            
             Padding(
               padding: const EdgeInsets.only(top: 5, bottom: 0),
               child: Container(
@@ -262,9 +258,9 @@ class _EmpLeaveState extends State<EmpLeave> {
                     Flexible(
                       flex: 3,
                       child: Card(
-                        elevation: 10,
+                        elevation: ColorPage.elevation,
                         child: Container(
-                            decoration: decoration,
+                            decoration: ColorPage.decoration,
                             alignment: Alignment.center,
                             // width: 200,
                             padding: EdgeInsets.all(8),
@@ -282,7 +278,7 @@ class _EmpLeaveState extends State<EmpLeave> {
                       child: Card(
                         elevation: 10,
                         child: Container(
-                            decoration: decoration,
+                            decoration: ColorPage.decoration,
                             // color: ColorPage.buttoncolor1,
                             padding: EdgeInsets.all(8),
                             alignment: Alignment.center,
@@ -301,7 +297,7 @@ class _EmpLeaveState extends State<EmpLeave> {
                       child: Card(
                         elevation: 10,
                         child: Container(
-                            decoration: decoration,
+                            decoration: ColorPage.decoration,
                             // color: ColorPage.buttoncolor1,
                             alignment: Alignment.center,
                             padding: EdgeInsets.all(8),
@@ -320,7 +316,7 @@ class _EmpLeaveState extends State<EmpLeave> {
                       child: Card(
                         elevation: 10,
                         child: Container(
-                            decoration: decoration,
+                            decoration: ColorPage.decoration,
                             // color: ColorPage.buttoncolor1,
                             padding: EdgeInsets.all(8),
                             alignment: Alignment.center,
@@ -338,7 +334,6 @@ class _EmpLeaveState extends State<EmpLeave> {
                 ),
               ),
             ),
-              
             Expanded(
               child: Obx(
                 () => ListView.builder(
@@ -459,7 +454,6 @@ class _EmpLeaveState extends State<EmpLeave> {
                     }),
               ),
             ),
-          
           ],
         ),
       ),

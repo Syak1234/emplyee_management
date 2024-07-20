@@ -12,14 +12,7 @@ class AdminEmpFilter extends StatelessWidget {
   TextEditingController email = TextEditingController();
 
   TextEditingController password = TextEditingController();
-  BoxDecoration decoration = const BoxDecoration(
-      // borderRadius: BorderRadius.circular(10),
-      gradient: LinearGradient(colors: [
-    Color.fromARGB(255, 5, 103, 249),
-    Colors.blue,
-  ])
-      // color: Color.fromARGB(81, 14, 14, 28),
-      );
+
   TextEditingController datePickerController = TextEditingController();
 
   @override
@@ -179,7 +172,7 @@ class AdminEmpFilter extends StatelessWidget {
     return Container(
       width: 200,
       child: Card(
-        elevation: 4,
+        elevation: ColorPage.elevation,
         child: TextFormField(
           validator: (value) {
             if (value == null) {
@@ -209,7 +202,7 @@ class AdminEmpFilter extends StatelessWidget {
     return Container(
       width: 200,
       child: Card(
-        elevation: 4,
+        elevation: ColorPage.elevation,
         child: TextFormField(
           maxLines: 1,
           controller: datePickerController,
@@ -243,7 +236,7 @@ class AdminEmpFilter extends StatelessWidget {
     return Container(
       width: 200,
       child: Card(
-        elevation: 4,
+        elevation: ColorPage.elevation,
         child: DropdownButtonFormField<String>(
           decoration: InputDecoration(
             filled: true,

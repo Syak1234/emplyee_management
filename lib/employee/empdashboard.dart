@@ -1,4 +1,4 @@
-import 'package:animated_icon/animated_icon.dart';
+
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/empattendance.dart';
 import 'package:employee_management/employee/empbreak.dart';
@@ -37,9 +37,6 @@ class _EmpDashboardState extends State<EmpDashboard> {
       Container(
         child: Text('data'),
       ),
-      Container(
-        child: Text('data'),
-      ),
     ];
     // TODO: implement initState
     super.initState();
@@ -51,39 +48,31 @@ class _EmpDashboardState extends State<EmpDashboard> {
 
     return Scaffold(
       key: _key,
-      appBar:
-       !isSmallScreen
-          ? 
-          AppBar(
+      appBar: !isSmallScreen
+          ? AppBar(
               toolbarHeight: 65,
               automaticallyImplyLeading: false,
               backgroundColor: canvasColor,
               title: Row(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage('assets/app_icon/exa1.jpg'),
-                    radius: 28,
-                  ),
-                  Container(
-                    // width: 300,
-                    child: Text(
-                      ' Nexa CRM',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
+                  Image.asset(
+                    'assets/app_icon/app_icon.jpg',
+                    // width: 1,
                   ),
                 ],
               ),
               actions: [
                 // CircleAvatar()
-                AnimateIcon(
-                  key: UniqueKey(),
-                  onTap: () {},
-                  iconType: IconType.continueAnimation,
-                  height: 70,
-                  width: 70,
-                  color: ColorPage.buttoncolor1,
-                  animateIcon: AnimateIcons.bell,
-                )
+               
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: CircleAvatar(
+                    backgroundColor: Color.fromRGBO(221, 221, 221, 1),
+                    child: Text(
+                      'SN',
+                    ),
+                  ),
+                ),
               ],
             )
           : AppBar(
@@ -92,17 +81,7 @@ class _EmpDashboardState extends State<EmpDashboard> {
               iconTheme: IconThemeData(color: Colors.white),
               title: Row(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage('assets/app_icon/exa1.jpg'),
-                    radius: 28,
-                  ),
-                  Container(
-                    // width: 300,
-                    child: Text(
-                      ' Nexa CRM',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                  ),
+                  Image.asset('assets/app_icon/app_icon.jpg'),
                 ],
               ),
             ),

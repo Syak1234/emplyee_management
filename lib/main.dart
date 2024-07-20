@@ -22,6 +22,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Employee Management',
       theme: ThemeData(
+        scaffoldBackgroundColor: Color.fromARGB(255, 244, 245, 249),
+        // cardColor: Colors.red,
+
+        // backgroundColor: Color.fromARGB(255, 101, 114, 167),
         textTheme: TextTheme(
           bodyMedium: GoogleFonts.josefinSans().copyWith(),
         ),
