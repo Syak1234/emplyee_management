@@ -264,87 +264,49 @@ class _AdminProjectListState extends State<AdminProjectList> {
                       },
                     ),
 
-                    Flexible(
+                    buildDropdownFormField(
                       flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: Container(
-                          decoration: ColorPage.decoration1,
-                          child: DropdownButtonFormField<String>(
-                            decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              // prefixIcon: Icon(
-                              //   Icons.type_specimen,
-                              //   color: Colors.grey,
-                              // ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.5, color: Colors.black),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.5, color: Colors.black),
-                              ),
-                              border: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.5, color: Colors.black),
-                              ),
-                            ),
-                            hint: Text('Employee'),
-                            items: <String>[
-                              'Abc'
-                                  "Classified ads",
-                              "Business Listing",
-                              "Infographic Submission",
-                              "Image Submission",
-                              "PDF Submission",
-                              "PPT Submission",
-                              "Guest Posting",
-                              "Blog Submission",
-                              "Article Submission",
-                              "Comment Posting",
-                              "Q&A Submission",
-                              "Web Blog Submission",
-                              "Video Submission",
-                              "Map Listing",
-                              "Directory Submission",
-                              "Ping Submission",
-                              "Social Bookmarking",
-                              "GMB Posting",
-                              "Profile Creation",
-                              "Press Release",
-                              "Forum Submission",
-                              "Event Submission",
-                              "Other Listings",
-                              "Website Audit",
-                              "Competitor Analysis",
-                              "Keyword Research",
-                              "Meta Setup"
-                            ].map<DropdownMenuItem<String>>((String e) {
-                              return DropdownMenuItem(
-                                value: e,
-                                child: Text(
-                                  e,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (v) {
-                              getx.adminprojectlistselectedemployeebutton
-                                  .value = v!;
-                            },
-                            validator: (value) {
-                              if (value == null) {
-                                return 'Cannot be null';
-                              }
-                              return null;
-                            },
-                            isExpanded: true,
-                          ),
-                        ),
-                      ),
+                      hintText: 'Employee',
+                      items: [
+                        "Classified ads",
+                        "Business Listing",
+                        "Image Submission",
+                        "PDF Submission",
+                        "PPT Submission",
+                        "Guest Posting",
+                        "Blog Submission",
+                        "Article Submission",
+                        "Comment Posting",
+                        "Q&A Submission",
+                        "Web Blog",
+                        "Video Submission",
+                        "Map Listing",
+                        "Directory",
+                        "Ping Submission",
+                        "Social Bookmarking",
+                        "GMB Posting",
+                        "Profile Creation",
+                        "Press Release",
+                        "Forum Submission",
+                        "Event Submission",
+                        "Other Listings",
+                        "Website Audit",
+                        "Competitor Analysis",
+                        "Keyword Research",
+                        "Meta Setup",
+                        "Infographic",
+                      ],
+                      onChanged: (v) {
+                        getx.projecttype.value = v!;
+                      },
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Cannot be null';
+                        }
+                        return null;
+                      },
                     ),
+
                     Flexible(
                       flex: 2,
                       child: Padding(

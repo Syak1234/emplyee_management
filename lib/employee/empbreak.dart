@@ -297,40 +297,47 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsets.only(left: 0, top: 10, bottom: 0),
+                          const EdgeInsets.only(left: 0, top: 15, bottom: 0),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             'Break Time',
-                            textScaler: TextScaler.linear(2),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 0),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                showBreaktimeDilaog(context);
-                              },
-                              child: Text(
-                                'Start Break',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              style: ButtonStyle(
-                                  padding: MaterialStatePropertyAll(
-                                      EdgeInsets.all(15)),
-                                  backgroundColor:
-                                      MaterialStatePropertyAll(ColorPage.red),
-                                  shape: MaterialStatePropertyAll(
-                                      ContinuousRectangleBorder(
-                                    borderRadius: BorderRadius.circular(0),
-                                  ))),
-                            ),
+                            style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              showBreaktimeDilaog(context);
+                            },
+                            child: Text(
+                              'Start Break',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            style: ButtonStyle(
+                                padding: MaterialStatePropertyAll(
+                                    EdgeInsets.all(15)),
+                                backgroundColor:
+                                    MaterialStatePropertyAll(ColorPage.red),
+                                shape: MaterialStatePropertyAll(
+                                    ContinuousRectangleBorder(
+                                  borderRadius: BorderRadius.circular(0),
+                                ))),
+                          ),
+                        ),
+                      ],
+                    ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 5, bottom: 5),
+                      padding: const EdgeInsets.only(
+                          top: 15, bottom: 0, left: 20, right: 20),
                       child: Container(
                         color: const Color.fromARGB(255, 57, 161, 247),
                         // decoration: decoration,
@@ -415,116 +422,123 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                     ),
                     Expanded(
                       child: Obx(
-                        () => ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: getx.timebreaklist.length,
-                            itemBuilder: (context, index) {
-                              var x = getx.timebreaklist[index];
-                              return Container(
+                        () => Padding(
+                          padding: const EdgeInsets.only(
+                              top: 15, bottom: 0, left: 20, right: 20),
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: getx.timebreaklist.length,
+                              itemBuilder: (context, index) {
+                                var x = getx.timebreaklist[index];
+                                return Container(
 
-                                  // margin: EdgeInsets.only(top: 10),
-                                  decoration: BoxDecoration(
-                                    border: Border(
-                                      bottom: BorderSide(width: 0.3),
+                                    // margin: EdgeInsets.only(top: 10),
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(width: 0.3),
+                                      ),
+                                      // color:
+                                      //     index % 2 == 0 ? Colors.pink[100] : null
                                     ),
-                                    // color:
-                                    //     index % 2 == 0 ? Colors.pink[100] : null
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 2, horizontal: 5),
-                                  // width: 200,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Flexible(
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              // color: ColorPage.buttoncolor2,
-                                              border: Border(
-                                                  right: BorderSide(width: 0.3))
-                                              // borderRadius: BorderRadius.all(
-                                              //   Radius.circular(8),
-                                              // ),
-                                              ),
-                                          padding: EdgeInsets.all(8),
-                                          // color: Colors.orange,
-                                          alignment: Alignment.center,
-                                          // width: 200,
-                                          child: Text(
-                                            x.date,
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 2, horizontal: 5),
+                                    // width: 200,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Flexible(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                // color: ColorPage.buttoncolor2,
+                                                border: Border(
+                                                    right:
+                                                        BorderSide(width: 0.3))
+                                                // borderRadius: BorderRadius.all(
+                                                //   Radius.circular(8),
+                                                // ),
+                                                ),
+                                            padding: EdgeInsets.all(8),
+                                            // color: Colors.orange,
+                                            alignment: Alignment.center,
+                                            // width: 200,
+                                            child: Text(
+                                              x.date,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Flexible(
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              // color: ColorPage.buttoncolor2,
-                                              border: Border(
-                                                  right: BorderSide(width: 0.3))
-                                              // borderRadius: BorderRadius.all(
-                                              //   Radius.circular(8),
-                                              // ),
-                                              ),
-                                          // decoration: BoxDecoration(
-                                          //     color: ColorPage.buttoncolor2,
-                                          //     borderRadius: BorderRadius.all(
-                                          //         Radius.circular(8))),
-                                          padding: EdgeInsets.all(8),
-                                          // decoration: decoration,
-                                          // padding: EdgeInsets.all(10),
-                                          // color: Colors.orange,
-                                          alignment: Alignment.center,
-                                          // width: 200,
-                                          child: Text(x.startbreak),
+                                        Flexible(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                // color: ColorPage.buttoncolor2,
+                                                border: Border(
+                                                    right:
+                                                        BorderSide(width: 0.3))
+                                                // borderRadius: BorderRadius.all(
+                                                //   Radius.circular(8),
+                                                // ),
+                                                ),
+                                            // decoration: BoxDecoration(
+                                            //     color: ColorPage.buttoncolor2,
+                                            //     borderRadius: BorderRadius.all(
+                                            //         Radius.circular(8))),
+                                            padding: EdgeInsets.all(8),
+                                            // decoration: decoration,
+                                            // padding: EdgeInsets.all(10),
+                                            // color: Colors.orange,
+                                            alignment: Alignment.center,
+                                            // width: 200,
+                                            child: Text(x.startbreak),
+                                          ),
                                         ),
-                                      ),
-                                      Flexible(
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              // color: ColorPage.buttoncolor2,
-                                              border: Border(
-                                                  right: BorderSide(width: 0.3))
-                                              // borderRadius: BorderRadius.all(
-                                              //   Radius.circular(8),
-                                              // ),
-                                              ),
-                                          // decoration: decoration,
-                                          // decoration: BoxDecoration(
-                                          //     color: ColorPage.buttoncolor2,
-                                          //     borderRadius: BorderRadius.all(
-                                          //         Radius.circular(8))),
-                                          padding: EdgeInsets.all(8),
-                                          // color: Colors.orange,
-                                          alignment: Alignment.center,
-                                          // width: 200,
-                                          child: Text(x.endbreak),
+                                        Flexible(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                // color: ColorPage.buttoncolor2,
+                                                border: Border(
+                                                    right:
+                                                        BorderSide(width: 0.3))
+                                                // borderRadius: BorderRadius.all(
+                                                //   Radius.circular(8),
+                                                // ),
+                                                ),
+                                            // decoration: decoration,
+                                            // decoration: BoxDecoration(
+                                            //     color: ColorPage.buttoncolor2,
+                                            //     borderRadius: BorderRadius.all(
+                                            //         Radius.circular(8))),
+                                            padding: EdgeInsets.all(8),
+                                            // color: Colors.orange,
+                                            alignment: Alignment.center,
+                                            // width: 200,
+                                            child: Text(x.endbreak),
+                                          ),
                                         ),
-                                      ),
-                                      Flexible(
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              // color: ColorPage.buttoncolor2,
+                                        Flexible(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                // color: ColorPage.buttoncolor2,
 
-                                              // borderRadius: BorderRadius.all(
-                                              //   Radius.circular(8),
-                                              // ),
-                                              ),
-                                          // decoration: decoration,
-                                          // decoration: BoxDecoration(
-                                          //     color: ColorPage.buttoncolor2,
-                                          //     borderRadius: BorderRadius.all(
-                                          //         Radius.circular(8))),
-                                          padding: EdgeInsets.all(8),
-                                          // color: Colors.orange,
-                                          alignment: Alignment.center,
-                                          // width: 200,
-                                          child: Text(x.timetaken),
+                                                // borderRadius: BorderRadius.all(
+                                                //   Radius.circular(8),
+                                                // ),
+                                                ),
+                                            // decoration: decoration,
+                                            // decoration: BoxDecoration(
+                                            //     color: ColorPage.buttoncolor2,
+                                            //     borderRadius: BorderRadius.all(
+                                            //         Radius.circular(8))),
+                                            padding: EdgeInsets.all(8),
+                                            // color: Colors.orange,
+                                            alignment: Alignment.center,
+                                            // width: 200,
+                                            child: Text(x.timetaken),
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ));
-                            }),
+                                      ],
+                                    ));
+                              }),
+                        ),
                       ),
                     ),
                   ],

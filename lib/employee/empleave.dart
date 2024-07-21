@@ -1,9 +1,11 @@
 import 'package:board_datetime_picker/board_datetime_picker.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/emp_model/leavemodel.dart';
+import 'package:employee_management/employee/widget/textFormFieldWidget.dart';
 import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -53,156 +55,105 @@ class _EmpLeaveState extends State<EmpLeave> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Card(
-        color: Colors.white,
-        shadowColor: Colors.white,
-        surfaceTintColor: Colors.white,
-        elevation: 50,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 0, top: 10, bottom: 0),
-              child: Row(
-                children: [
-                  Text(
-                    'Leave',
-                    textScaler: TextScaler.linear(2),
-                  ),
-                ],
-              ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Apply For Leave',
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 5, bottom: 10),
-              child: Container(
-                // decoration: BoxDecoration(boxShadow: [
-                //   BoxShadow(
-                //       color: Colors.grey,
-                //       offset: Offset(2, 2),
-                //       blurRadius: 50,
-                //       spreadRadius: 2)
-                // ]),
-                // color: const Color.fromARGB(255, 57, 161, 247),
-                // decoration: decoration,
-                // color: Color.fromARGB(255, 19, 7, 240),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      flex: 3,
-                      child: Card(
-                        elevation: ColorPage.elevation,
-                        child: Container(
-                            // decoration: decoration,
-                            alignment: Alignment.center,
-                            // width: 200,
-                            // padding: EdgeInsets.all(8),
-                            child: TextFormField(
-                              maxLines: 1,
-                              decoration: const InputDecoration(
-                                filled: true,
-                                fillColor: ColorPage.white,
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 0.5, color: Colors.grey)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 0.5, color: Colors.grey)),
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 0.5, color: Colors.grey)),
-                                prefixIcon: Icon(
-                                  Icons.report,
-                                  // color: Colors.white,
-                                ),
-                                // hintStyle: TextStyle(color: Colors.black),
-                                hintText: 'Reason',
-                                // helperText: '',
-                              ),
-                            )),
-                      ),
-                    ),
-                    Flexible(
-                      flex: 1,
-                      child: Card(
-                        elevation: ColorPage.elevation,
-                        child: Container(
-                            // decoration: decoration,
-                            // color: ColorPage.buttoncolor1,
-                            // padding: EdgeInsets.all(8),
-                            alignment: Alignment.center,
-                            // width: 200,
-                            child: TextFormField(
-                              controller: datePickerController,
-                              // readOnly: true,
-                              decoration: InputDecoration(
-                                suffixIcon: IconButton(
-                                    onPressed: () async {
-                                      final result =
-                                          await showBoardDateTimeMultiPicker(
-                                        context: context,
-                                        pickerType: DateTimePickerType.datetime,
-                                      );
-                                      datePickerController.text =
-                                          '${result?.start}${result!.end}';
-                                      setState(() {});
-                                      // onTapFunction(context: context);
-                                    },
-                                    icon: Icon(Icons.date_range)),
-                                filled: true,
-                                fillColor: ColorPage.white,
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 0.5, color: Colors.grey)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 0.5, color: Colors.grey)),
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 0.5, color: Colors.grey)),
-                                // prefixIcon: Icon(
-                                //   Icons.date_range_rounded,
-                                //   color: Colors.white,
-                                // ),
-                                // hintStyle: TextStyle(color: ColorPage.white),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 15, bottom: 0, left: 20, right: 20),
+            child: Container(
+              // decoration: BoxDecoration(boxShadow: [
+              //   BoxShadow(
+              //       color: Colors.grey,
+              //       offset: Offset(2, 2),
+              //       blurRadius: 50,
+              //       spreadRadius: 2)
+              // ]),
+              // color: const Color.fromARGB(255, 57, 161, 247),
+              // decoration: decoration,
+              // color: Color.fromARGB(255, 19, 7, 240),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  buildTextFormField(
+                    controller: TextEditingController(),
+                    hintText: 'Reason',
+                    icon: Icons.link,
+                    validator: (p0) {},
+                    flex: 3,
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Container(
+                          decoration: ColorPage.decoration1,
+                          // color: ColorPage.buttoncolor1,
+                          // padding: EdgeInsets.all(8),
+                          alignment: Alignment.center,
+                          // width: 200,
+                          child: TextFormField(
+                            controller: datePickerController,
+                            // readOnly: true,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                  onPressed: () async {
+                                    final result =
+                                        await showBoardDateTimeMultiPicker(
+                                      context: context,
+                                      pickerType: DateTimePickerType.datetime,
+                                    );
+                                    datePickerController.text =
+                                        '${result?.start}${result!.end}';
+                                    setState(() {});
+                                    // onTapFunction(context: context);
+                                  },
+                                  icon: Icon(Icons.date_range)),
+                              filled: true,
+                              fillColor: ColorPage.white,
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 0.5, color: Colors.black)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 0.5, color: Colors.black)),
+                              border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 0.5, color: Colors.black)),
+                              // prefixIcon: Icon(
+                              //   Icons.date_range_rounded,
+                              //   color: Colors.white,
+                              // ),
+                              // hintStyle: TextStyle(color: ColorPage.white),
 
-                                hintText: 'Choose Date',
-                                // helperText: '',
-                              ),
-                            )),
-                      ),
+                              hintText: 'Choose Date',
+                              // helperText: '',
+                            ),
+                          )),
                     ),
-                    Flexible(
-                      flex: 1,
-                      child: Card(
-                        elevation: ColorPage.elevation,
-                        child: Container(
-                            // decoration: decoration,
-                            // color: ColorPage.buttoncolor1,
-                            alignment: Alignment.center,
-                            // padding: EdgeInsets.all(8),
-                            // width: 200,
-                            child: TextFormField(
-                              decoration: const InputDecoration(
-                                filled: true,
-                                fillColor: ColorPage.white,
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 0.5, color: Colors.grey)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 0.5, color: Colors.grey)),
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 0.5, color: Colors.grey)),
-                                hintText: 'No.of days',
-                                // helperText: '',
-                                // hintStyle: TextStyle(),
-                              ),
-                            )),
-                      ),
-                    ),
-                    Flexible(
-                      // flex: 1,
+                  ),
+                  buildTextFormField(
+                    controller: TextEditingController(),
+                    hintText: 'No.of days',
+                    icon: Icons.link,
+                    validator: (p0) {},
+                    flex: 1,
+                  ),
+                  Flexible(
+                    // flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: MouseRegion(
                         onEnter: (_) => setState(() => _isHovered = true),
                         onExit: (_) => setState(() => _isHovered = false),
@@ -242,101 +193,106 @@ class _EmpLeaveState extends State<EmpLeave> {
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 5, bottom: 0),
-              child: Container(
-                color: const Color.fromARGB(255, 57, 161, 247),
-                // decoration: decoration,
-                // color: Color.fromARGB(255, 19, 7, 240),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      flex: 3,
-                      child: Card(
-                        elevation: ColorPage.elevation,
-                        child: Container(
-                            decoration: ColorPage.decoration,
-                            alignment: Alignment.center,
-                            // width: 200,
-                            padding: EdgeInsets.all(8),
-                            child: Text(
-                              'Reason',
-                              style: TextStyle(
-                                  color: ColorPage.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20),
-                            )),
-                      ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(top: 15, bottom: 0, left: 20, right: 20),
+            child: Container(
+              color: const Color.fromARGB(255, 57, 161, 247),
+              // decoration: decoration,
+              // color: Color.fromARGB(255, 19, 7, 240),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    flex: 3,
+                    child: Card(
+                      elevation: ColorPage.elevation,
+                      child: Container(
+                          decoration: ColorPage.decoration,
+                          alignment: Alignment.center,
+                          // width: 200,
+                          padding: EdgeInsets.all(8),
+                          child: Text(
+                            'Reason',
+                            style: TextStyle(
+                                color: ColorPage.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          )),
                     ),
-                    Flexible(
-                      flex: 1,
-                      child: Card(
-                        elevation: 10,
-                        child: Container(
-                            decoration: ColorPage.decoration,
-                            // color: ColorPage.buttoncolor1,
-                            padding: EdgeInsets.all(8),
-                            alignment: Alignment.center,
-                            // width: 200,
-                            child: Text(
-                              'Choose Date',
-                              style: TextStyle(
-                                  color: ColorPage.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            )),
-                      ),
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: Card(
+                      elevation: 10,
+                      child: Container(
+                          decoration: ColorPage.decoration,
+                          // color: ColorPage.buttoncolor1,
+                          padding: EdgeInsets.all(8),
+                          alignment: Alignment.center,
+                          // width: 200,
+                          child: Text(
+                            'Choose Date',
+                            style: TextStyle(
+                                color: ColorPage.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          )),
                     ),
-                    Flexible(
-                      // flex: 1,
-                      child: Card(
-                        elevation: 10,
-                        child: Container(
-                            decoration: ColorPage.decoration,
-                            // color: ColorPage.buttoncolor1,
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.all(8),
-                            // width: 200,
-                            child: Text(
-                              'No.of Days',
-                              style: TextStyle(
-                                  color: ColorPage.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            )),
-                      ),
+                  ),
+                  Flexible(
+                    // flex: 1,
+                    child: Card(
+                      elevation: 10,
+                      child: Container(
+                          decoration: ColorPage.decoration,
+                          // color: ColorPage.buttoncolor1,
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.all(8),
+                          // width: 200,
+                          child: Text(
+                            'No.of Days',
+                            style: TextStyle(
+                                color: ColorPage.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          )),
                     ),
-                    Flexible(
-                      flex: 1,
-                      child: Card(
-                        elevation: 10,
-                        child: Container(
-                            decoration: ColorPage.decoration,
-                            // color: ColorPage.buttoncolor1,
-                            padding: EdgeInsets.all(8),
-                            alignment: Alignment.center,
-                            // width: 200,
-                            child: Text(
-                              'Status',
-                              style: TextStyle(
-                                  color: ColorPage.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            )),
-                      ),
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: Card(
+                      elevation: 10,
+                      child: Container(
+                          decoration: ColorPage.decoration,
+                          // color: ColorPage.buttoncolor1,
+                          padding: EdgeInsets.all(8),
+                          alignment: Alignment.center,
+                          // width: 200,
+                          child: Text(
+                            'Status',
+                            style: TextStyle(
+                                color: ColorPage.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          )),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            Expanded(
-              child: Obx(
-                () => ListView.builder(
+          ),
+          Expanded(
+            child: Obx(
+              () => Padding(
+                padding: const EdgeInsets.only(
+                    top: 15, bottom: 0, left: 20, right: 20),
+                child: ListView.builder(
                     shrinkWrap: true,
                     itemCount: getx.leavelist.length,
                     itemBuilder: (context, index) {
@@ -454,8 +410,8 @@ class _EmpLeaveState extends State<EmpLeave> {
                     }),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

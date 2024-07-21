@@ -1,5 +1,6 @@
 import 'package:employee_management/admin/admin_model/adminEmpAdd.dart';
 import 'package:employee_management/color/color.dart';
+import 'package:employee_management/employee/widget/textFormFieldWidget.dart';
 import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -161,45 +162,45 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
     );
   }
 
-  Flexible buildTextFormField({
-    required TextEditingController controller,
-    required String hintText,
-    required IconData icon,
-    required String? Function(String?)? validator,
-    bool isPassword = false,
-  }) {
-    return Flexible(
-      flex: 1,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5),
-        child: Container(
-          decoration: ColorPage.decoration1,
-          alignment: Alignment.center,
-          child: TextFormField(
-            controller: controller,
-            maxLines: 1,
-            // obscureText: isPassword,
-            validator: validator,
-            decoration: InputDecoration(
-              filled: true,
-              fillColor: ColorPage.white,
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 0.5, color: Colors.black),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 0.5, color: Colors.black),
-              ),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(width: 0.5, color: Colors.black),
-              ),
-              // prefixIcon: Icon(icon),
-              labelText: hintText,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // Flexible buildTextFormField({
+  //   required TextEditingController controller,
+  //   required String hintText,
+  //   required IconData icon,
+  //   required String? Function(String?)? validator,
+  //   bool isPassword = false,
+  // }) {
+  //   return Flexible(
+  //     flex: 1,
+  //     child: Padding(
+  //       padding: const EdgeInsets.symmetric(horizontal: 5),
+  //       child: Container(
+  //         decoration: ColorPage.decoration1,
+  //         alignment: Alignment.center,
+  //         child: TextFormField(
+  //           controller: controller,
+  //           maxLines: 1,
+  //           // obscureText: isPassword,
+  //           validator: validator,
+  //           decoration: InputDecoration(
+  //             filled: true,
+  //             fillColor: ColorPage.white,
+  //             focusedBorder: OutlineInputBorder(
+  //               borderSide: BorderSide(width: 0.5, color: Colors.black),
+  //             ),
+  //             enabledBorder: OutlineInputBorder(
+  //               borderSide: BorderSide(width: 0.5, color: Colors.black),
+  //             ),
+  //             border: OutlineInputBorder(
+  //               borderSide: BorderSide(width: 0.5, color: Colors.black),
+  //             ),
+  //             // prefixIcon: Icon(icon),
+  //             labelText: hintText,
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Flexible buildDropdownFormField({
     required String hintText,
@@ -252,7 +253,8 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
 
   bool _isHovered = false;
   Flexible buildAddUserButton() {
-    return Flexible(
+    return 
+    Flexible(
       flex: 1,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5),

@@ -21,10 +21,11 @@ class AdminEmpDrawer extends StatelessWidget {
     return SidebarX(
       controller: _controller,
       theme: SidebarXTheme(
+        // padding: EdgeInsets.all(50),
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: canvasColor,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(5),
         ),
         hoverColor: scaffoldBackgroundColor,
         textStyle: TextStyle(color: Colors.white),
@@ -33,6 +34,8 @@ class AdminEmpDrawer extends StatelessWidget {
           color: Colors.white,
           fontWeight: FontWeight.w500,
         ),
+
+        selectedItemPadding: EdgeInsets.symmetric(vertical: 15),
         itemTextPadding: const EdgeInsets.only(left: 30),
         selectedItemTextPadding: const EdgeInsets.only(left: 30),
         itemDecoration: BoxDecoration(
@@ -40,12 +43,12 @@ class AdminEmpDrawer extends StatelessWidget {
           border: Border.all(color: canvasColor),
         ),
         selectedItemDecoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(2),
           border: Border.all(
             color: actionColor.withOpacity(0.37),
           ),
           gradient: LinearGradient(
-            colors: [accentCanvasColor, canvasColor],
+            colors: [accentCanvasColor, accentCanvasColor],
           ),
           boxShadow: [
             BoxShadow(
@@ -65,7 +68,13 @@ class AdminEmpDrawer extends StatelessWidget {
       ),
       extendedTheme: SidebarXTheme(
         width: 200,
+        // height: 500,
+        // height: MediaQuery.sizeOf(context).height,
+        padding: EdgeInsets.all(0),
+        margin: EdgeInsets.only(left: 10, top: 10, bottom: 10, right: 10),
         decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          // shape: BoxShape.values[2],
           color: ColorPage.colortheme,
         ),
       ),

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:csv/csv.dart';
 import 'package:employee_management/color/color.dart';
+import 'package:employee_management/employee/widget/searchDropDown.dart';
+import 'package:employee_management/employee/widget/textFormFieldWidget.dart';
 import 'package:employee_management/export/csvexport.dart';
 import 'package:employee_management/export/excelexport.dart';
 import 'package:employee_management/getx/getx.dart';
@@ -38,264 +40,91 @@ class _EmpProjectListState extends State<EmpProjectList> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Flexible(
+                buildTextFormField(
+                  controller: TextEditingController(),
+                  icon: Icons.link,
+                  flex: 3,
+                  // flex: 2,
+                  hintText: 'Backlink',
+                  // items: [],
+                  // onChanged: (v) {},
+                  validator: (p0) {},
+                ),
+                buildTextFormField(
+                  controller: TextEditingController(),
+                  icon: Icons.link,
                   flex: 2,
-                  child: Card(
-                    elevation: 4,
-                    child: Container(
-                        // decoration: decoration,
-                        alignment: Alignment.center,
-                        // width: 200,
-                        // padding: EdgeInsets.all(8),
-                        child: TextFormField(
-                          maxLines: 1,
-                          decoration: const InputDecoration(
-                            filled: true,
-                            fillColor: ColorPage.white,
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.5, color: Colors.grey)),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.5, color: Colors.grey)),
-                            border: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.5, color: Colors.grey)),
-                            prefixIcon: Icon(
-                              Icons.link,
-                              // color: Colors.white,
-                            ),
-                            // hintStyle: TextStyle(color: Colors.black),
-                            hintText: 'Backlink',
-                            // helperText: '',
-                          ),
-                        )),
-                  ),
+                  // flex: 2,
+                  hintText: 'Keywords',
+                  // items: [],
+                  // onChanged: (v) {},
+                  validator: (p0) {},
+                ),
+                buildDropdownFormField(
+                  flex: 1,
+                  // flex: 2,
+                  hintText: 'Type',
+                  // items: [],
+                  // onChanged: (v) {},
+                  validator: (p0) {}, items: [], onChanged: (S) {},
+                ),
+                buildDropdownFormField(
+                  flex: 1,
+                  // flex: 2,
+                  hintText: 'Status',
+                  // items: [],
+                  // onChanged: (v) {},
+                  validator: (p0) {},
+                  items: [
+                    'Active',
+                    'Pending',
+                  ],
+                  onChanged: (S) {},
+                ),
+                buildTextFormField(
+                  controller: TextEditingController(),
+                  hintText: 'Remark',
+                  icon: Icons.abc,
+                  validator: (p0) {},
+                  flex: 1,
                 ),
                 Flexible(
-                  flex: 2,
-                  child: Card(
-                    elevation: 4,
-                    child: Container(
-                        // decoration: decoration,
-                        alignment: Alignment.center,
-                        // width: 200,
-                        // padding: EdgeInsets.all(8),
-                        child: TextFormField(
-                          maxLines: 1,
-                          decoration: const InputDecoration(
-                            filled: true,
-                            fillColor: ColorPage.white,
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.5, color: Colors.grey)),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.5, color: Colors.grey)),
-                            border: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.5, color: Colors.grey)),
-                            prefixIcon: Icon(
-                              Icons.key,
-                              // color: Colors.white,
+                  flex: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: MouseRegion(
+                      onEnter: (_) => setState(() => _isHovered = true),
+                      onExit: (_) => setState(() => _isHovered = false),
+                      child: InkWell(
+                        onTap: () {},
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: _isHovered
+                                  ? ColorPage.buttoncolor1
+                                  : Colors.green,
                             ),
-                            // hintStyle: TextStyle(color: Colors.black),
-                            hintText: 'keyword',
-                            // helperText: '',
-                          ),
-                        )),
-                  ),
-                ),
-                Flexible(
-                  flex: 2,
-                  child: Card(
-                    elevation: 4,
-                    child: DropdownButtonFormField<String>(
-                      decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        // prefixIcon: Icon(
-                        //   Icons.type_specimen,
-                        //   color: Colors.grey,
-                        // ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 0.5, color: Colors.grey),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 0.5, color: Colors.grey),
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 0.5, color: Colors.grey),
-                        ),
+
+                            // decoration: BoxDecoration(
+                            //     // borderRadius: BorderRadius.circular(10),
+                            //     gradient: const LinearGradient(colors: [
+                            //   Color.fromARGB(255, 249, 46, 5),
+                            //   Colors.red,
+                            // ])
+                            //     // color: Color.fromARGB(81, 14, 14, 28),
+                            //     ),
+                            // color: ColorPage.buttoncolor1,
+                            padding: EdgeInsets.symmetric(vertical: 14),
+                            alignment: Alignment.center,
+                            // width: 200,
+                            child: Text(
+                              'Submit',
+                              style: TextStyle(
+                                  color: ColorPage.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            )),
                       ),
-                      hint: Text('Type'),
-                      items: <String>[
-                        "Classified ads",
-                        "Business Listing",
-                        "Infographic Submission",
-                        "Image Submission",
-                        "PDF Submission",
-                        "PPT Submission",
-                        "Guest Posting",
-                        "Blog Submission",
-                        "Article Submission",
-                        "Comment Posting",
-                        "Q&A Submission",
-                        "Web Blog Submission",
-                        "Video Submission",
-                        "Map Listing",
-                        "Directory Submission",
-                        "Ping Submission",
-                        "Social Bookmarking",
-                        "GMB Posting",
-                        "Profile Creation",
-                        "Press Release",
-                        "Forum Submission",
-                        "Event Submission",
-                        "Other Listings",
-                        "Website Audit",
-                        "Competitor Analysis",
-                        "Keyword Research",
-                        "Meta Setup"
-                      ].map<DropdownMenuItem<String>>((String e) {
-                        return DropdownMenuItem(
-                          value: e,
-                          child: Text(
-                            e,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (v) {
-                        getx.projecttype.value = v!;
-                      },
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Cannot be null';
-                        }
-                        return null;
-                      },
-                      isExpanded: true,
-                    ),
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Card(
-                    elevation: 4,
-                    child: Container(
-                        // decoration: decoration,
-                        // color: ColorPage.buttoncolor1,
-                        // padding: EdgeInsets.all(8),
-                        alignment: Alignment.center,
-                        // width: 200,
-                        child: TextFormField(
-                          controller: datePickerController,
-                          // readOnly: true,
-                          decoration: InputDecoration(
-                            prefixIcon: IconButton(
-                                onPressed: () async {
-                                  // final result =
-                                  //     await showBoardDateTimeMultiPicker(
-                                  //   context: context,
-                                  //   pickerType: DateTimePickerType.datetime,
-                                  // );
-                                  // datePickerController.text =
-                                  //     '${result?.start}${result!.end}';
-                                  // setState(() {});
-                                  // // onTapFunction(context: context);
-                                },
-                                icon: Icon(Icons.stars_outlined)),
-                            filled: true,
-                            fillColor: ColorPage.white,
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.5, color: Colors.grey)),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.5, color: Colors.grey)),
-                            border: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.5, color: Colors.grey)),
-                            // prefixIcon: Icon(
-                            //   Icons.date_range_rounded,
-                            //   color: Colors.white,
-                            // ),
-                            // hintStyle: TextStyle(color: ColorPage.white),
-
-                            hintText: 'Status',
-                            // helperText: '',
-                          ),
-                        )),
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Card(
-                    elevation: 4,
-                    child: Container(
-                        // decoration: decoration,
-                        // color: ColorPage.buttoncolor1,
-                        alignment: Alignment.center,
-                        // padding: EdgeInsets.all(8),
-                        // width: 200,
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            filled: true,
-                            fillColor: ColorPage.white,
-                            focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.5, color: Colors.grey)),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.5, color: Colors.grey)),
-                            border: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 0.5, color: Colors.grey)),
-                            hintText: 'Remark',
-                            // helperText: '',
-                            // hintStyle: TextStyle(),
-                          ),
-                        )),
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: MouseRegion(
-                    onEnter: (_) => setState(() => _isHovered = true),
-                    onExit: (_) => setState(() => _isHovered = false),
-                    child: InkWell(
-                      onTap: () {},
-                      child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: _isHovered
-                                ? ColorPage.buttoncolor1
-                                : Colors.green,
-                          ),
-
-                          // decoration: BoxDecoration(
-                          //     // borderRadius: BorderRadius.circular(10),
-                          //     gradient: const LinearGradient(colors: [
-                          //   Color.fromARGB(255, 249, 46, 5),
-                          //   Colors.red,
-                          // ])
-                          //     // color: Color.fromARGB(81, 14, 14, 28),
-                          //     ),
-                          // color: ColorPage.buttoncolor1,
-                          padding: EdgeInsets.symmetric(vertical: 14),
-                          alignment: Alignment.center,
-                          // width: 200,
-                          child: Text(
-                            'Submit',
-                            style: TextStyle(
-                                color: ColorPage.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          )),
                     ),
                   ),
                 ),
