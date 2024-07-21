@@ -42,7 +42,7 @@ class _AdminUserCreateState extends State<AdminUserCreate> {
   }
 
   d() {
-    AdminEmpAdd empAdd = AdminEmpAdd(
+    AdminEmpAddModel empAdd = AdminEmpAddModel(
       fullname: 'Sayak Mishra',
       email: 'sayakmishra@gmail.com',
       emprole: 'Developer',
@@ -288,7 +288,7 @@ class _AdminUserCreateState extends State<AdminUserCreate> {
       child: InkWell(
         onTap: () {
           if (gk.currentState!.validate()) {
-            AdminEmpAdd add = AdminEmpAdd(
+            AdminEmpAddModel add = AdminEmpAddModel(
               fullname: fullname.text,
               email: email.text,
               emprole: getx.projecttype.value,

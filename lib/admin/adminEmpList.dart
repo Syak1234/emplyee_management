@@ -1,23 +1,24 @@
+import 'package:employee_management/admin/adminEmpfilter.dart';
 import 'package:employee_management/admin/adminprojectlist.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/widget/searchWidget.dart';
 import 'package:flutter/material.dart';
 
-class AdminprojectShow extends StatefulWidget {
-  const AdminprojectShow({super.key});
+class AdminEmpList extends StatefulWidget {
+  const AdminEmpList({super.key});
 
   @override
-  State<AdminprojectShow> createState() => _AdminprojectShowState();
+  State<AdminEmpList> createState() => _AdminEmpListState();
 }
 
-class _AdminprojectShowState extends State<AdminprojectShow> {
+class _AdminEmpListState extends State<AdminEmpList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Navigator(
         onGenerateRoute: (routeSettings) {
           return MaterialPageRoute(
-            builder: (context) => AdminProjectsListScreen(),
+            builder: (context) => AdminEmpListPage(),
           );
         },
       ),
@@ -25,7 +26,7 @@ class _AdminprojectShowState extends State<AdminprojectShow> {
   }
 }
 
-class AdminProjectsListScreen extends StatelessWidget {
+class AdminEmpListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -41,7 +42,7 @@ class AdminProjectsListScreen extends StatelessWidget {
                   alignment: Alignment.center,
                   padding: EdgeInsets.symmetric(horizontal: 50, vertical: 0),
                   child: Text(
-                    'Projects',
+                    'Employee',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 30,
@@ -62,10 +63,10 @@ class AdminProjectsListScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      AdminProjectCard(index: index),
-                      AdminProjectCard(index: index),
-                      AdminProjectCard(index: index),
-                      AdminProjectCard(index: index),
+                      AdminEmpCard(index: index),
+                      AdminEmpCard(index: index),
+                      AdminEmpCard(index: index),
+                      AdminEmpCard(index: index),
                     ],
                   ),
                 );
@@ -78,16 +79,16 @@ class AdminProjectsListScreen extends StatelessWidget {
   }
 }
 
-class AdminProjectCard extends StatefulWidget {
+class AdminEmpCard extends StatefulWidget {
   final int index;
 
-  const AdminProjectCard({required this.index, Key? key}) : super(key: key);
+  const AdminEmpCard({required this.index, Key? key}) : super(key: key);
 
   @override
-  _AdminProjectCardState createState() => _AdminProjectCardState();
+  _AdminEmpCardState createState() => _AdminEmpCardState();
 }
 
-class _AdminProjectCardState extends State<AdminProjectCard> {
+class _AdminEmpCardState extends State<AdminEmpCard> {
   bool _isHovered = false;
   @override
   Widget build(BuildContext context) {
@@ -109,7 +110,7 @@ class _AdminProjectCardState extends State<AdminProjectCard> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AdminProjectList(),
+                      builder: (context) => AdminEmpFilter(),
                     ));
               },
               child: Container(

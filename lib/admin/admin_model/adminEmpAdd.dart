@@ -1,7 +1,7 @@
-class AdminEmpAdd {
+class AdminEmpAddModel {
   String fullname = "";
   String email = "";
   String emprole = "";
   String password = "";
-  AdminEmpAdd({required this.fullname,required this.email,required this.emprole,required this.password});
+  AdminEmpAddModel({required this.fullname,required this.email,required this.emprole,required this.password});
 }

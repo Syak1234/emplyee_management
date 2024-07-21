@@ -1,6 +1,7 @@
 import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:employee_management/admin/adminEmpadd.dart';
 import 'package:employee_management/color/color.dart';
+import 'package:employee_management/employee/widget/searchDropDown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -29,11 +30,24 @@ class _AdminEmpAttendanceState extends State<AdminEmpAttendance> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 5, bottom: 10),
+              padding: const EdgeInsets.only(left: 0, top: 15, bottom: 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Attendance',
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  top: 15, bottom: 0, left: 20, right: 20),
               child: Form(
                 // key: gk,
                 child: Column(
@@ -54,6 +68,7 @@ class _AdminEmpAttendanceState extends State<AdminEmpAttendance> {
                           },
                         ),
                         buildDropdownFormField(
+                          flex: 1,
                           hintText: 'Employee Name',
                           items: ["SEO", "Developer", "Content writer"],
                           onChanged: (v) {
@@ -167,39 +182,42 @@ class _AdminEmpAttendanceState extends State<AdminEmpAttendance> {
   }) {
     return Flexible(
       flex: 1,
-      child: Card(
-        elevation: ColorPage.elevation,
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            return DropdownButtonFormField<String>(
-              decoration: const InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 0.5, color: Colors.grey),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 0.5, color: Colors.grey),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 0.5, color: Colors.grey),
-                ),
-              ),
-              hint: Text(hintText),
-              items: items.map<DropdownMenuItem<String>>((String e) {
-                return DropdownMenuItem(
-                  value: e,
-                  child: Text(
-                    e,
-                    overflow: TextOverflow.ellipsis,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Container(
+          decoration: ColorPage.decoration1,
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              return DropdownButtonFormField<String>(
+                decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: ColorPage.white,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 0.5, color: Colors.black),
                   ),
-                );
-              }).toList(),
-              onChanged: onChanged,
-              validator: validator,
-              isExpanded: true, // Ensure the dropdown button takes full width
-            );
-          },
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 0.5, color: Colors.black),
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(width: 0.5, color: Colors.black),
+                  ),
+                ),
+                hint: Text(hintText),
+                items: items.map<DropdownMenuItem<String>>((String e) {
+                  return DropdownMenuItem(
+                    value: e,
+                    child: Text(
+                      e,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  );
+                }).toList(),
+                onChanged: onChanged,
+                validator: validator,
+                isExpanded: true, // Ensure the dropdown button takes full width
+              );
+            },
+          ),
         ),
       ),
     );
@@ -209,27 +227,31 @@ class _AdminEmpAttendanceState extends State<AdminEmpAttendance> {
   Flexible buildAddUserButton() {
     return Flexible(
       flex: 1,
-      child: MouseRegion(
-        onEnter: (_) => setState(() => _isHovered = true),
-        onExit: (_) => setState(() => _isHovered = false),
-        child: InkWell(
-          onTap: () {},
-          child: Card(
-            margin: EdgeInsets.all(0),
-            elevation: ColorPage.elevation,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: _isHovered ? ColorPage.buttoncolor1 : Colors.green,
-              ),
-              padding: EdgeInsets.symmetric(vertical: 14),
-              alignment: Alignment.center,
-              child: Text(
-                'Search',
-                style: TextStyle(
-                  color: ColorPage.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        // padding: const EdgeInsets.all(8.0),
+        child: MouseRegion(
+          onEnter: (_) => setState(() => _isHovered = true),
+          onExit: (_) => setState(() => _isHovered = false),
+          child: InkWell(
+            onTap: () {},
+            child: Card(
+              margin: EdgeInsets.all(0),
+              elevation: ColorPage.elevation,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: _isHovered ? ColorPage.buttoncolor1 : Colors.green,
+                ),
+                padding: EdgeInsets.symmetric(vertical: 14),
+                alignment: Alignment.center,
+                child: Text(
+                  'Search',
+                  style: TextStyle(
+                    color: ColorPage.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
@@ -239,84 +261,71 @@ class _AdminEmpAttendanceState extends State<AdminEmpAttendance> {
     );
   }
 
-  static List<String> getSuggestions(
-    String query,
-    List<String> items,
-  ) {
-    List<String> matches = <String>[];
-    matches.addAll(items);
+  // Flexible buildDropdownFormField({
+  //   required String hintText,
+  //   required List<String> items,
+  //   required void Function(String?) onChanged,
+  //   required String? Function(String?) validator,
+  // }) {
+  //   final TextEditingController _dropdownSearchFieldController =
+  //       TextEditingController();
 
-    matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
-    return matches;
-  }
+  //   SuggestionsBoxController suggestionBoxController =
+  //       SuggestionsBoxController();
+  //   return Flexible(
+  //     flex: 1,
+  //     child: LayoutBuilder(
+  //       builder: (context, constraints) {
+  //         double width = constraints.maxWidth;
+  //         bool isSmallScreen = width < 600;
 
-  Flexible buildDropdownFormField({
-    required String hintText,
-    required List<String> items,
-    required void Function(String?) onChanged,
-    required String? Function(String?) validator,
-  }) {
-    final TextEditingController _dropdownSearchFieldController =
-        TextEditingController();
-
-    SuggestionsBoxController suggestionBoxController =
-        SuggestionsBoxController();
-    return Flexible(
-      flex: 1,
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          double width = constraints.maxWidth;
-          bool isSmallScreen = width < 600;
-
-          return Card(
-            elevation: ColorPage.elevation,
-            child: Container(
-              // padding:
-              //     isSmallScreen ? EdgeInsets.all(8.0) : EdgeInsets.all(16.0),
-              child: DropDownSearchFormField(
-                textFieldConfiguration: TextFieldConfiguration(
-                  decoration: InputDecoration(
-                    labelText: hintText,
-                    filled: true,
-                    fillColor: Colors.white,
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 0.5, color: Colors.grey),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 0.5, color: Colors.grey),
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 0.5, color: Colors.grey),
-                    ),
-                  ),
-                  controller: _dropdownSearchFieldController,
-                ),
-                suggestionsCallback: (pattern) {
-                  return getSuggestions(pattern, items);
-                },
-                itemBuilder: (context, String suggestion) {
-                  return ListTile(
-                    title: Text(suggestion),
-                  );
-                },
-                itemSeparatorBuilder: (context, index) {
-                  return const Divider();
-                },
-                transitionBuilder: (context, suggestionsBox, controller) {
-                  return suggestionsBox;
-                },
-                onSuggestionSelected: (String suggestion) {
-                  _dropdownSearchFieldController.text = suggestion;
-                  onChanged(suggestion);
-                },
-                suggestionsBoxController: suggestionBoxController,
-                validator: validator,
-                displayAllSuggestionWhenTap: true,
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
+  //         return Container(
+  //           decoration: ColorPage.decoration1,
+  //           // padding:
+  //           //     isSmallScreen ? EdgeInsets.all(8.0) : EdgeInsets.all(16.0),
+  //           child: DropDownSearchFormField(
+  //             textFieldConfiguration: TextFieldConfiguration(
+  //               decoration: InputDecoration(
+  //                 labelText: hintText,
+  //                 filled: true,
+  //                 fillColor: ColorPage.white,
+  //                 focusedBorder: OutlineInputBorder(
+  //                   borderSide: BorderSide(width: 0.5, color: Colors.black),
+  //                 ),
+  //                 enabledBorder: OutlineInputBorder(
+  //                   borderSide: BorderSide(width: 0.5, color: Colors.black),
+  //                 ),
+  //                 border: OutlineInputBorder(
+  //                   borderSide: BorderSide(width: 0.5, color: Colors.black),
+  //                 ),
+  //               ),
+  //               controller: _dropdownSearchFieldController,
+  //             ),
+  //             suggestionsCallback: (pattern) {
+  //               return getSuggestions(pattern, items);
+  //             },
+  //             itemBuilder: (context, String suggestion) {
+  //               return ListTile(
+  //                 title: Text(suggestion),
+  //               );
+  //             },
+  //             itemSeparatorBuilder: (context, index) {
+  //               return const Divider();
+  //             },
+  //             transitionBuilder: (context, suggestionsBox, controller) {
+  //               return suggestionsBox;
+  //             },
+  //             onSuggestionSelected: (String suggestion) {
+  //               _dropdownSearchFieldController.text = suggestion;
+  //               onChanged(suggestion);
+  //             },
+  //             suggestionsBoxController: suggestionBoxController,
+  //             validator: validator,
+  //             displayAllSuggestionWhenTap: true,
+  //           ),
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 }

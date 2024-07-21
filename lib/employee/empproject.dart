@@ -1,5 +1,6 @@
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/emprojectlist.dart';
+import 'package:employee_management/employee/widget/searchWidget.dart';
 import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ class ProjectsListScreen extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 0, top: 5, bottom: 5),
+            padding: const EdgeInsets.only(left: 0, top: 0, bottom: 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -55,13 +56,15 @@ class ProjectsListScreen extends StatelessWidget {
                     'Projects',
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 25,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ],
             ),
           ),
+          SearchBarWidget(),
           Expanded(
             child: ListView.builder(
               shrinkWrap: true,
@@ -110,6 +113,7 @@ class _ProjectCardState extends State<ProjectCard> {
           onEnter: (_) => setState(() => _isHovered = true),
           onExit: (_) => setState(() => _isHovered = false),
           child: Card(
+            color: ColorPage.white,
             elevation: ColorPage.elevation,
             child: InkWell(
               onTap: () {
@@ -125,9 +129,7 @@ class _ProjectCardState extends State<ProjectCard> {
                     width: 0.5,
                     color: _isHovered ? Colors.white : ColorPage.buttoncolor1,
                   ),
-                  color: _isHovered
-                      ? ColorPage.buttoncolor1
-                      : Color.fromARGB(255, 244, 242, 242),
+                  color: _isHovered ? ColorPage.buttoncolor1 : ColorPage.white,
                   borderRadius: BorderRadius.circular(5),
                 ),
                 padding: const EdgeInsets.all(8),

@@ -1,4 +1,5 @@
 import 'package:employee_management/admin/adminEmpAttendance.dart';
+import 'package:employee_management/admin/adminEmpList.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -26,7 +27,7 @@ class _AdminEmphomePageState extends State<AdminEmphomePage> {
 
   @override
   void initState() {
-    page = [AdminEmpFilter(), AdminEmpList(), AdminEmpAttendance()];
+    page = [AdminEmpList(), AdminEmpAdd(), AdminEmpAttendance()];
     super.initState();
   }
 

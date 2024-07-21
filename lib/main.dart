@@ -28,8 +28,21 @@ class MyApp extends StatelessWidget {
         // backgroundColor: Color.fromARGB(255, 101, 114, 167),
         textTheme: TextTheme(
           bodyMedium: GoogleFonts.josefinSans().copyWith(),
+          bodyLarge: GoogleFonts.josefinSans().copyWith(),
+          bodySmall: GoogleFonts.josefinSans().copyWith(),
+          // bodyText1: GoogleFonts.josefinSans().copyWith(),
+          displayMedium: GoogleFonts.josefinSans().copyWith(),
+          displaySmall: GoogleFonts.josefinSans().copyWith(),
+          // bodyText2: GoogleFonts.josefinSans().copyWith(),
+          displayLarge: GoogleFonts.josefinSans().copyWith(),
+          labelLarge: GoogleFonts.josefinSans().copyWith(),
+          labelMedium: GoogleFonts.josefinSans().copyWith(),
+          labelSmall: GoogleFonts.josefinSans().copyWith(),
         ),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.black,
+        ),
+
         useMaterial3: true,
       ),
       home: EmpSignUp(),

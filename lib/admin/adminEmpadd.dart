@@ -4,14 +4,14 @@ import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AdminEmpList extends StatefulWidget {
-  const AdminEmpList({super.key});
+class AdminEmpAdd extends StatefulWidget {
+  const AdminEmpAdd({super.key});
 
   @override
-  State<AdminEmpList> createState() => _AdminEmpListState();
+  State<AdminEmpAdd> createState() => _AdminEmpAddState();
 }
 
-class _AdminEmpListState extends State<AdminEmpList> {
+class _AdminEmpAddState extends State<AdminEmpAdd> {
   Getx getx = Get.put(Getx());
   GlobalKey<FormState> gk = GlobalKey();
   TextEditingController fullname = TextEditingController();
@@ -32,22 +32,26 @@ class _AdminEmpListState extends State<AdminEmpList> {
           bool isSmallScreen = width < 600;
 
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 0, top: 10, bottom: 0),
+                 padding : const EdgeInsets.only(left: 0, top: 15, bottom: 0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Add Employee',
-                        style: TextStyle(fontSize: isSmallScreen ? 16 : 24),
+                        style: TextStyle(
+                            fontSize: isSmallScreen ? 16 : 30,
+                            fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 5, bottom: 10),
+                  padding: const EdgeInsets.only(
+                      top: 15, bottom: 0, left: 20, right: 20),
                   child: Form(
                     key: gk,
                     child: Column(
@@ -166,29 +170,30 @@ class _AdminEmpListState extends State<AdminEmpList> {
   }) {
     return Flexible(
       flex: 1,
-      child: Card(
-        elevation: ColorPage.elevation,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
         child: Container(
+          decoration: ColorPage.decoration1,
           alignment: Alignment.center,
           child: TextFormField(
             controller: controller,
             maxLines: 1,
-            obscureText: isPassword,
+            // obscureText: isPassword,
             validator: validator,
             decoration: InputDecoration(
               filled: true,
               fillColor: ColorPage.white,
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 0.5, color: Colors.grey),
+                borderSide: BorderSide(width: 0.5, color: Colors.black),
               ),
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 0.5, color: Colors.grey),
+                borderSide: BorderSide(width: 0.5, color: Colors.black),
               ),
               border: OutlineInputBorder(
-                borderSide: BorderSide(width: 0.5, color: Colors.grey),
+                borderSide: BorderSide(width: 0.5, color: Colors.black),
               ),
-              prefixIcon: Icon(icon),
-              hintText: hintText,
+              // prefixIcon: Icon(icon),
+              labelText: hintText,
             ),
           ),
         ),
@@ -204,39 +209,42 @@ class _AdminEmpListState extends State<AdminEmpList> {
   }) {
     return Flexible(
       flex: 1,
-      child: Card(
-        elevation: ColorPage.elevation,
-        child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            return DropdownButtonFormField<String>(
-              decoration: const InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 0.5, color: Colors.grey),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 0.5, color: Colors.grey),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 0.5, color: Colors.grey),
-                ),
-              ),
-              hint: Text(hintText),
-              items: items.map<DropdownMenuItem<String>>((String e) {
-                return DropdownMenuItem(
-                  value: e,
-                  child: Text(
-                    e,
-                    overflow: TextOverflow.ellipsis,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: Container(
+          decoration: ColorPage.decoration1,
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              return DropdownButtonFormField<String>(
+                decoration: const InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 0.5, color: Colors.black),
                   ),
-                );
-              }).toList(),
-              onChanged: onChanged,
-              validator: validator,
-              isExpanded: true, // Ensure the dropdown button takes full width
-            );
-          },
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(width: 0.5, color: Colors.black),
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(width: 0.5, color: Colors.black),
+                  ),
+                ),
+                hint: Text(hintText),
+                items: items.map<DropdownMenuItem<String>>((String e) {
+                  return DropdownMenuItem(
+                    value: e,
+                    child: Text(
+                      e,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  );
+                }).toList(),
+                onChanged: onChanged,
+                validator: validator,
+                isExpanded: true, // Ensure the dropdown button takes full width
+              );
+            },
+          ),
         ),
       ),
     );
@@ -246,37 +254,40 @@ class _AdminEmpListState extends State<AdminEmpList> {
   Flexible buildAddUserButton() {
     return Flexible(
       flex: 1,
-      child: MouseRegion(
-        onEnter: (_) => setState(() => _isHovered = true),
-        onExit: (_) => setState(() => _isHovered = false),
-        child: InkWell(
-          onTap: () {
-            if (gk.currentState!.validate()) {
-              AdminEmpAdd add = AdminEmpAdd(
-                fullname: fullname.text,
-                email: email.text,
-                emprole: getx.projecttype.value,
-                password: password.text,
-              );
-              getx.empaddList.add(add);
-            }
-          },
-          child: Card(
-            margin: EdgeInsets.all(0),
-            elevation: ColorPage.elevation,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: _isHovered ? ColorPage.buttoncolor1 : Colors.green,
-              ),
-              padding: EdgeInsets.symmetric(vertical: 14),
-              alignment: Alignment.center,
-              child: Text(
-                'Add User',
-                style: TextStyle(
-                  color: ColorPage.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: MouseRegion(
+          onEnter: (_) => setState(() => _isHovered = true),
+          onExit: (_) => setState(() => _isHovered = false),
+          child: InkWell(
+            onTap: () {
+              if (gk.currentState!.validate()) {
+                AdminEmpAddModel add = AdminEmpAddModel(
+                  fullname: fullname.text,
+                  email: email.text,
+                  emprole: getx.projecttype.value,
+                  password: password.text,
+                );
+                getx.empaddList.add(add);
+              }
+            },
+            child: Card(
+              margin: EdgeInsets.all(0),
+              elevation: ColorPage.elevation,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: _isHovered ? ColorPage.buttoncolor1 : Colors.green,
+                ),
+                padding: EdgeInsets.symmetric(vertical: 14),
+                alignment: Alignment.center,
+                child: Text(
+                  'Add User',
+                  style: TextStyle(
+                    color: ColorPage.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),

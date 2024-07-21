@@ -17,7 +17,7 @@ class Getx extends GetxController {
   RxString projecttype = "Type".obs;
 
   //Employee
-  RxList<AdminEmpAdd> empaddList = <AdminEmpAdd>[].obs;
+  RxList<AdminEmpAddModel> empaddList = <AdminEmpAddModel>[].obs;
   RxString adminEmpselectedbutton = "SEO".obs;
   RxInt adminprojectslidebox = 0.obs;
   RxInt adminEmpslidebox = 0.obs;
