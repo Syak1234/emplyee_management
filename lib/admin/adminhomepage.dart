@@ -39,6 +39,12 @@ class _AdminHomePageState extends State<AdminHomePage> {
       key: _key,
       appBar: !isSmallScreen
           ? AppBar(
+              leading: IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(Icons.arrow_back)),
+              iconTheme: IconThemeData(color: Colors.white),
               toolbarHeight: 65,
               automaticallyImplyLeading: false,
               backgroundColor: ColorPage.colortheme,
@@ -73,9 +79,14 @@ class _AdminHomePageState extends State<AdminHomePage> {
               ],
             )
           : AppBar(
+              leading: IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(Icons.arrow_back)),
+              iconTheme: IconThemeData(color: Colors.white),
               toolbarHeight: 65,
               backgroundColor: ColorPage.colortheme,
-              iconTheme: IconThemeData(color: Colors.white),
               title: Row(
                 children: [
                   Image.asset('assets/app_icon/app_icon.jpg'),

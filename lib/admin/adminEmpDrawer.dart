@@ -35,7 +35,7 @@ class AdminEmpDrawer extends StatelessWidget {
           fontWeight: FontWeight.w500,
         ),
 
-        selectedItemPadding: EdgeInsets.symmetric(vertical: 15),
+        // selectedItemPadding: EdgeInsets.symmetric(vertical: 15),
         itemTextPadding: const EdgeInsets.only(left: 30),
         selectedItemTextPadding: const EdgeInsets.only(left: 30),
         itemDecoration: BoxDecoration(
@@ -43,7 +43,7 @@ class AdminEmpDrawer extends StatelessWidget {
           border: Border.all(color: canvasColor),
         ),
         selectedItemDecoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(2),
+          borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: actionColor.withOpacity(0.37),
           ),
@@ -71,9 +71,9 @@ class AdminEmpDrawer extends StatelessWidget {
         // height: 500,
         // height: MediaQuery.sizeOf(context).height,
         padding: EdgeInsets.all(0),
-        margin: EdgeInsets.only(left: 10, top: 10, bottom: 10, right: 10),
+        // margin: EdgeInsets.only(left: 10, top: 10, bottom: 10, right: 10),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
+          // borderRadius: BorderRadius.circular(5),
           // shape: BoxShape.values[2],
           color: ColorPage.colortheme,
         ),
@@ -95,12 +95,25 @@ class AdminEmpDrawer extends StatelessWidget {
           },
         ),
         SidebarXItem(
-          icon: Icons.calendar_month,
+          iconBuilder: (selected, hovered) {
+            return Image.asset(
+              'assets/app_icon/adminEmpIcon/add-user.png',
+              width: 25,
+              color: Colors.white,
+            );
+          },
           label: 'Add Employee',
           onTap: () => getx.adminEmpslidebox.value = 1,
         ),
         SidebarXItem(
-          icon: Icons.calendar_month,
+          // icon: Icons.calendar_month,
+          iconBuilder: (selected, hovered) {
+            return Image.asset(
+              'assets/app_icon/adminEmpIcon/Attendance.png',
+              width: 25,
+              color: Colors.white,
+            );
+          },
           label: 'Attendance',
           onTap: () => getx.adminEmpslidebox.value = 2,
         ),

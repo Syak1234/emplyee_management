@@ -43,8 +43,8 @@ class AdminProjectDrawer extends StatelessWidget {
           border: Border.all(
             color: actionColor.withOpacity(0.37),
           ),
-          gradient:  LinearGradient(
-            colors: [accentCanvasColor, canvasColor],
+          gradient: LinearGradient(
+            colors: [accentCanvasColor, accentCanvasColor],
           ),
           boxShadow: [
             BoxShadow(
@@ -62,10 +62,10 @@ class AdminProjectDrawer extends StatelessWidget {
           size: 20,
         ),
       ),
-      extendedTheme:  SidebarXTheme(
+      extendedTheme: SidebarXTheme(
         width: 200,
         decoration: BoxDecoration(
-          color: canvasColor,
+          color: ColorPage.colortheme,
         ),
       ),
       footerDivider: divider,

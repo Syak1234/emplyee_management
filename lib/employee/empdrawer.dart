@@ -21,11 +21,12 @@ class ExampleSidebarX extends StatelessWidget {
       showToggleButton: false,
       controller: _controller,
       theme: SidebarXTheme(
+        margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: canvasColor,
+          borderRadius: BorderRadius.circular(20),
         ),
         hoverColor: scaffoldBackgroundColor,
-        hoverIconTheme: IconThemeData(),
         textStyle: TextStyle(color: Colors.white),
         selectedTextStyle: const TextStyle(color: Colors.white),
         hoverTextStyle: const TextStyle(
@@ -36,14 +37,15 @@ class ExampleSidebarX extends StatelessWidget {
         selectedItemTextPadding: const EdgeInsets.only(left: 30),
         itemDecoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: canvasColor),
         ),
         selectedItemDecoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: ColorPage.buttoncolor1,
+            color: actionColor.withOpacity(0.37),
           ),
-          gradient: const LinearGradient(
-            colors: [accentCanvasColor, canvasColor],
+          gradient: LinearGradient(
+            colors: [accentCanvasColor, accentCanvasColor],
           ),
           boxShadow: [
             BoxShadow(
@@ -53,7 +55,7 @@ class ExampleSidebarX extends StatelessWidget {
           ],
         ),
         iconTheme: IconThemeData(
-          color: ColorPage.buttoncolor1,
+          color: Colors.white.withOpacity(0.7),
           size: 20,
         ),
         selectedIconTheme: const IconThemeData(
@@ -61,20 +63,19 @@ class ExampleSidebarX extends StatelessWidget {
           size: 20,
         ),
       ),
-      extendedTheme: const SidebarXTheme(
-        width: 50,
+      extendedTheme: SidebarXTheme(
+        width: 200,
         decoration: BoxDecoration(
-          border: Border(
-            right: BorderSide(
-              width: 0.2,
-            ),
-          ),
+          color: ColorPage.colortheme,
         ),
       ),
       footerDivider: divider,
-      headerDivider: const Padding(
+      // showToggleButton: false,
+
+      headerDivider: Padding(
         padding: EdgeInsets.only(bottom: 10),
       ),
+
       items: [
         SidebarXItem(
           icon: Icons.home,

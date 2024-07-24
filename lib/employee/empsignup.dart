@@ -1,4 +1,5 @@
 import 'package:employee_management/admin/admindashboard.dart';
+import 'package:employee_management/api/api.dart';
 import 'package:employee_management/employee/empdashboard.dart';
 import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +17,14 @@ class EmpSignUp extends StatefulWidget {
 
 class _EmpSignUpState extends State<EmpSignUp> {
   Getx getx = Get.put(Getx());
-  GlobalKey<FormState> gk = GlobalKey();
+  TextEditingController fullname = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController phno = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController confirmpassword = TextEditingController();
+
+  GlobalKey<FormState> signupgk = GlobalKey();
+  GlobalKey<FormState> logingk = GlobalKey();
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
@@ -120,7 +128,7 @@ class _EmpSignUpState extends State<EmpSignUp> {
                           visible: getx.showloginpage.value,
                           child: Expanded(
                             child: Form(
-                              key: gk,
+                              key: signupgk,
                               child: Container(
                                 // height: MediaQuery.sizeOf(context).height,
                                 // padding: EdgeInsets.symmetric(vertical: 200),
@@ -188,6 +196,7 @@ class _EmpSignUpState extends State<EmpSignUp> {
                                                       .width -
                                                   1100,
                                               child: TextFormField(
+                                                controller: fullname,
                                                 decoration:
                                                     const InputDecoration(
                                                   filled: true,
@@ -219,6 +228,7 @@ class _EmpSignUpState extends State<EmpSignUp> {
                                                       .width -
                                                   1100,
                                               child: TextFormField(
+                                                controller: email,
                                                 decoration:
                                                     const InputDecoration(
                                                         border:
@@ -251,6 +261,7 @@ class _EmpSignUpState extends State<EmpSignUp> {
                                                       .width -
                                                   1100,
                                               child: TextFormField(
+                                                controller: phno,
                                                 decoration:
                                                     const InputDecoration(
                                                         border:
@@ -334,6 +345,7 @@ class _EmpSignUpState extends State<EmpSignUp> {
                                                       .width -
                                                   1100,
                                               child: TextFormField(
+                                                controller: password,
                                                 decoration: InputDecoration(
                                                     filled: true,
                                                     fillColor: Color.fromARGB(
@@ -366,6 +378,7 @@ class _EmpSignUpState extends State<EmpSignUp> {
                                                       .width -
                                                   1100,
                                               child: TextFormField(
+                                                controller: confirmpassword,
                                                 decoration: InputDecoration(
                                                     filled: true,
                                                     fillColor: Color.fromARGB(
@@ -421,11 +434,16 @@ class _EmpSignUpState extends State<EmpSignUp> {
                                                                     .circular(
                                                                         10)))),
                                                 onPressed: () {
-                                                  // if (gk.currentState!
-                                                  //     .validate()) {
-                                                  // Get.to(
-                                                  //     () => const EmpDashboard());
-                                                  // }
+                                                  if (signupgk.currentState!
+                                                          .validate() &&
+                                                      password.text ==
+                                                          confirmpassword.text)
+                                                    registration(
+                                                        context,
+                                                        fullname.text,
+                                                        email.text,
+                                                        phno.text,
+                                                        password.text);
                                                 },
                                                 child: Text(
                                                   'Sign up'.toUpperCase(),
@@ -448,7 +466,7 @@ class _EmpSignUpState extends State<EmpSignUp> {
                           visible: !getx.showloginpage.value,
                           child: Expanded(
                             child: Form(
-                              key: gk,
+                              key: logingk,
                               child: Container(
                                 // height: MediaQuery.sizeOf(context).height,
                                 // padding: EdgeInsets.symmetric(vertical: 200),
@@ -518,6 +536,7 @@ class _EmpSignUpState extends State<EmpSignUp> {
                                                       .width -
                                                   1100,
                                               child: TextFormField(
+                                                controller: email,
                                                 decoration:
                                                     const InputDecoration(
                                                         border:
@@ -571,66 +590,66 @@ class _EmpSignUpState extends State<EmpSignUp> {
                                     //   ),
                                     // ),
 
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Obx(
-                                            () => SizedBox(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width -
-                                                        1100,
-                                                child: DropdownButtonFormField<
-                                                    String>(
-                                                  decoration:
-                                                      const InputDecoration(
-                                                          filled: true,
-                                                          fillColor:
-                                                              Color.fromARGB(
-                                                                  255,
-                                                                  234,
-                                                                  231,
-                                                                  231),
-                                                          prefixIcon: Icon(
-                                                            Icons.type_specimen,
-                                                            color: Colors.grey,
-                                                          ),
-                                                          border:
-                                                              OutlineInputBorder(
-                                                                  borderSide:
-                                                                      BorderSide
-                                                                          .none)),
-                                                  value:
-                                                      getx.selectedbutton.value,
-                                                  items: <String>[
-                                                    'Admin',
-                                                    'Employee'
-                                                  ].map<
-                                                      DropdownMenuItem<
-                                                          String>>((String e) {
-                                                    return DropdownMenuItem(
-                                                        value: e,
-                                                        child: Text(e));
-                                                  }).toList(),
-                                                  onChanged: (v) {
-                                                    getx.selectedbutton.value =
-                                                        v!;
-                                                  },
-                                                  validator: (value) {
-                                                    if (value == null) {
-                                                      return 'Cannot be null';
-                                                    }
-                                                    return null;
-                                                  },
-                                                )),
-                                          )
-                                        ],
-                                      ),
-                                    ),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.symmetric(
+                                    //       vertical: 10),
+                                    //   child: Row(
+                                    //     mainAxisAlignment:
+                                    //         MainAxisAlignment.center,
+                                    //     children: [
+                                    //       Obx(
+                                    //         () => SizedBox(
+                                    //             width:
+                                    //                 MediaQuery.sizeOf(context)
+                                    //                         .width -
+                                    //                     1100,
+                                    //             child: DropdownButtonFormField<
+                                    //                 String>(
+                                    //               decoration:
+                                    //                   const InputDecoration(
+                                    //                       filled: true,
+                                    //                       fillColor:
+                                    //                           Color.fromARGB(
+                                    //                               255,
+                                    //                               234,
+                                    //                               231,
+                                    //                               231),
+                                    //                       prefixIcon: Icon(
+                                    //                         Icons.type_specimen,
+                                    //                         color: Colors.grey,
+                                    //                       ),
+                                    //                       border:
+                                    //                           OutlineInputBorder(
+                                    //                               borderSide:
+                                    //                                   BorderSide
+                                    //                                       .none)),
+                                    //               value:
+                                    //                   getx.selectedbutton.value,
+                                    //               items: <String>[
+                                    //                 'Admin',
+                                    //                 'Employee'
+                                    //               ].map<
+                                    //                   DropdownMenuItem<
+                                    //                       String>>((String e) {
+                                    //                 return DropdownMenuItem(
+                                    //                     value: e,
+                                    //                     child: Text(e));
+                                    //               }).toList(),
+                                    //               onChanged: (v) {
+                                    //                 getx.selectedbutton.value =
+                                    //                     v!;
+                                    //               },
+                                    //               validator: (value) {
+                                    //                 if (value == null) {
+                                    //                   return 'Cannot be null';
+                                    //                 }
+                                    //                 return null;
+                                    //               },
+                                    //             )),
+                                    //       )
+                                    //     ],
+                                    //   ),
+                                    // ),
 
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
@@ -644,6 +663,7 @@ class _EmpSignUpState extends State<EmpSignUp> {
                                                       .width -
                                                   1100,
                                               child: TextFormField(
+                                                controller: password,
                                                 decoration: InputDecoration(
                                                     filled: true,
                                                     fillColor: Color.fromARGB(
@@ -731,10 +751,17 @@ class _EmpSignUpState extends State<EmpSignUp> {
                                                                     .circular(
                                                                         10)))),
                                                 onPressed: () {
+                                                  if (logingk.currentState!
+                                                      .validate()) {
+                                                    useradminlogin(
+                                                        context,
+                                                        email.text,
+                                                        password.text);
+                                                  }
                                                   // if (gk.currentState!
                                                   //     .validate()) {
-                                                  Get.to(() =>
-                                                      const AdminDashboard());
+                                                  // Get.to(() =>
+                                                  //     const AdminDashboard());
                                                 },
                                                 child: Text(
                                                   'Login'.toUpperCase(),
