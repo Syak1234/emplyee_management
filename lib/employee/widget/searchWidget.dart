@@ -7,7 +7,8 @@ class SearchBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return
+     Card(
       elevation: ColorPage.elevation,
       child: Container(
         alignment: Alignment.topLeft,

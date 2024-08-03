@@ -1,4 +1,5 @@
 
+import 'package:employee_management/admin/tool/tool.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/empattendance.dart';
 import 'package:employee_management/employee/empbreak.dart';
@@ -31,6 +32,7 @@ class _EmpDashboardState extends State<EmpDashboard> {
       EmpAttendance(),
       const EmpBreakTime(),
       EmpLeave(),
+      MainScreen(),
       Container(
         child: Text('data'),
       ),

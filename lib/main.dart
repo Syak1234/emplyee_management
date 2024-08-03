@@ -1,10 +1,14 @@
+import 'package:employee_management/admin/admindashboard.dart';
+import 'package:employee_management/admin/tool/tool.dart';
+import 'package:employee_management/color/color.dart';
+import 'package:employee_management/employee/empdashboard.dart';
 import 'package:employee_management/employee/empsignup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +21,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Employee Management',
       theme: ThemeData(
-        
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor: ColorPage.buttoncolor1,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.grey),
+        buttonTheme: ButtonThemeData(
+            // textTheme: ButtonTextTheme.normal,
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.white)),
         scaffoldBackgroundColor: Color.fromARGB(255, 244, 245, 249),
         // cardColor: Colors.red,
 
@@ -39,9 +49,9 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.black,
         ),
 
-        useMaterial3: true,
+        // useMaterial3: true,
       ),
-      home: EmpSignUp(),
+      home: EmpDashboard(),
     );
   }
 }

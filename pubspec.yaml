@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   get:
-  google_fonts: ^6.2.1
+  google_fonts:
   sidebarx: ^0.17.1
   elegant_notification: ^2.2.2
   # animated_icon: ^0.0.9
@@ -44,6 +44,7 @@ dependencies:
   csv: ^6.0.0
   url_launcher:
   http:
+  clipboard: ^0.1.3
  
 
 

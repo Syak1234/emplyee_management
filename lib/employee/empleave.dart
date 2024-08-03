@@ -55,7 +55,8 @@ class _EmpLeaveState extends State<EmpLeave> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body:
+       Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -413,6 +414,7 @@ class _EmpLeaveState extends State<EmpLeave> {
           ),
         ],
       ),
+    
     );
   }
 }

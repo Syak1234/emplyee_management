@@ -101,16 +101,22 @@ class ExampleSidebarX extends StatelessWidget {
           onTap: () => getx.slidebox.value = 3,
         ),
         SidebarXItem(
+          icon: Icons.logout,
+          label: 'Tools',
+          // selectable: ,
+          onTap: () => getx.slidebox.value = 4,
+        ),
+        SidebarXItem(
           icon: Icons.help,
           label: 'Help',
           selectable: false,
-          onTap: () => getx.slidebox.value = 4,
+          onTap: () => getx.slidebox.value = 5,
         ),
         SidebarXItem(
           icon: Icons.logout,
           label: 'Logout',
           selectable: false,
-          onTap: () => getx.slidebox.value = 5,
+          onTap: () => getx.slidebox.value = 6,
         ),
       ],
     );
