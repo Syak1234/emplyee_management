@@ -50,7 +50,7 @@ class _AdminEmphomePageState extends State<AdminEmphomePage> {
               backgroundColor: ColorPage.canvasColor,
               title: Row(
                 children: [
-                  Image.asset('assets/app_icon/app_icon.jpg'),
+                  Image.asset('assets/app_icon/logo.png'),
                 ],
               ),
               actions: [
@@ -91,7 +91,7 @@ class _AdminEmphomePageState extends State<AdminEmphomePage> {
               // iconTheme: IconThemeData(color: Colors.white),
               title: Row(
                 children: [
-                  Image.asset('assets/app_icon/app_icon.jpg'),
+                  Image.asset('assets/app_icon/logo.png'),
                 ],
               ),
             ),

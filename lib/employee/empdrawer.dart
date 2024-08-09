@@ -21,36 +21,42 @@ class ExampleSidebarX extends StatelessWidget {
       showToggleButton: false,
       controller: _controller,
       theme: SidebarXTheme(
-        margin: const EdgeInsets.all(10),
+        // hoverIconTheme: IconThemeData(color: Colors.transparent),
+        hoverTextStyle: TextStyle(color: Colors.white),
+        // hoverColor: Colors.transparent,
+        // ho
+        // height: 30,
+        // margin: EdgeInsets.zero,
+        // padding: EdgeInsets.zero,
+        // itemMargin: EdgeInsets.zero,
+        // // itemPadding: EdgeInsets.zero,
+        // // selectedItemPadding: EdgeInsets.zero,
+        // selectedItemMargin: EdgeInsets.zero,
+        // // margin: const EdgeInsets.all(0),
         decoration: BoxDecoration(
           color: canvasColor,
-          borderRadius: BorderRadius.circular(20),
+          // borderRadius: BorderRadius.circular(20),
         ),
-        hoverColor: scaffoldBackgroundColor,
+        // hoverColor: Colors.green,
         textStyle: TextStyle(color: Colors.white),
         selectedTextStyle: const TextStyle(color: Colors.white),
-        hoverTextStyle: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w500,
-        ),
+        // hoverTextStyle: const TextStyle(
+        //   // color: Colors.white,
+        //   fontWeight: FontWeight.w500,
+        // ),
         itemTextPadding: const EdgeInsets.only(left: 30),
         selectedItemTextPadding: const EdgeInsets.only(left: 30),
-        itemDecoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: canvasColor),
-        ),
+
         selectedItemDecoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: actionColor.withOpacity(0.37),
-          ),
+          // borderRadius: BorderRadius.circular(10),
+
           gradient: LinearGradient(
-            colors: [accentCanvasColor, accentCanvasColor],
+            colors: [ColorPage.red, ColorPage.red],
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.28),
-              blurRadius: 30,
+              color: Color.fromARGB(255, 7, 22, 45).withOpacity(0.28),
+              blurRadius: 0,
             )
           ],
         ),
@@ -58,10 +64,8 @@ class ExampleSidebarX extends StatelessWidget {
           color: Colors.white.withOpacity(0.7),
           size: 20,
         ),
-        selectedIconTheme: const IconThemeData(
-          color: Colors.white,
-          size: 20,
-        ),
+        selectedIconTheme:
+            const IconThemeData(color: Colors.white, size: 20, weight: 800),
       ),
       extendedTheme: SidebarXTheme(
         width: 200,
@@ -72,9 +76,9 @@ class ExampleSidebarX extends StatelessWidget {
       footerDivider: divider,
       // showToggleButton: false,
 
-      headerDivider: Padding(
-        padding: EdgeInsets.only(bottom: 10),
-      ),
+      // headerDivider: Padding(
+      //   // padding: EdgeInsets.only(bottom: 10),
+      // ),
 
       items: [
         SidebarXItem(
@@ -102,6 +106,18 @@ class ExampleSidebarX extends StatelessWidget {
         ),
         SidebarXItem(
           icon: Icons.logout,
+          label: 'GMB Extractor',
+          // selectable: ,
+          onTap: () => getx.slidebox.value = 5,
+        ),
+        SidebarXItem(
+          icon: Icons.chat,
+          label: 'Bulk Whatsapp',
+          // selectable: ,
+          onTap: () => getx.slidebox.value = 5,
+        ),
+        SidebarXItem(
+          icon: Icons.logout,
           label: 'Tools',
           // selectable: ,
           onTap: () => getx.slidebox.value = 4,
@@ -110,13 +126,13 @@ class ExampleSidebarX extends StatelessWidget {
           icon: Icons.help,
           label: 'Help',
           selectable: false,
-          onTap: () => getx.slidebox.value = 5,
+          onTap: () => getx.slidebox.value = 6,
         ),
         SidebarXItem(
           icon: Icons.logout,
           label: 'Logout',
           selectable: false,
-          onTap: () => getx.slidebox.value = 6,
+          onTap: () => getx.slidebox.value = 7,
         ),
       ],
     );
@@ -124,9 +140,9 @@ class ExampleSidebarX extends StatelessWidget {
 }
 
 const primaryColor = Color(0xFF685BFF);
-const canvasColor = Color.fromRGBO(30, 31, 31, 1);
-const scaffoldBackgroundColor = Color(0xFF464667);
-const accentCanvasColor = Color(0xFF3E3E61);
+const canvasColor = Color.fromARGB(255, 7, 22, 45);
+// const scaffoldBackgroundColor = Color(0xFF464667);
+// const accentCanvasColor = Color(0xFF3E3E61);
 const white = Colors.white;
-final actionColor = const Color(0xFF5F5FA7).withOpacity(0.6);
+// final actionColor = const Color(0xFF5F5FA7).withOpacity(0.6);
 final divider = Divider(color: white.withOpacity(0.3), height: 1);

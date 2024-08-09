@@ -60,18 +60,21 @@ class _AdminProjectListState extends State<AdminProjectList> {
                                 fillColor: ColorPage.white,
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        width: 0.5, color: Colors.black)),
+                                        width: 0.5,
+                                        color: Color.fromARGB(255, 7, 22, 45))),
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        width: 0.5, color: Colors.black)),
+                                        width: 0.5,
+                                        color: Color.fromARGB(255, 7, 22, 45))),
                                 border: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        width: 0.5, color: Colors.black)),
+                                        width: 0.5,
+                                        color: Color.fromARGB(255, 7, 22, 45))),
                                 // prefixIcon: Icon(
                                 //   Icons.link,
                                 //   // color: Colors.white,
                                 // ),
-                                // hintStyle: TextStyle(color: Colors.black),
+                                // hintStyle: TextStyle(color: Color.fromARGB(255, 7, 22, 45)),
                                 labelText: 'Keyword',
                                 // helperText: '',
                               ),
@@ -96,13 +99,16 @@ class _AdminProjectListState extends State<AdminProjectList> {
                                 fillColor: ColorPage.white,
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        width: 0.5, color: Colors.black)),
+                                        width: 0.5,
+                                        color: Color.fromARGB(255, 7, 22, 45))),
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        width: 0.5, color: Colors.black)),
+                                        width: 0.5,
+                                        color: Color.fromARGB(255, 7, 22, 45))),
                                 border: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                        width: 0.5, color: Colors.black)),
+                                        width: 0.5,
+                                        color: Color.fromARGB(255, 7, 22, 45))),
                                 suffixIcon: IconButton(
                                   onPressed: () async {
                                     final result =
@@ -119,7 +125,7 @@ class _AdminProjectListState extends State<AdminProjectList> {
                                     // color: Colors.white,
                                   ),
                                 ),
-                                // hintStyle: TextStyle(color: Colors.black),
+                                // hintStyle: TextStyle(color: Color.fromARGB(255, 7, 22, 45)),
                                 labelText: 'Date',
                                 // helperText: '',
                               ),
@@ -184,15 +190,15 @@ class _AdminProjectListState extends State<AdminProjectList> {
                     //           // ),
                     //           focusedBorder: OutlineInputBorder(
                     //             borderSide:
-                    //                 BorderSide(width: 0.5, color: Colors.black),
+                    //                 BorderSide(width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
                     //           ),
                     //           enabledBorder: OutlineInputBorder(
                     //             borderSide:
-                    //                 BorderSide(width: 0.5, color: Colors.black),
+                    //                 BorderSide(width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
                     //           ),
                     //           border: OutlineInputBorder(
                     //             borderSide:
-                    //                 BorderSide(width: 0.5, color: Colors.black),
+                    //                 BorderSide(width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
                     //           ),
                     //         ),
                     //         hint: Text('Type'),

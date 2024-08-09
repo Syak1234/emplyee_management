@@ -1,5 +1,5 @@
-
-import 'package:employee_management/admin/tool/tool.dart';
+import 'package:employee_management/tool/googlemap.dart';
+import 'package:employee_management/tool/tool.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/empattendance.dart';
 import 'package:employee_management/employee/empbreak.dart';
@@ -33,6 +33,7 @@ class _EmpDashboardState extends State<EmpDashboard> {
       const EmpBreakTime(),
       EmpLeave(),
       MainScreen(),
+      BusinessSearchScreen(),
       Container(
         child: Text('data'),
       ),
@@ -54,18 +55,17 @@ class _EmpDashboardState extends State<EmpDashboard> {
           ? AppBar(
               toolbarHeight: 65,
               automaticallyImplyLeading: false,
-              backgroundColor: canvasColor,
               title: Row(
                 children: [
                   Image.asset(
-                    'assets/app_icon/app_icon.jpg',
+                    'assets/app_icon/logo.png',
                     // width: 1,
                   ),
                 ],
               ),
               actions: [
                 // CircleAvatar()
-               
+
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: CircleAvatar(
@@ -79,11 +79,10 @@ class _EmpDashboardState extends State<EmpDashboard> {
             )
           : AppBar(
               toolbarHeight: 65,
-              backgroundColor: canvasColor,
               iconTheme: IconThemeData(color: Colors.white),
               title: Row(
                 children: [
-                  Image.asset('assets/app_icon/app_icon.jpg'),
+                  Image.asset('assets/app_icon/logo.png'),
                 ],
               ),
             ),

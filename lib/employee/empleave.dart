@@ -32,7 +32,7 @@ class _EmpLeaveState extends State<EmpLeave> {
           reason: "abjsjd",
           choosedate: "15/06/2024",
           noofdays: "15",
-          status: "panding");
+          status: "Pending");
       getx.leavelist.add(btm);
     }
   }
@@ -55,8 +55,7 @@ class _EmpLeaveState extends State<EmpLeave> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-       Column(
+      body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -81,7 +80,7 @@ class _EmpLeaveState extends State<EmpLeave> {
               //       blurRadius: 50,
               //       spreadRadius: 2)
               // ]),
-              // color: const Color.fromARGB(255, 57, 161, 247),
+              // color:ColorPage.red,
               // decoration: decoration,
               // color: Color.fromARGB(255, 19, 7, 240),
               child: Row(
@@ -125,13 +124,16 @@ class _EmpLeaveState extends State<EmpLeave> {
                               fillColor: ColorPage.white,
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      width: 0.5, color: Colors.black)),
+                                      width: 0.5,
+                                      color: Color.fromARGB(255, 7, 22, 45))),
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      width: 0.5, color: Colors.black)),
+                                      width: 0.5,
+                                      color: Color.fromARGB(255, 7, 22, 45))),
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      width: 0.5, color: Colors.black)),
+                                      width: 0.5,
+                                      color: Color.fromARGB(255, 7, 22, 45))),
                               // prefixIcon: Icon(
                               //   Icons.date_range_rounded,
                               //   color: Colors.white,
@@ -203,7 +205,7 @@ class _EmpLeaveState extends State<EmpLeave> {
             padding:
                 const EdgeInsets.only(top: 15, bottom: 0, left: 20, right: 20),
             child: Container(
-              color: const Color.fromARGB(255, 57, 161, 247),
+              color: ColorPage.red,
               // decoration: decoration,
               // color: Color.fromARGB(255, 19, 7, 240),
               child: Row(
@@ -414,7 +416,6 @@ class _EmpLeaveState extends State<EmpLeave> {
           ),
         ],
       ),
-    
     );
   }
 }

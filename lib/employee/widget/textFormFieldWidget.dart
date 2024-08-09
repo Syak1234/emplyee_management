@@ -24,13 +24,16 @@ Flexible buildTextFormField(
             filled: true,
             fillColor: ColorPage.white,
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Colors.black),
+              borderSide:
+                  BorderSide(width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Colors.black),
+              borderSide:
+                  BorderSide(width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
             ),
             border: OutlineInputBorder(
-              borderSide: BorderSide(width: 0.5, color: Colors.black),
+              borderSide:
+                  BorderSide(width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
             ),
             // prefixIcon: Icon(icon),
             labelText: hintText,

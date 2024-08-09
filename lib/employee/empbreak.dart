@@ -137,7 +137,8 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                               });
                             },
                             child: Container(
-                                decoration: decoration,
+                                color: ColorPage.green,
+                                // decoration: decoration,
                                 // color: ColorPage.buttoncolor1,
                                 padding: const EdgeInsets.all(8),
                                 alignment: Alignment.center,
@@ -239,10 +240,7 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
 
   BoxDecoration decoration = BoxDecoration(
       // borderRadius: BorderRadius.circular(10),
-      gradient: const LinearGradient(colors: [
-    Color.fromARGB(255, 5, 103, 249),
-    Colors.blue,
-  ])
+      gradient: const LinearGradient(colors: [ColorPage.red, ColorPage.red])
       // color: Color.fromARGB(81, 14, 14, 28),
       );
 
@@ -325,8 +323,8 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                             style: ButtonStyle(
                                 padding: MaterialStatePropertyAll(
                                     EdgeInsets.all(15)),
-                                backgroundColor:
-                                    MaterialStatePropertyAll(ColorPage.red),
+                                backgroundColor: MaterialStatePropertyAll(
+                                    ColorPage.smallbuttoncolor),
                                 shape: MaterialStatePropertyAll(
                                     ContinuousRectangleBorder(
                                   borderRadius: BorderRadius.circular(0),
@@ -339,7 +337,7 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                       padding: const EdgeInsets.only(
                           top: 15, bottom: 0, left: 20, right: 20),
                       child: Container(
-                        color: const Color.fromARGB(255, 57, 161, 247),
+                        color: ColorPage.red,
                         // decoration: decoration,
                         // color: Color.fromARGB(255, 19, 7, 240),
                         child: Row(

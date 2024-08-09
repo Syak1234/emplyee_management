@@ -21,10 +21,7 @@ class _AdminEmpAttendanceState extends State<AdminEmpAttendance> {
 
   TextEditingController empname = TextEditingController();
   BoxDecoration decoration = const BoxDecoration(
-      gradient: LinearGradient(colors: [
-    Color.fromARGB(255, 5, 103, 249),
-    Colors.blue,
-  ]));
+      gradient: LinearGradient(colors: [ColorPage.red, ColorPage.red]));
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +88,7 @@ class _AdminEmpAttendanceState extends State<AdminEmpAttendance> {
             Padding(
               padding: const EdgeInsets.only(top: 20, bottom: 10),
               child: Container(
-                color: const Color.fromARGB(255, 57, 161, 247),
+                color: ColorPage.red,
                 child: ResponsiveRow(
                   children: [
                     buildHeaderCell('Date'),
@@ -193,13 +190,16 @@ class _AdminEmpAttendanceState extends State<AdminEmpAttendance> {
                   filled: true,
                   fillColor: ColorPage.white,
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 0.5, color: Colors.black),
+                    borderSide: BorderSide(
+                        width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 0.5, color: Colors.black),
+                    borderSide: BorderSide(
+                        width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
                   ),
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(width: 0.5, color: Colors.black),
+                    borderSide: BorderSide(
+                        width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
                   ),
                 ),
                 hint: Text(hintText),
@@ -290,13 +290,13 @@ class _AdminEmpAttendanceState extends State<AdminEmpAttendance> {
   //                 filled: true,
   //                 fillColor: ColorPage.white,
   //                 focusedBorder: OutlineInputBorder(
-  //                   borderSide: BorderSide(width: 0.5, color: Colors.black),
+  //                   borderSide: BorderSide(width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
   //                 ),
   //                 enabledBorder: OutlineInputBorder(
-  //                   borderSide: BorderSide(width: 0.5, color: Colors.black),
+  //                   borderSide: BorderSide(width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
   //                 ),
   //                 border: OutlineInputBorder(
-  //                   borderSide: BorderSide(width: 0.5, color: Colors.black),
+  //                   borderSide: BorderSide(width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
   //                 ),
   //               ),
   //               controller: _dropdownSearchFieldController,

@@ -19,10 +19,7 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   BoxDecoration decoration = const BoxDecoration(
-      gradient: LinearGradient(colors: [
-    Color.fromARGB(255, 5, 103, 249),
-    Colors.blue,
-  ]));
+      gradient: LinearGradient(colors: [ColorPage.red, ColorPage.red]));
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +34,7 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
             child: Column(
               children: [
                 Padding(
-                 padding : const EdgeInsets.only(left: 0, top: 15, bottom: 0),
+                  padding: const EdgeInsets.only(left: 0, top: 15, bottom: 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -116,7 +113,7 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
                 Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 10),
                   child: Container(
-                    color: const Color.fromARGB(255, 57, 161, 247),
+                    color: ColorPage.red,
                     child: ResponsiveRow(
                       children: [
                         buildHeaderCell('User Name'),
@@ -185,13 +182,13 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
   //             filled: true,
   //             fillColor: ColorPage.white,
   //             focusedBorder: OutlineInputBorder(
-  //               borderSide: BorderSide(width: 0.5, color: Colors.black),
+  //               borderSide: BorderSide(width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
   //             ),
   //             enabledBorder: OutlineInputBorder(
-  //               borderSide: BorderSide(width: 0.5, color: Colors.black),
+  //               borderSide: BorderSide(width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
   //             ),
   //             border: OutlineInputBorder(
-  //               borderSide: BorderSide(width: 0.5, color: Colors.black),
+  //               borderSide: BorderSide(width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
   //             ),
   //             // prefixIcon: Icon(icon),
   //             labelText: hintText,
@@ -221,13 +218,16 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
                   filled: true,
                   fillColor: Colors.white,
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 0.5, color: Colors.black),
+                    borderSide: BorderSide(
+                        width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 0.5, color: Colors.black),
+                    borderSide: BorderSide(
+                        width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
                   ),
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(width: 0.5, color: Colors.black),
+                    borderSide: BorderSide(
+                        width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
                   ),
                 ),
                 hint: Text(hintText),
@@ -253,8 +253,7 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
 
   bool _isHovered = false;
   Flexible buildAddUserButton() {
-    return 
-    Flexible(
+    return Flexible(
       flex: 1,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5),

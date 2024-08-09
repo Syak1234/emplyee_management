@@ -102,7 +102,7 @@ class _EmpProjectListState extends State<EmpProjectList> {
                               borderRadius: BorderRadius.circular(5),
                               color: _isHovered
                                   ? ColorPage.buttoncolor1
-                                  : Colors.green,
+                                  : ColorPage.green,
                             ),
 
                             // decoration: BoxDecoration(
@@ -143,8 +143,8 @@ class _EmpProjectListState extends State<EmpProjectList> {
                               padding: MaterialStatePropertyAll(
                                 EdgeInsets.all(15),
                               ),
-                              backgroundColor:
-                                  MaterialStatePropertyAll(ColorPage.red),
+                              backgroundColor: MaterialStatePropertyAll(
+                                  ColorPage.smallbuttoncolor),
                               shape: MaterialStatePropertyAll(
                                   ContinuousRectangleBorder(
                                       borderRadius: BorderRadius.circular(5)))),
@@ -171,8 +171,8 @@ class _EmpProjectListState extends State<EmpProjectList> {
                               padding: MaterialStatePropertyAll(
                                 EdgeInsets.all(15),
                               ),
-                              backgroundColor:
-                                  MaterialStatePropertyAll(ColorPage.red),
+                              backgroundColor: MaterialStatePropertyAll(
+                                  ColorPage.smallbuttoncolor),
                               shape: MaterialStatePropertyAll(
                                   ContinuousRectangleBorder(
                                       borderRadius: BorderRadius.circular(5)))),
@@ -197,8 +197,8 @@ class _EmpProjectListState extends State<EmpProjectList> {
                               padding: MaterialStatePropertyAll(
                                 EdgeInsets.all(15),
                               ),
-                              backgroundColor:
-                                  MaterialStatePropertyAll(ColorPage.red),
+                              backgroundColor: MaterialStatePropertyAll(
+                                  ColorPage.smallbuttoncolor),
                               shape: MaterialStatePropertyAll(
                                   ContinuousRectangleBorder(
                                       borderRadius: BorderRadius.circular(5)))),
@@ -223,8 +223,8 @@ class _EmpProjectListState extends State<EmpProjectList> {
                               padding: MaterialStatePropertyAll(
                                 EdgeInsets.all(15),
                               ),
-                              backgroundColor:
-                                  MaterialStatePropertyAll(ColorPage.red),
+                              backgroundColor: MaterialStatePropertyAll(
+                                  ColorPage.smallbuttoncolor),
                               shape: MaterialStatePropertyAll(
                                   ContinuousRectangleBorder(
                                       borderRadius: BorderRadius.circular(5)))),
@@ -247,7 +247,7 @@ class _EmpProjectListState extends State<EmpProjectList> {
             Padding(
               padding: const EdgeInsets.only(top: 5, bottom: 10),
               child: Container(
-                color: const Color.fromARGB(255, 57, 161, 247),
+                color: ColorPage.red,
                 // decoration: decoration,
                 // color: Color.fromARGB(255, 19, 7, 240),
                 child: Row(

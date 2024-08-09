@@ -48,7 +48,7 @@ class AdminProjectDrawer extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.28),
+              color: Color.fromARGB(255, 7, 22, 45).withOpacity(0.28),
               blurRadius: 30,
             )
           ],
@@ -98,7 +98,7 @@ class AdminProjectDrawer extends StatelessWidget {
       const SnackBar(
         content: Text(
           'Item disabled for selecting',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Color.fromARGB(255, 7, 22, 45)),
         ),
         backgroundColor: Colors.white,
       ),

@@ -1,5 +1,5 @@
 import 'package:employee_management/admin/admindashboard.dart';
-import 'package:employee_management/admin/tool/tool.dart';
+import 'package:employee_management/tool/tool.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/empdashboard.dart';
 import 'package:employee_management/employee/empsignup.dart';
@@ -21,6 +21,28 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Employee Management',
       theme: ThemeData(
+        appBarTheme: AppBarTheme(
+            color: ColorPage.white,
+            shape: Border(
+                bottom: BorderSide(color: ColorPage.buttoncolor1, width: 0.3))),
+        inputDecorationTheme: InputDecorationTheme(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color.fromARGB(255, 7, 22, 45)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Color.fromARGB(255, 7, 22, 45)),
+          ),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Color.fromARGB(255, 7, 22, 45)),
+          ),
+        ),
+
+        // Define border color for OutlinedButton
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            side: BorderSide(color: Color.fromARGB(255, 7, 22, 45)),
+          ),
+        ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
             backgroundColor: ColorPage.buttoncolor1,
             selectedItemColor: Colors.white,
@@ -28,25 +50,41 @@ class MyApp extends StatelessWidget {
         buttonTheme: ButtonThemeData(
             // textTheme: ButtonTextTheme.normal,
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.white)),
-        scaffoldBackgroundColor: Color.fromARGB(255, 244, 245, 249),
+        scaffoldBackgroundColor: Color.fromARGB(255, 243, 246, 255),
         // cardColor: Colors.red,
 
         // backgroundColor: Color.fromARGB(255, 101, 114, 167),
         textTheme: TextTheme(
-          bodyMedium: GoogleFonts.josefinSans().copyWith(),
-          bodyLarge: GoogleFonts.josefinSans().copyWith(),
-          bodySmall: GoogleFonts.josefinSans().copyWith(),
-          // bodyText1: GoogleFonts.josefinSans().copyWith(),
-          displayMedium: GoogleFonts.josefinSans().copyWith(),
-          displaySmall: GoogleFonts.josefinSans().copyWith(),
-          // bodyText2: GoogleFonts.josefinSans().copyWith(),
-          displayLarge: GoogleFonts.josefinSans().copyWith(),
-          labelLarge: GoogleFonts.josefinSans().copyWith(),
-          labelMedium: GoogleFonts.josefinSans().copyWith(),
-          labelSmall: GoogleFonts.josefinSans().copyWith(),
+          bodyMedium: GoogleFonts.josefinSans().copyWith(
+            color: Color.fromARGB(255, 7, 22, 45),
+          ),
+          bodyLarge: GoogleFonts.josefinSans().copyWith(
+            color: Color.fromARGB(255, 7, 22, 45),
+          ),
+          bodySmall: GoogleFonts.josefinSans().copyWith(
+            color: Color.fromARGB(255, 7, 22, 45),
+          ),
+          displayMedium: GoogleFonts.josefinSans().copyWith(
+            color: Color.fromARGB(255, 7, 22, 45),
+          ),
+          displaySmall: GoogleFonts.josefinSans().copyWith(
+            color: Color.fromARGB(255, 7, 22, 45),
+          ),
+          displayLarge: GoogleFonts.josefinSans().copyWith(
+            color: Color.fromARGB(255, 7, 22, 45),
+          ),
+          labelLarge: GoogleFonts.josefinSans().copyWith(
+            color: Color.fromARGB(255, 7, 22, 45),
+          ),
+          labelMedium: GoogleFonts.josefinSans().copyWith(
+            color: Color.fromARGB(255, 7, 22, 45),
+          ),
+          labelSmall: GoogleFonts.josefinSans().copyWith(
+            color: Color.fromARGB(255, 7, 22, 45),
+          ),
         ),
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.black,
+          seedColor: Color.fromARGB(255, 7, 22, 45),
         ),
 
         // useMaterial3: true,

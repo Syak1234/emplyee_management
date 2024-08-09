@@ -44,7 +44,7 @@ class AdminEmpListPage extends StatelessWidget {
                   child: Text(
                     'Employee',
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Color.fromARGB(255, 7, 22, 45),
                         fontSize: 30,
                         fontWeight: FontWeight.bold),
                   ),

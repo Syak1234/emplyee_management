@@ -43,7 +43,7 @@ class AdminProjectsListScreen extends StatelessWidget {
                   child: Text(
                     'Projects',
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Color.fromARGB(255, 7, 22, 45),
                         fontSize: 30,
                         fontWeight: FontWeight.bold),
                   ),

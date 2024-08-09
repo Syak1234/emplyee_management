@@ -37,10 +37,7 @@ class _EmpAttendanceState extends State<EmpAttendance> {
   Getx getx = Get.put(Getx());
   BoxDecoration decoration = BoxDecoration(
       // borderRadius: BorderRadius.circular(10),
-      gradient: const LinearGradient(colors: [
-    Color.fromARGB(255, 5, 103, 249),
-    Colors.blue,
-  ])
+      gradient: const LinearGradient(colors: [ColorPage.red, ColorPage.red])
       // color: Color.fromARGB(81, 14, 14, 28),
       );
   @override
@@ -63,7 +60,7 @@ class _EmpAttendanceState extends State<EmpAttendance> {
           Padding(
             padding: const EdgeInsets.only(top: 5, bottom: 5),
             child: Container(
-              color: const Color.fromARGB(255, 57, 161, 247),
+              color: ColorPage.red,
               // decoration: decoration,
               // color: Color.fromARGB(255, 19, 7, 240),
               child: Row(
@@ -170,7 +167,7 @@ class _EmpAttendanceState extends State<EmpAttendance> {
                   itemBuilder: (context, index) {
                     var x = getx.attendancelist[index];
                     return Container(
-      
+
                         // margin: EdgeInsets.only(top: 10),
                         decoration: BoxDecoration(
                           border: Border(
@@ -253,7 +250,7 @@ class _EmpAttendanceState extends State<EmpAttendance> {
                               child: Container(
                                 decoration: BoxDecoration(
                                     // color: ColorPage.buttoncolor2,
-      
+
                                     // borderRadius: BorderRadius.all(
                                     //   Radius.circular(8),
                                     // ),

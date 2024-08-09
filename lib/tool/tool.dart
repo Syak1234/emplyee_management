@@ -12,20 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 
-void main() {
-  runApp(MyAppTool());
-}
-
-class MyAppTool extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Text Tools',
-      home: MainScreen(),
-    );
-  }
-}
-
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -71,7 +57,7 @@ ButtonStyle buttonStyle = ButtonStyle(
     textStyle: MaterialStatePropertyAll(TextStyle(color: Colors.white)),
     shape: MaterialStatePropertyAll(
         ContinuousRectangleBorder(borderRadius: BorderRadius.circular(0))),
-    backgroundColor: MaterialStatePropertyAll(ColorPage.buttoncolor1));
+    backgroundColor: MaterialStatePropertyAll(ColorPage.red));
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
@@ -112,7 +98,7 @@ class _MainScreenState extends State<MainScreen> {
           // selectedIconTheme: IconThemeData(opacity: 0),
           showUnselectedLabels: true,
           // selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-          // selectedItemColor: Colors.black,
+          // selectedItemColor: Color.fromARGB(255, 7, 22, 45),
           // unselectedItemColor: Colors.grey,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(

@@ -47,7 +47,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
               iconTheme: IconThemeData(color: Colors.white),
               toolbarHeight: 65,
               automaticallyImplyLeading: false,
-              backgroundColor: ColorPage.colortheme,
+             
               title: Row(
                 children: [
                   Image.asset('assets/app_icon/app_icon.jpg'),
@@ -86,7 +86,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   icon: Icon(Icons.arrow_back)),
               iconTheme: IconThemeData(color: Colors.white),
               toolbarHeight: 65,
-              backgroundColor: ColorPage.colortheme,
+             
               title: Row(
                 children: [
                   Image.asset('assets/app_icon/app_icon.jpg'),

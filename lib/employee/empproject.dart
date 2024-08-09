@@ -5,6 +5,7 @@ import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class EmpProject extends StatefulWidget {
   const EmpProject({super.key});
@@ -55,7 +56,7 @@ class ProjectsListScreen extends StatelessWidget {
                   child: Text(
                     'Projects',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Color.fromARGB(255, 7, 22, 45),
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
@@ -137,7 +138,7 @@ class _ProjectCardState extends State<ProjectCard> {
                 height: 45,
                 child: Text(
                   'Project ${widget.index}',
-                  style: TextStyle(
+                  style: GoogleFonts.josefinSans().copyWith(
                     color: _isHovered ? Colors.white : ColorPage.colortheme,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
