@@ -23,19 +23,24 @@ class _EmpProjectState extends State<EmpProject> {
       ],
     ),
   );
-
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Navigator(
+        // onPopPage: (route, result) => true,
+        key: _navigatorKey,
         onGenerateRoute: (routeSettings) {
           return MaterialPageRoute(
+            
             builder: (context) => ProjectsListScreen(),
           );
         },
       ),
     );
   }
+
+ 
 }
 
 class ProjectsListScreen extends StatelessWidget {

@@ -1,8 +1,10 @@
-import 'package:employee_management/admin/admindashboard.dart';
-import 'package:employee_management/tool/tool.dart';
+// import 'package:employee_management/admin/admindashboard.dart';
+// import 'package:employee_management/tool/tool.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/empdashboard.dart';
 import 'package:employee_management/employee/empsignup.dart';
+import 'package:employee_management/employee/splash.dart';
+// import 'package:employee_management/employee/empsignup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,7 +52,7 @@ class MyApp extends StatelessWidget {
         buttonTheme: ButtonThemeData(
             // textTheme: ButtonTextTheme.normal,
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.white)),
-        scaffoldBackgroundColor: Color.fromARGB(255, 243, 246, 255),
+        scaffoldBackgroundColor: ColorPage.white,
         // cardColor: Colors.red,
 
         // backgroundColor: Color.fromARGB(255, 101, 114, 167),
@@ -89,7 +91,7 @@ class MyApp extends StatelessWidget {
 
         // useMaterial3: true,
       ),
-      home: EmpDashboard(),
+      home: SplashScreen(),
     );
   }
 }

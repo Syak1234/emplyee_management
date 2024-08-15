@@ -1,9 +1,13 @@
 import 'package:employee_management/color/color.dart';
+import 'package:employee_management/employee/empdashboard.dart';
+import 'package:employee_management/employee/empproject.dart';
 import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sidebarx/sidebarx.dart';
+
+import 'logout.dart';
 
 class ExampleSidebarX extends StatelessWidget {
   ExampleSidebarX({
@@ -14,7 +18,7 @@ class ExampleSidebarX extends StatelessWidget {
 
   final SidebarXController _controller;
   final Getx getx = Get.put(Getx());
-
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
   @override
   Widget build(BuildContext context) {
     return SidebarX(
@@ -83,10 +87,16 @@ class ExampleSidebarX extends StatelessWidget {
       items: [
         SidebarXItem(
           icon: Icons.home,
-          label: 'Home',
+          label: 'Project',
           onTap: () {
             getx.slidebox.value = 0;
-            debugPrint('Home');
+            // if (_navigatorKey.currentState?.canPop() ?? false) {
+            //   _navigatorKey.currentState?.popUntil((route) => route.isFirst);
+            // } else {
+            //   // Navigator.of(context).pushReplacement(
+            //   //     MaterialPageRoute(builder: (_) => EmpDashboard()));
+            // }
+            debugPrint('Project');
           },
         ),
         SidebarXItem(
@@ -125,14 +135,14 @@ class ExampleSidebarX extends StatelessWidget {
         SidebarXItem(
           icon: Icons.help,
           label: 'Help',
-          selectable: false,
+          // selectable: false,
           onTap: () => getx.slidebox.value = 6,
         ),
         SidebarXItem(
           icon: Icons.logout,
           label: 'Logout',
-          selectable: false,
-          onTap: () => getx.slidebox.value = 7,
+          // selectable: false,
+          onTap: () => logout(context),
         ),
       ],
     );

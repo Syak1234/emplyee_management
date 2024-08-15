@@ -225,10 +225,14 @@ class _ConvertCaseScreenState extends State<ConvertCaseScreen> {
                       style: buttonStyle,
                       onPressed: () {
                         final text = _controller.text;
-                        _controller.text = text
+                        final capitalizedText = text
                             .split(' ')
-                            .map((word) => word.toUpperCase())
+                            .map((word) => word.isNotEmpty
+                                ? word[0].toUpperCase() +
+                                    word.substring(1).toLowerCase()
+                                : '')
                             .join(' ');
+                        _controller.text = capitalizedText;
                       },
                       child: Text(
                         'Capital Case',
@@ -243,10 +247,14 @@ class _ConvertCaseScreenState extends State<ConvertCaseScreen> {
                       style: buttonStyle,
                       onPressed: () {
                         final text = _controller.text;
-                        _controller.text = text
+                        final titleCasedText = text
                             .split(' ')
-                            .map((word) => word.toUpperCase())
+                            .map((word) => word.isNotEmpty
+                                ? word[0].toUpperCase() +
+                                    word.substring(1).toLowerCase()
+                                : '')
                             .join(' ');
+                        _controller.text = titleCasedText;
                       },
                       child: Text(
                         'Title Case',
@@ -367,7 +375,7 @@ class _ReplaceNewLinesScreenState extends State<ReplaceNewLinesScreen> {
                       style: buttonStyle,
                       onPressed: () {
                         final text = _controller.text;
-                        _controller.text = text.replaceAll('\n', ',');
+                        _controller.text = text.replaceAll(',', '\n');
                         setState(() {});
                         print(_controller.text);
                       },
@@ -525,16 +533,25 @@ class _ExtractDomainScreenState extends State<ExtractDomainScreen> {
   // String _result = '';
 
   void extractDomain(String text) {
+    print(text);
     final urls = text.split('\n').where((url) => url.isNotEmpty);
     final domains = <String>{};
 
     for (var url in urls) {
+      // Ensure the URL has a scheme (http:// or https://)
+      if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        url = 'http://' + url; // Prepend http:// if no scheme is provided
+      }
+
       final uri = Uri.tryParse(url);
-      if (uri != null) {
+      print(uri);
+
+      if (uri != null && uri.host.isNotEmpty) {
         domains.add(uri.host);
       }
     }
 
+    print(domains);
     setState(() {
       _controller.text = domains.join('\n');
     });
@@ -647,11 +664,13 @@ class _ExtractDomainScreenState extends State<ExtractDomainScreen> {
 class SerpLengthCheckerScreen extends StatelessWidget {
   final TextEditingController _controller = TextEditingController();
   final isLengthValid = false.obs;
+  final textcheck = ''.obs;
 
   SerpLengthCheckerScreen(this.title);
   String title = "";
   void checkLength(String text) {
     isLengthValid.value = text.length <= 60;
+    if (isLengthValid.value) textcheck.value = text;
   }
 
   @override
@@ -684,9 +703,7 @@ class SerpLengthCheckerScreen extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Obx(() => Text(
-                  isLengthValid.value
-                      ? 'Within SERP Length'
-                      : 'Exceeds SERP Length',
+                  isLengthValid.value ? textcheck.value : 'Limit',
                   style: TextStyle(
                       color: isLengthValid.value ? Colors.green : Colors.red),
                 )),
@@ -707,9 +724,9 @@ class SlugGeneratorScreen extends StatelessWidget {
   void generateSlug(String text) {
     _controller.text = text
         .toLowerCase()
-        .replaceAll(RegExp(r'[^a-z0-9\s]+'),
+        .replaceAll(RegExp(r'[^a-z0-9\s-_]+'),
             '') // Remove special characters but keep spaces
-        .replaceAll(RegExp(r'\s+'), '-'); // Replace spaces with dashes
+        .replaceAll(RegExp(r'[_\s]+'), '-'); // Replace spaces with dashes
   }
 
   void removeNumbers() {
@@ -720,9 +737,9 @@ class SlugGeneratorScreen extends StatelessWidget {
   void separateWithUnderscore() {
     final underscored = _controller.text
         .toLowerCase()
-        .replaceAll(RegExp(r'[^a-z0-9\s]+'),
+        .replaceAll(RegExp(r'[^a-z0-9\s-_]+'),
             '') // Remove special characters but keep spaces
-        .replaceAll(RegExp(r'\s+'), '_'); // Replace spaces with underscores
+        .replaceAll(RegExp(r'[-\s]+'), '_'); // Replace spaces with underscores
     _controller.text = underscored;
   }
 
@@ -846,18 +863,52 @@ class SlugGeneratorScreen extends StatelessWidget {
   }
 }
 
-class ExtractUrlsScreen extends StatelessWidget {
-  final TextEditingController _controller = TextEditingController();
-  final urls = <String>[].obs;
+class ExtractUrlsScreen extends StatefulWidget {
   final String title;
 
   ExtractUrlsScreen(this.title);
 
+  @override
+  State<ExtractUrlsScreen> createState() => _ExtractUrlsScreenState();
+}
+
+class _ExtractUrlsScreenState extends State<ExtractUrlsScreen> {
+  final TextEditingController _controller = TextEditingController();
+
+  final urls = <String>[].obs;
+
   void extractUrls(String text) {
-    urls.value = RegExp(r'http[s]?:\/\/[^ \n]+')
-        .allMatches(text)
-        .map((match) => match.group(0) ?? '')
-        .toList();
+    // Regular expression to match URLs, with or without a scheme (http/https)
+    final regex = RegExp(
+      r'(https?:\/\/)?([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(\/[^\s]*)?',
+    );
+
+    // Find all matches in the text
+    final matches = regex.allMatches(text);
+
+    // Process each match
+    final extractedUrls = matches.map((match) {
+      // Extract the scheme, domain, and path components
+      final scheme = match.group(1);
+      final domain = match.group(2);
+      final path = match.group(3) ?? '';
+
+      // If the scheme is missing, prepend 'http://'
+      final url = scheme == null ? 'http://' + domain! + path : match.group(0);
+
+      return url ?? '';
+    }).toList();
+
+    // Convert list of URLs to a single string, joined by newlines
+    final urlsString = extractedUrls.join('\n');
+
+    // Set the extracted URLs to the text controller, removing unwanted characters
+    _controller.text = urlsString;
+
+    // Optionally, you might want to clean any unwanted characters
+    _controller.text = _controller.text.replaceAll(RegExp(r'[()]+'), '');
+
+    setState(() {});
   }
 
   void copyToClipboard(context) {
@@ -886,7 +937,7 @@ class ExtractUrlsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    title,
+                    widget.title,
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -899,7 +950,7 @@ class ExtractUrlsScreen extends StatelessWidget {
                 hintText: 'Enter text here',
                 border: OutlineInputBorder(),
               ),
-              onChanged: extractUrls,
+              // onChanged: extractUrls,
             ),
             SizedBox(height: 16),
             Row(
@@ -958,18 +1009,42 @@ class ExtractUrlsScreen extends StatelessWidget {
   }
 }
 
-class ExtractEmailsScreen extends StatelessWidget {
-  final TextEditingController _controller = TextEditingController();
-  final emails = <String>[].obs;
+class ExtractEmailsScreen extends StatefulWidget {
   final String title;
 
   ExtractEmailsScreen(this.title);
 
+  @override
+  State<ExtractEmailsScreen> createState() => _ExtractEmailsScreenState();
+}
+
+class _ExtractEmailsScreenState extends State<ExtractEmailsScreen> {
+  final TextEditingController _controller = TextEditingController();
+
+  final emails = <String>[].obs;
+
   void extractEmails(String text) {
-    emails.value = RegExp(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}')
-        .allMatches(text)
-        .map((match) => match.group(0) ?? '')
-        .toList();
+    // Regular expression to match email addresses
+    final emailRegex =
+        RegExp(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}');
+
+    // Find all matches in the text
+    final matches = emailRegex.allMatches(text);
+
+    // Process each match and convert to a list of email addresses
+    final extractedEmails =
+        matches.map((match) => match.group(0) ?? '').toList();
+
+    // Join the emails into a single string, separated by newlines
+    final emailsString = extractedEmails.join('\n');
+
+    // Set the extracted emails to the text controller
+    _controller.text = emailsString;
+
+    // Optionally, you can remove any unwanted characters
+    _controller.text = _controller.text.replaceAll(RegExp(r'\[\]'), '');
+
+    setState(() {});
   }
 
   void copyToClipboard(context) {
@@ -998,7 +1073,7 @@ class ExtractEmailsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    title,
+                    widget.title,
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ],

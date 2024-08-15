@@ -27,21 +27,27 @@ class _BusinessSearchScreenState extends State<BusinessSearchScreen> {
   final TextEditingController _searchController = TextEditingController();
   List<Map<String, dynamic>> _placesDetails = [];
   bool _isLoading = false;
-
+  String? _nextPageToken;
   // Coordinates for Kolkata
   final double _latitude = 22.5726;
   final double _longitude = 88.3639;
 
   // Fetch places based on text query and location
-  Future<List<Map<String, dynamic>>> fetchPlaces(String query) async {
-    final response = await http.get(
-      Uri.parse(
-          '$textSearchUrl?query=$query&location=$_latitude,$_longitude&radius=5000&key=$apiKey'),
-    );
+  Future<List<Map<String, dynamic>>> fetchPlaces(String query,
+      {String? pageToken}) async {
+    final url = Uri.parse(
+        '$textSearchUrl?query=$query&location=$_latitude,$_longitude&radius=5000&key=$apiKey${pageToken != null ? '&pagetoken=$pageToken' : ''}');
+    final response = await http.get(url).timeout(Duration(minutes: 5));
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       final results = data['results'] as List<dynamic>;
+
+      // Update the next page token if it exists
+      _nextPageToken = data['next_page_token'];
+      print(_nextPageToken);
+      log(50);
+
       return results.map((place) => place as Map<String, dynamic>).toList();
     } else {
       throw Exception('Failed to load places');
@@ -101,24 +107,12 @@ class _BusinessSearchScreenState extends State<BusinessSearchScreen> {
 
     setState(() {
       _isLoading = true;
+      _placesDetails.clear(); // Clear previous search results
+      _nextPageToken = null; // Reset the pagination token
     });
 
     try {
-      final places = await fetchPlaces(query);
-
-      final details = await Future.wait(
-        places.map((place) async {
-          final placeId = place['place_id'];
-          if (placeId != null) {
-            return await fetchPlaceDetails(placeId);
-          }
-          return null;
-        }).where((detail) => detail != null),
-      );
-
-      setState(() {
-        _placesDetails = details.cast<Map<String, dynamic>>();
-      });
+      await _fetchAndDisplayPlaces(query);
     } catch (e) {
       print(e);
       // Handle error
@@ -141,6 +135,30 @@ class _BusinessSearchScreenState extends State<BusinessSearchScreen> {
       setState(() {
         _isLoading = false;
       });
+    }
+  }
+
+  Future<void> _fetchAndDisplayPlaces(String query) async {
+    final places = await fetchPlaces(query, pageToken: _nextPageToken);
+    final details = await Future.wait(
+      places.map((place) async {
+        final placeId = place['place_id'];
+        if (placeId != null) {
+          return await fetchPlaceDetails(placeId);
+        }
+        return null;
+      }).where((detail) => detail != null),
+    );
+
+    setState(() {
+      _placesDetails.addAll(details.cast<Map<String, dynamic>>());
+    });
+
+    // If there's a next page token, fetch the next page after a short delay
+    if (_nextPageToken != null) {
+      await Future.delayed(
+          Duration(seconds: 2)); // Optional delay for better UX
+      await _fetchAndDisplayPlaces(query);
     }
   }
 
@@ -409,7 +427,7 @@ class _BusinessSearchScreenState extends State<BusinessSearchScreen> {
                       ),
 
                       Flexible(
-                        flex: 2,
+                        flex: 1,
                         child: Card(
                           elevation: 10,
                           child: Container(
@@ -542,35 +560,45 @@ class _BusinessSearchScreenState extends State<BusinessSearchScreen> {
                             ),
                             Flexible(
                               flex: 2,
-                              child: Row(
-                                // mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 380,
-                                    child: Container(
-                                      decoration: BoxDecoration(),
-                                      padding: EdgeInsets.all(8),
-                                      // alignment: Alignment.center,
-                                      child: Text(
-                                        details['formatted_address'] ??
-                                            'No Address',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(fontSize: 16),
+                              child: LayoutBuilder(
+                                builder: (context, constraints) {
+                                  // Calculate the width based on available constraints
+                                  double boxWidth = constraints.maxWidth *
+                                      0.7; // Adjust the width proportionally
+
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: boxWidth > 380
+                                            ? 380
+                                            : boxWidth, // Max width is 380, otherwise responsive
+                                        child: Container(
+                                          padding: EdgeInsets.all(8),
+                                          child: Text(
+                                            details['formatted_address'] ??
+                                                'No Address',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                      onPressed: () {
-                                        _copyToClipboard(
-                                            details['formatted_address']);
-                                      },
-                                      icon: Icon(
-                                        Icons.copy,
-                                        size: 15,
-                                      ))
-                                ],
+                                      IconButton(
+                                        onPressed: () {
+                                          _copyToClipboard(
+                                              details['formatted_address']);
+                                        },
+                                        icon: Icon(
+                                          Icons.copy,
+                                          size: 15,
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
                               ),
                             ),
+
                             Flexible(
                               flex: 1,
                               child: Container(
@@ -585,56 +613,74 @@ class _BusinessSearchScreenState extends State<BusinessSearchScreen> {
                             ),
                             Flexible(
                               flex: 1,
-                              child: Container(
-                                decoration: BoxDecoration(),
-                                // padding: EdgeInsets.all(8),
-                                alignment: Alignment.center,
-                                child: Column(
-                                  children: [
-                                    // if (details['website'] != null) ...[
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                              child: LayoutBuilder(
+                                builder: (context, constraints) {
+                                  return Container(
+                                    alignment: Alignment.center,
+                                    child: Column(
                                       children: [
-                                        Container(
-                                          width: 100,
-                                          child: Text(
-                                            '${details['website'] ?? 'No Website'}',
-                                            textAlign: TextAlign.center,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              color: Color.fromARGB(
-                                                  255, 7, 22, 45),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                                child: Text(
+                                                  details['website'] ??
+                                                      'No Website',
+                                                  textAlign: TextAlign.center,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    fontSize:
+                                                        constraints.maxWidth <
+                                                                400
+                                                            ? 14
+                                                            : 16,
+                                                    color: Color.fromARGB(
+                                                        255, 7, 22, 45),
+                                                  ),
+                                                ),
+                                              ),
                                             ),
-                                          ),
+                                            if (details['website'] != null) ...[
+                                              IconButton(
+                                                onPressed: () {
+                                                  final website =
+                                                      details['website'];
+                                                  if (website != null &&
+                                                      website.isNotEmpty) {
+                                                    _launchURL(website);
+                                                  }
+                                                },
+                                                icon: Icon(
+                                                  Icons.arrow_outward,
+                                                  size:
+                                                      constraints.maxWidth < 400
+                                                          ? 15
+                                                          : 18,
+                                                ),
+                                              ),
+                                              IconButton(
+                                                onPressed: () {
+                                                  _copyToClipboard(
+                                                      details['website']);
+                                                },
+                                                icon: Icon(
+                                                  Icons.copy,
+                                                  size:
+                                                      constraints.maxWidth < 400
+                                                          ? 15
+                                                          : 18,
+                                                ),
+                                              ),
+                                            ],
+                                          ],
                                         ),
-                                        if (details['website'] != null) ...[
-                                          IconButton(
-                                              onPressed: () {
-                                                final website =
-                                                    details['website'];
-                                                if (website != null &&
-                                                    website.isNotEmpty) {
-                                                  _launchURL(website);
-                                                }
-                                              },
-                                              icon: Icon(Icons.arrow_outward)),
-                                          IconButton(
-                                              onPressed: () {
-                                                _copyToClipboard(
-                                                    details['website']);
-                                              },
-                                              icon: Icon(
-                                                Icons.copy,
-                                                size: 15,
-                                              ))
-                                        ]
                                       ],
                                     ),
-                                    // ],
-                                  ],
-                                ),
+                                  );
+                                },
                               ),
                             ),
                           ],

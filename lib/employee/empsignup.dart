@@ -1,5 +1,6 @@
 import 'package:employee_management/admin/admindashboard.dart';
 import 'package:employee_management/api/api.dart';
+import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/empdashboard.dart';
 import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,6 +30,7 @@ class _EmpSignUpState extends State<EmpSignUp> {
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
     return Scaffold(
+      backgroundColor: ColorPage.buttoncolor1,
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.sizeOf(context).width,
@@ -37,22 +39,14 @@ class _EmpSignUpState extends State<EmpSignUp> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Image.asset('assets/app_icon/EmpIcon/logolight.png'),
                 Container(
-                  height: 700,
+                  height: 560,
                   // padding: EdgeInsets.symmetric(vertical: 100),
                   // color: Colors.blue,
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 100,
-                            color: Colors.grey,
-                            offset: Offset(3, -3),
-                            spreadRadius: 1)
-                      ],
-                      gradient:
-                          LinearGradient(colors: [Colors.blue, Colors.white])),
+                  decoration: BoxDecoration(color: ColorPage.red),
                   // padding: EdgeInsets.all(100),
-                  width: MediaQuery.sizeOf(context).width - 400,
+                  width: MediaQuery.sizeOf(context).width - 420,
 
                   alignment: Alignment.center,
                   child: Row(
@@ -124,9 +118,11 @@ class _EmpSignUpState extends State<EmpSignUp> {
                         ),
                       ),
                       Obx(
-                        () => Visibility(
+                        () =>
+                         Visibility(
                           visible: getx.showloginpage.value,
-                          child: Expanded(
+                          child:
+                           Expanded(
                             child: Form(
                               key: signupgk,
                               child: Container(
@@ -459,6 +455,7 @@ class _EmpSignUpState extends State<EmpSignUp> {
                               ),
                             ),
                           ),
+                        
                         ),
                       ),
                       Obx(

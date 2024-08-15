@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SearchBarWidget extends StatelessWidget {
-  const SearchBarWidget({super.key});
+  String search;
+   SearchBarWidget({this.search="Search"});
 
   @override
   Widget build(BuildContext context) {
-    return
-     Card(
+    return Card(
       elevation: ColorPage.elevation,
       child: Container(
         alignment: Alignment.topLeft,
@@ -28,7 +28,7 @@ class SearchBarWidget extends StatelessWidget {
             enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(width: 0.5),
                 borderRadius: BorderRadius.zero),
-            labelText: 'Search',
+            labelText: search,
           ),
         ),
       ),

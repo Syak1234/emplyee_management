@@ -450,8 +450,10 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                                             decoration: BoxDecoration(
                                                 // color: ColorPage.buttoncolor2,
                                                 border: Border(
-                                                    right:
-                                                        BorderSide(width: 0.3))
+                                                    right: BorderSide(
+                                                        width: 0.3,
+                                                        color: ColorPage
+                                                            .buttoncolor1))
                                                 // borderRadius: BorderRadius.all(
                                                 //   Radius.circular(8),
                                                 // ),
@@ -470,8 +472,10 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                                             decoration: BoxDecoration(
                                                 // color: ColorPage.buttoncolor2,
                                                 border: Border(
-                                                    right:
-                                                        BorderSide(width: 0.3))
+                                                    right: BorderSide(
+                                                        width: 0.3,
+                                                        color: ColorPage
+                                                            .buttoncolor1))
                                                 // borderRadius: BorderRadius.all(
                                                 //   Radius.circular(8),
                                                 // ),
@@ -494,8 +498,10 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                                             decoration: BoxDecoration(
                                                 // color: ColorPage.buttoncolor2,
                                                 border: Border(
-                                                    right:
-                                                        BorderSide(width: 0.3))
+                                                    right: BorderSide(
+                                                        width: 0.3,
+                                                        color: ColorPage
+                                                            .buttoncolor1))
                                                 // borderRadius: BorderRadius.all(
                                                 //   Radius.circular(8),
                                                 // ),

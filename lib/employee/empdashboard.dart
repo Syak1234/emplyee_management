@@ -8,8 +8,11 @@ import 'package:employee_management/employee/empleave.dart';
 import 'package:employee_management/employee/empproject.dart';
 import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:sidebarx/sidebarx.dart';
+
+import 'emp_helppage.dart';
 
 class EmpDashboard extends StatefulWidget {
   const EmpDashboard({super.key});
@@ -34,12 +37,10 @@ class _EmpDashboardState extends State<EmpDashboard> {
       EmpLeave(),
       MainScreen(),
       BusinessSearchScreen(),
-      Container(
-        child: Text('data'),
-      ),
-      Container(
-        child: Text('data'),
-      ),
+      HelpPage(),
+      // Container(
+      //   child: Text('data'),
+      // ),
     ];
     // TODO: implement initState
     super.initState();
@@ -67,11 +68,20 @@ class _EmpDashboardState extends State<EmpDashboard> {
                 // CircleAvatar()
 
                 Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: CircleAvatar(
-                    backgroundColor: Color.fromRGBO(221, 221, 221, 1),
-                    child: Text(
-                      'SN',
+                  padding: const EdgeInsets.only(right: 20),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(width: 2, color: ColorPage.buttoncolor1),
+                        borderRadius: BorderRadius.circular(
+                          80,
+                        )),
+                    child: CircleAvatar(
+                      backgroundColor: ColorPage.red,
+                      child: Text(
+                        'SN',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
