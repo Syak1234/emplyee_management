@@ -27,24 +27,24 @@ class MyApp extends StatelessWidget {
             color: ColorPage.white,
             shape: Border(
                 bottom: BorderSide(color: ColorPage.buttoncolor1, width: 0.3))),
-        inputDecorationTheme: InputDecorationTheme(
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Color.fromARGB(255, 7, 22, 45)),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Color.fromARGB(255, 7, 22, 45)),
-          ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: Color.fromARGB(255, 7, 22, 45)),
-          ),
-        ),
+        // inputDecorationTheme: InputDecorationTheme(
+        //   enabledBorder: OutlineInputBorder(
+        //     borderSide: BorderSide(color: Color.fromARGB(255, 7, 22, 45)),
+        //   ),
+        //   focusedBorder: OutlineInputBorder(
+        //     borderSide: BorderSide(color: Color.fromARGB(255, 7, 22, 45)),
+        //   ),
+        //   border: OutlineInputBorder(
+        //     borderSide: BorderSide(color: Color.fromARGB(255, 7, 22, 45)),
+        //   ),
+        // ),
 
         // Define border color for OutlinedButton
-        outlinedButtonTheme: OutlinedButtonThemeData(
-          style: OutlinedButton.styleFrom(
-            side: BorderSide(color: Color.fromARGB(255, 7, 22, 45)),
-          ),
-        ),
+        // outlinedButtonTheme: OutlinedButtonThemeData(
+        //   style: OutlinedButton.styleFrom(
+        //     side: BorderSide(color: Color.fromARGB(255, 7, 22, 45)),
+        //   ),
+        // ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
             backgroundColor: ColorPage.buttoncolor1,
             selectedItemColor: Colors.white,

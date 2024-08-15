@@ -1,8 +1,10 @@
 import 'package:clipboard/clipboard.dart';
 
 import 'package:employee_management/color/color.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -661,53 +664,277 @@ class _ExtractDomainScreenState extends State<ExtractDomainScreen> {
   }
 }
 
-class SerpLengthCheckerScreen extends StatelessWidget {
-  final TextEditingController _controller = TextEditingController();
-  final isLengthValid = false.obs;
-  final textcheck = ''.obs;
-
+class SerpLengthCheckerScreen extends StatefulWidget {
   SerpLengthCheckerScreen(this.title);
   String title = "";
-  void checkLength(String text) {
-    isLengthValid.value = text.length <= 60;
-    if (isLengthValid.value) textcheck.value = text;
+
+  @override
+  State<SerpLengthCheckerScreen> createState() =>
+      _SerpLengthCheckerScreenState();
+}
+
+class _SerpLengthCheckerScreenState extends State<SerpLengthCheckerScreen> {
+  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller1 = TextEditingController();
+  final TextEditingController _controller2 = TextEditingController();
+
+  final String metaText = '''
+The Google SERP snippet optimization tool is a completely unpaid/free online tool that lets webmasters draft precise web page title and meta descriptions. Why are page title and meta description optimization necessary? According to the Google guidelines, Google trims your page meta title and meta description if the meta description length and meta tags length exceed the recommended limits.
+
+As per the Google webmaster guidelines, the meta title of a web page should not exceed the recommended 50-60 characters. In addition to that, the meta description of a web page should not exceed 120 to 160 characters. Thus, the aim is to keep it short, simple, and SEO friendly without exceeding the character limits.
+
+''';
+
+  int characterCount = 0;
+  int characterCount1 = 0;
+  double pixelWidth = 0.0;
+  double pixelWidth1 = 0.0;
+  final url = "http://www.example.com".obs;
+  String truncatedTitle =
+      'For Example: #1 Digital Marketing Company - Example.com';
+  String truncatedDescription =
+      'Write your meta description to tell the Google users that you are the best in your industry! Tip: Use';
+
+  // Function to estimate pixel width based on text length
+  double _estimatePixelWidth(String text) {
+    // Assuming a base width of 7 pixels per character as an average estimate
+    return text.length * 7.0;
+  }
+
+  void _updateHelperText() {
+    setState(() {
+      characterCount = _controller.text.length;
+      pixelWidth = _estimatePixelWidth(_controller.text);
+
+      // Truncate the title if it exceeds 60 characters
+      if (characterCount > 60) {
+        truncatedTitle = _controller.text.substring(0, 60) + '...';
+      } else {
+        truncatedTitle = _controller.text;
+      }
+    });
+  }
+
+  void _updateHelperText1() {
+    setState(() {
+      characterCount1 = _controller1.text.length;
+      pixelWidth1 = _estimatePixelWidth(_controller1.text);
+
+      // Truncate the description if it exceeds 160 characters
+      if (characterCount1 > 160) {
+        truncatedDescription = _controller1.text.substring(0, 160) + '...';
+      } else {
+        truncatedDescription = _controller1.text;
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(_updateHelperText);
+    _controller1.addListener(_updateHelperText1);
+  }
+
+  @override
+  void dispose() {
+    _controller.removeListener(_updateHelperText);
+    _controller.dispose();
+    _controller1.removeListener(_updateHelperText1);
+    _controller1.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              child: Row(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                // color: ColorPage.red,
+                width: 750,
+                // alignment: Alignment.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      // width: 100,
+                      child: Expanded(
+                        flex: 1,
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'assets/app_icon/EmpIcon/googleimg.png',
+                              width: 70,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 30),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              truncatedTitle,
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: ColorPage.buttoncolor1,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Obx(
+                              () => SizedBox(
+                                // width: 400,
+                                child: Text(
+                                  overflow: TextOverflow.ellipsis,
+                                  url.value,
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 3, 70, 6),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: Text(
+                                truncatedDescription,
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 75, 73, 73),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  // height: 40,
+                  width: 500,
+                  child: Card(
+                    child: TextFormField(
+                      maxLines: 1,
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        filled: true,
+                        hintText: 'Page Title',
+                        // contentPadding: EdgeInsets.symmetric(
+                        //     vertical: 8, horizontal: 5),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    title,
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  SizedBox(
+                    width: 500,
+                    child: Text(
+                      'Characters: $characterCount and Pixels: ${pixelWidth.toStringAsFixed(0)}',
+                    ),
                   ),
                 ],
               ),
-            ),
-            TextField(
-              controller: _controller,
-              maxLines: 5,
-              decoration: InputDecoration(
-                hintText: 'Enter text here',
-                border: OutlineInputBorder(),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     SizedBox(
+              //       width: 500,
+              //       child: Text(
+              //         'Truncated Title: $truncatedTitle',
+              //         style: TextStyle(fontWeight: FontWeight.bold),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: 500,
+                  child: Card(
+                    child: TextFormField(
+                      controller: _controller2,
+                      onChanged: (value) {
+                        url.value = value;
+                      },
+                      decoration: InputDecoration(
+                        filled: true,
+                        hintText: 'Page URL',
+                      ),
+                    ),
+                  ),
+                ),
               ),
-              onChanged: checkLength,
-            ),
-            SizedBox(height: 16),
-            Obx(() => Text(
-                  isLengthValid.value ? textcheck.value : 'Limit',
-                  style: TextStyle(
-                      color: isLengthValid.value ? Colors.green : Colors.red),
-                )),
-          ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: 500,
+                  child: Card(
+                    child: TextFormField(
+                      maxLines: 2,
+                      controller: _controller1,
+                      decoration: InputDecoration(
+                        filled: true,
+                        hintText: 'Meta Description',
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 500,
+                    child: Text(
+                      'Characters: $characterCount1 and Pixels: ${pixelWidth1.toStringAsFixed(0)}',
+                    ),
+                  ),
+                ],
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: Container(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Text(
+                              'Meta Title & Description Length Checker',
+                              style: TextStyle(
+                                  color: ColorPage.red,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text(
+                          metaText,
+                          style: TextStyle(color: ColorPage.buttoncolor1),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
