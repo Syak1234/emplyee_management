@@ -1,6 +1,10 @@
 import 'package:clipboard/clipboard.dart';
 
 import 'package:employee_management/color/color.dart';
+import 'package:employee_management/tool/bulkImageConverter.dart';
+import 'package:employee_management/tool/bulkUrlOpener.dart';
+import 'package:employee_management/tool/function.dart';
+import 'package:employee_management/tool/removeRemoveDuplicateLines.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,15 +19,13 @@ import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
-class MainScreen extends StatefulWidget {
+class Tools extends StatefulWidget {
   @override
-  _MainScreenState createState() => _MainScreenState();
+  _ToolsState createState() => _ToolsState();
 }
 
-Widget textFormieldBar(
-  BuildContext context,
-  TextEditingController controller,
-) {
+Widget textFormieldBar(BuildContext context, TextEditingController controller,
+    {hinttext = "Paste your text"}) {
   return Card(
     elevation: ColorPage.elevation,
     child: Container(
@@ -46,12 +48,11 @@ Widget textFormieldBar(
             enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(width: 0.5),
                 borderRadius: BorderRadius.zero),
-            hintText: 'Paste your text',
+            hintText: hinttext,
             labelStyle: TextStyle()),
       ),
     ),
   );
-  ;
 }
 
 ButtonStyle buttonStyle = ButtonStyle(
@@ -62,10 +63,11 @@ ButtonStyle buttonStyle = ButtonStyle(
         ContinuousRectangleBorder(borderRadius: BorderRadius.circular(0))),
     backgroundColor: MaterialStatePropertyAll(ColorPage.red));
 
-class _MainScreenState extends State<MainScreen> {
+class _ToolsState extends State<Tools> {
   int _selectedIndex = 0;
 
   List<Widget> _widgetOptions = <Widget>[
+    BulkUrlOpenerScreen('Bulk URL Opener'),
     ConvertCaseScreen('Convert Case'),
     ReplaceNewLinesScreen('Replace New Lines To Comma'),
     WordCounterScreen('Word Counter'),
@@ -76,6 +78,8 @@ class _MainScreenState extends State<MainScreen> {
     ExtractEmailsScreen('Extract Emails'),
     ReplaceSpacesScreen('Replace Extra Spaces'),
     RemoveNumbersScreen('Remove Numbers From Text'),
+    RemoveDuplicateLines('Remove Duplicate Lines'),
+    ImageConverterPage('Bulk Image Converter'),
   ];
 
   void _onItemTapped(int index) {
@@ -104,6 +108,11 @@ class _MainScreenState extends State<MainScreen> {
           // selectedItemColor: Color.fromARGB(255, 7, 22, 45),
           // unselectedItemColor: Colors.grey,
           items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              backgroundColor: ColorPage.buttoncolor1,
+              icon: Icon(Icons.open_in_browser),
+              label: 'Bulk URL Opener',
+            ),
             BottomNavigationBarItem(
               backgroundColor: ColorPage.buttoncolor1,
               icon: Icon(Icons.text_fields),
@@ -144,6 +153,14 @@ class _MainScreenState extends State<MainScreen> {
             BottomNavigationBarItem(
               icon: Icon(Icons.remove_circle),
               label: 'Remove Numbers',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.remove),
+              label: 'Remove Duplicate Lines',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.image),
+              label: 'Image Converter',
             ),
           ],
           currentIndex: _selectedIndex,
@@ -560,18 +577,11 @@ class _ExtractDomainScreenState extends State<ExtractDomainScreen> {
     });
   }
 
-  void removeDuplicates() {
+  void removeDuplicates(controller) {
     final uniqueDomains = _controller.text.split('\n').toSet();
     setState(() {
       _controller.text = uniqueDomains.join('\n');
     });
-  }
-
-  void copyToClipboard() {
-    Clipboard.setData(ClipboardData(text: _controller.text));
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Copied to clipboard')),
-    );
   }
 
   @override
@@ -623,7 +633,7 @@ class _ExtractDomainScreenState extends State<ExtractDomainScreen> {
                   child: ElevatedButton(
                     style: buttonStyle,
                     onPressed: () {
-                      removeDuplicates();
+                      removeDuplicates(_controller);
                     },
                     child: Text(
                       'Remove Duplicate',
@@ -637,7 +647,7 @@ class _ExtractDomainScreenState extends State<ExtractDomainScreen> {
                   child: ElevatedButton(
                     style: buttonStyle,
                     onPressed: () {
-                      copyToClipboard();
+                      ToolFunction.copyToClipboard(context, _controller);
                     },
                     child: Text(
                       'Copy to Clipboard',
@@ -815,11 +825,14 @@ As per the Google webmaster guidelines, the meta title of a web page should not 
                   ],
                 ),
               ),
+              SizedBox(
+                height: 30,
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
                   // height: 40,
-                  width: 500,
+                  width: 700,
                   child: Card(
                     child: TextFormField(
                       maxLines: 1,
@@ -838,7 +851,7 @@ As per the Google webmaster guidelines, the meta title of a web page should not 
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: 500,
+                    width: 700,
                     child: Text(
                       'Characters: $characterCount and Pixels: ${pixelWidth.toStringAsFixed(0)}',
                     ),
@@ -860,7 +873,7 @@ As per the Google webmaster guidelines, the meta title of a web page should not 
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  width: 500,
+                  width: 700,
                   child: Card(
                     child: TextFormField(
                       controller: _controller2,
@@ -878,7 +891,7 @@ As per the Google webmaster guidelines, the meta title of a web page should not 
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  width: 500,
+                  width: 700,
                   child: Card(
                     child: TextFormField(
                       maxLines: 2,
@@ -895,7 +908,7 @@ As per the Google webmaster guidelines, the meta title of a web page should not 
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: 500,
+                    width: 700,
                     child: Text(
                       'Characters: $characterCount1 and Pixels: ${pixelWidth1.toStringAsFixed(0)}',
                     ),
@@ -968,13 +981,6 @@ class SlugGeneratorScreen extends StatelessWidget {
             '') // Remove special characters but keep spaces
         .replaceAll(RegExp(r'[-\s]+'), '_'); // Replace spaces with underscores
     _controller.text = underscored;
-  }
-
-  void copyToClipboard(context) {
-    Clipboard.setData(ClipboardData(text: _controller.text));
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Copied to clipboard')),
-    );
   }
 
   void clearText() {
@@ -1060,7 +1066,7 @@ class SlugGeneratorScreen extends StatelessWidget {
                   child: ElevatedButton(
                     style: buttonStyle,
                     onPressed: () {
-                      copyToClipboard(context);
+                      ToolFunction.copyToClipboard(context, _controller);
                     },
                     child: Text(
                       'Copy to Clipboard',
@@ -1382,13 +1388,6 @@ class ReplaceSpacesScreen extends StatelessWidget {
     _controller.text = _controller.text.replaceAll(RegExp(r'\s+'), ' ');
   }
 
-  void copyToClipboard(context) {
-    Clipboard.setData(ClipboardData(text: _controller.text));
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Copied to clipboard')),
-    );
-  }
-
   void clear() {
     _controller.clear();
   }
@@ -1440,7 +1439,7 @@ class ReplaceSpacesScreen extends StatelessWidget {
                   child: ElevatedButton(
                     style: buttonStyle,
                     onPressed: () {
-                      copyToClipboard(context);
+                      ToolFunction.copyToClipboard(context, _controller);
                     },
                     child: Text(
                       'Copy to Clipboard',
@@ -1478,13 +1477,6 @@ class RemoveNumbersScreen extends StatelessWidget {
 
   void removeNumbers() {
     _controller.text = _controller.text.replaceAll(RegExp(r'[0-9]'), '');
-  }
-
-  void copyToClipboard(BuildContext context) {
-    Clipboard.setData(ClipboardData(text: _controller.text));
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Copied to clipboard')),
-    );
   }
 
   void clear() {
@@ -1540,7 +1532,8 @@ class RemoveNumbersScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 10),
                     child: ElevatedButton(
                       style: buttonStyle,
-                      onPressed: () => copyToClipboard(context),
+                      onPressed: () =>
+                          ToolFunction.copyToClipboard(context, _controller),
                       child: Text(
                         'Copy to Clipboard',
                         style: TextStyle(

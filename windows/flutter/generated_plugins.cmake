@@ -3,7 +3,10 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  file_selector_windows
   geolocator_windows
+  image_compression_flutter
+  permission_handler_windows
   url_launcher_windows
 )
 

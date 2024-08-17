@@ -35,8 +35,13 @@ class _EmpDashboardState extends State<EmpDashboard> {
       EmpAttendance(),
       const EmpBreakTime(),
       EmpLeave(),
-      MainScreen(),
       BusinessSearchScreen(),
+      Container(),
+
+      Container(),
+      Container(),
+      Container(),
+      Tools(),
       HelpPage(),
       // Container(
       //   child: Text('data'),

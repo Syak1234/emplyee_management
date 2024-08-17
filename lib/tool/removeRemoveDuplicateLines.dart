@@ -1,40 +1,48 @@
+import 'package:employee_management/tool/function.dart';
 import 'package:employee_management/tool/tool.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-// ignore: must_be_immutable
-class BulkUrlOpenerScreen extends StatefulWidget {
-  String title;
-  BulkUrlOpenerScreen(this.title);
+class RemoveDuplicateLines extends StatefulWidget {
+  String title = "";
+  RemoveDuplicateLines(this.title, {super.key});
 
   @override
-  _BulkUrlOpenerScreenState createState() => _BulkUrlOpenerScreenState();
+  State<RemoveDuplicateLines> createState() => _RemoveDuplicateLinesState();
 }
 
-class _BulkUrlOpenerScreenState extends State<BulkUrlOpenerScreen> {
-  TextEditingController _urlController = TextEditingController();
+class _RemoveDuplicateLinesState extends State<RemoveDuplicateLines> {
+  TextEditingController _controller = TextEditingController();
+  // void removeDuplicates() {
+  //   // Split the text into lines
+  //   final lines = _controller.text.split('\n');
 
-  void _openUrls() {
-    final urls = _urlController.text
-        .split(RegExp(r'[\n,]+'))
-        .map((url) => url.trim())
-        .where((url) => url.isNotEmpty);
+  //   // Create a Set to store unique lines
+  //   Set<String> uniqueLines = {};
 
-    for (var url in urls) {
-      _launchUrl(url);
-    }
-  }
+  //   // Process each line to remove duplicate words and lines
+  //   final processedLines = lines.map((line) {
+  //     // Remove duplicate words within the line
+  //     final words = line.split(' ').toSet().toList();
+  //     // Join words back into a line
+  //     final uniqueLine = words.join(' ');
+  //     return uniqueLine;
+  //   }).toList();
 
-  Future<void> _launchUrl(String url) async {
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      url = 'http://$url';
-    }
+  //   // Remove duplicate lines
+  //   processedLines.forEach((line) {
+  //     uniqueLines.add(line.trim());
+  //   });
 
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
+  //   // Join the unique lines back into a single string
+  //   _controller.text = uniqueLines.join('\n');
+  //   setState(() {});
+  // }
+
+  void removeDuplicates(controller) {
+    final uniqueDomains = controller.text.split('\n').toSet();
+    setState(() {
+      _controller.text = uniqueDomains.join('\n');
+    });
   }
 
   @override
@@ -56,8 +64,8 @@ class _BulkUrlOpenerScreenState extends State<BulkUrlOpenerScreen> {
                 ],
               ),
             ),
-            textFormieldBar(context, _urlController,
-                hinttext: "Separate with comma or one URL per line"),
+            textFormieldBar(context, _controller,
+                hinttext: "Paste Text Lines in this Box"),
             SizedBox(height: 16),
             Container(
               // color: Colors.white,
@@ -69,12 +77,13 @@ class _BulkUrlOpenerScreenState extends State<BulkUrlOpenerScreen> {
                     child: ElevatedButton(
                       style: buttonStyle,
                       onPressed: () {
-                        _openUrls();
+                        removeDuplicates(_controller);
+                        // _openUrls();
                         // final text = _controller.text;
                         // _controller.text = text.toUpperCase();
                       },
                       child: Text(
-                        'Open URLs All',
+                        'Remove Duplicate Lines',
                         style: TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
@@ -85,7 +94,21 @@ class _BulkUrlOpenerScreenState extends State<BulkUrlOpenerScreen> {
                     child: ElevatedButton(
                       style: buttonStyle,
                       onPressed: () {
-                        _urlController.text = '';
+                        ToolFunction.copyToClipboard(context, _controller);
+                      },
+                      child: Text(
+                        'Copy to Clipboard',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: ElevatedButton(
+                      style: buttonStyle,
+                      onPressed: () {
+                        _controller.text = '';
                         setState(() {});
                         // final text = _controller.text;
                         // _controller.text = text.toUpperCase();
@@ -103,27 +126,6 @@ class _BulkUrlOpenerScreenState extends State<BulkUrlOpenerScreen> {
           ],
         ),
       ),
-
-      //  Padding(
-      //   padding: const EdgeInsets.all(16.0),
-      //   child: Column(
-      //     children: <Widget>[
-      //       TextField(
-      //         controller: _urlController,
-      //         maxLines: 10,
-      //         decoration: InputDecoration(
-      //           border: OutlineInputBorder(),
-      //           labelText: 'Enter URLs (separated by new lines or commas)',
-      //         ),
-      //       ),
-      //       SizedBox(height: 20),
-      //       ElevatedButton(
-      //         onPressed: _openUrls,
-      //         child: Text('Open URLs'),
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
