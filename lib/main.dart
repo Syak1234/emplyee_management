@@ -1,5 +1,6 @@
 // import 'package:employee_management/admin/admindashboard.dart';
 // import 'package:employee_management/tool/tool.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/splash.dart';
 import 'package:employee_management/employee/widget/themewidget.dart';
@@ -10,6 +11,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MyApp());
+  doWhenWindowReady(() {
+    // const initialSize = Size(600, 450);
+    // appWindow.minSize = initialSize;
+    // appWindow.size = initialSize;
+    appWindow.alignment = Alignment.center;
+    appWindow.show();
+  });
 }
 
 class MyApp extends StatelessWidget {

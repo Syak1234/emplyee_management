@@ -59,6 +59,7 @@ dependencies:
   flutter_image_compress:
   image_compression_flutter: ^1.0.4
   dropdown_button2: ^2.3.9
+  bitsdojo_window: ^0.1.6
   # excel:
   
 
