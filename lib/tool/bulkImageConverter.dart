@@ -19,7 +19,7 @@ class ImageConverterPage extends StatefulWidget {
 }
 
 class _ImageConverterPageState extends State<ImageConverterPage> {
-  List<File>? _imageFiles;
+  List<File>? _imageFiles = [];
   String _selectedFormat = 'JPG';
   final ImagePicker _picker = ImagePicker();
   List<bool> _selectedImages = []; // List to keep track of selected images
@@ -38,7 +38,11 @@ class _ImageConverterPageState extends State<ImageConverterPage> {
         _selectedImages = List<bool>.filled(
             _imageFiles!.length, false); // Initialize selection list
       });
+    } else {
+      _imageFiles = null;
+      setState(() {});
     }
+    // pickedFiles = null;
   }
 
   Future<void> _convertImages(String format) async {
@@ -254,7 +258,7 @@ class _ImageConverterPageState extends State<ImageConverterPage> {
                 ],
               ),
             ),
-            _imageFiles == null
+            _imageFiles!.isEmpty
                 ? Center(
                     child: Image.asset(
                     'assets/app_icon/nodatafound.png',

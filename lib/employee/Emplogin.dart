@@ -19,12 +19,12 @@ class _EmpLoginState extends State<EmpLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        // decoration: BoxDecoration(
-        //     image: DecorationImage(
-        //         image: AssetImage(
-        //           'assets/app_icon/4.jpg',
-        //         ),
-        //         fit: BoxFit.cover)),
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                  'assets/app_icon/loginbackground/1.jpg',
+                ),
+                fit: BoxFit.cover)),
         child: Center(
           // Centers the child both vertically and horizontally
           child: Column(

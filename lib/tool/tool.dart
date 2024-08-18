@@ -1,6 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 
 import 'package:employee_management/color/color.dart';
+import 'package:employee_management/employee/widget/buttonwidget.dart';
 import 'package:employee_management/tool/bulkImageConverter.dart';
 import 'package:employee_management/tool/bulkUrlOpener.dart';
 import 'package:employee_management/tool/function.dart';
@@ -25,7 +26,7 @@ class Tools extends StatefulWidget {
 }
 
 Widget textFormieldBar(BuildContext context, TextEditingController controller,
-    {hinttext = "Paste your text"}) {
+    {hinttext = "Paste your text", line = 5,Widget? suffixIcon}) {
   return Card(
     elevation: ColorPage.elevation,
     child: Container(
@@ -34,8 +35,9 @@ Widget textFormieldBar(BuildContext context, TextEditingController controller,
       // decoration: BoxDecoration(boxShadow: ),
       child: TextFormField(
         controller: controller,
-        maxLines: 5,
+        maxLines: line,
         decoration: InputDecoration(
+            suffixIcon: suffixIcon,
             fillColor: ColorPage.white,
             filled: true,
             // prefixIcon: Icon(Icons.search),
@@ -209,21 +211,10 @@ class _ConvertCaseScreenState extends State<ConvertCaseScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: ElevatedButton(
-                      style: buttonStyle,
-                      onPressed: () {
-                        final text = _controller.text;
-                        _controller.text = text.toUpperCase();
-                      },
-                      child: Text(
-                        'Uppercase',
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
+                  ButtonWidget('Uppercase', () {
+                    final text = _controller.text;
+                    _controller.text = text.toUpperCase();
+                  }),
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: ElevatedButton(

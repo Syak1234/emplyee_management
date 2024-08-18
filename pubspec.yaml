@@ -116,6 +116,7 @@ flutter:
     - assets/app_icon/
     - assets/app_icon/adminEmpIcon/
     - assets/app_icon/EmpIcon/
+    - assets/app_icon/loginbackground/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
