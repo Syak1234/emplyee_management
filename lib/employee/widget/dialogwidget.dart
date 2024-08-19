@@ -1,10 +1,14 @@
 import 'package:employee_management/color/color.dart';
-import 'package:employee_management/employee/Emplogin.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Future logout(BuildContext context) {
+Future dialog(BuildContext context,
+    {String title = "",
+    Widget? child,
+    String buttonname2 = "Start",
+    String buttonname1 = "Cancel",
+    void Function()? onPressed1,
+    void Function()? onPressed2}) {
   return showDialog(
     barrierDismissible: false,
     context: context,
@@ -14,20 +18,15 @@ Future logout(BuildContext context) {
             ContinuousRectangleBorder(borderRadius: BorderRadius.circular(10)),
         // icon: Icon(Icons.logout),
         title: Text(
-          'Logout',
+          title,
           style: TextStyle(fontWeight: FontWeight.bold, color: ColorPage.red),
         ),
-        content: Text(
-          'Are you sure you want to logout?',
-          style: TextStyle(color: ColorPage.buttoncolor1),
-        ),
+        content: child,
         actions: [
           Card(
             elevation: 5,
             child: InkWell(
-              onTap: () {
-                Get.back();
-              },
+              onTap: onPressed1,
               child: Container(
                   decoration: BoxDecoration(
                     color: ColorPage.white,
@@ -42,7 +41,7 @@ Future logout(BuildContext context) {
                   alignment: Alignment.center,
                   width: 180,
                   child: Text(
-                    'Cancel',
+                    buttonname1,
                     style: TextStyle(
                         color: ColorPage.buttoncolor1,
                         fontSize: 18,
@@ -53,10 +52,7 @@ Future logout(BuildContext context) {
           Card(
             elevation: 5,
             child: InkWell(
-              onTap: () {
-                Get.back();
-                Get.offAll(() => EmpLogin());
-              },
+              onTap: onPressed2,
               child: Container(
                   decoration: BoxDecoration(
                       color: ColorPage.red,
@@ -67,8 +63,8 @@ Future logout(BuildContext context) {
                   padding: const EdgeInsets.all(8),
                   alignment: Alignment.center,
                   width: 180,
-                  child: const Text(
-                    'Logout',
+                  child: Text(
+                    buttonname2.toString(),
                     style: TextStyle(
                         color: ColorPage.white,
                         fontSize: 18,

@@ -1,3 +1,4 @@
+import 'package:employee_management/color/color.dart';
 import 'package:employee_management/tool/tool.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,11 +10,15 @@ class ButtonWidget extends StatelessWidget {
   // Widget child;
   String text;
   void Function()? onPressed;
+  Color color;
+  double radius = 0.0;
   ButtonWidget(
-this.text,
+    this.text,
     // this.child,
     this.onPressed, {
     this.padding = const EdgeInsets.only(right: 10),
+    this.color = ColorPage.red,
+    this.radius=0.0
   });
 
   @override
@@ -21,10 +26,13 @@ this.text,
     return Padding(
       padding: padding,
       child: ElevatedButton(
-        style: buttonStyle,
+        style: buttonStyle.copyWith(
+            shape: MaterialStatePropertyAll(ContinuousRectangleBorder(
+                borderRadius: BorderRadius.circular(radius))),
+            backgroundColor: MaterialStatePropertyAll(color)),
         onPressed: onPressed,
         child: Text(
-        text ,
+          text,
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),

@@ -14,7 +14,7 @@ class ColorPage {
       colors: [ColorPage.red, ColorPage.red],
     ),
   );
-static  const   green  =Colors.green;
+  static const green = const Color.fromARGB(255, 6, 95, 9);
   static const canvasColor = Color.fromARGB(255, 7, 22, 45);
   static const elevation = 2.0;
   static final decoration1 = BoxDecoration(boxShadow: [

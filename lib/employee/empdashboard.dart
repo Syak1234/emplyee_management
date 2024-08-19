@@ -1,4 +1,5 @@
 import 'package:employee_management/tool/bulk_mail_sender.dart';
+import 'package:employee_management/tool/bulk_whatsApp_sender.dart';
 import 'package:employee_management/tool/googlemap.dart';
 import 'package:employee_management/tool/tool.dart';
 import 'package:employee_management/color/color.dart';
@@ -39,7 +40,7 @@ class _EmpDashboardState extends State<EmpDashboard> {
       BusinessSearchScreen(),
       BulkMailSender(),
 
-      Container(),
+      BulkWhatsappSender(),
       Container(),
       Container(),
       Tools(),

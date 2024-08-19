@@ -4,69 +4,71 @@ import 'package:employee_management/employee/widget/dialogwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BulkMailSender extends StatefulWidget {
-  const BulkMailSender({Key? key}) : super(key: key);
+class BulkWhatsappSender extends StatefulWidget {
+  const BulkWhatsappSender({Key? key}) : super(key: key);
 
   @override
-  _BulkMailSenderState createState() => _BulkMailSenderState();
+  _BulkWhatsappSenderState createState() => _BulkWhatsappSenderState();
 }
 
-class _BulkMailSenderState extends State<BulkMailSender> {
+class _BulkWhatsappSenderState extends State<BulkWhatsappSender> {
   List<String> attachments = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Color.fromARGB(255, 237, 243, 248),
-//
-      // backgroundColor: Colors.grey[200],
       body: Center(
-        child: Container(
-          width: 1200, // Adjust the width as needed
-          padding: EdgeInsets.all(10),
+        child: Column(
+          children: [
+            _buildHeader(),
+            Container(
+              width: 1200, // Adjust the width as needed
+              padding: EdgeInsets.all(10),
 
-          decoration: BoxDecoration(
-            //  /
-            color: ColorPage.white,
-            borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 2,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildHeader(),
-                  const SizedBox(height: 20),
-                  _buildTextField(
-                    'From',
-                    'your@gmail.com',
+              decoration: BoxDecoration(
+                //  /
+                color: ColorPage.white,
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 2,
+                    spreadRadius: 2,
                   ),
-                  const SizedBox(height: 20),
-                  _buildTextField(
-                      'To',
-                      'Add recipient separated with comma, new line or import .xls or .csv file',
-                      Icons.file_open),
-                  const SizedBox(height: 20),
-                  _buildTextField('Subject', 'Type here...'),
-                  const SizedBox(height: 20),
-                  _buildBodyField(),
-                  const SizedBox(height: 20),
-                  _buildAttachmentsSection(),
-                  const SizedBox(height: 20),
-                  _buildFooterButtons(),
                 ],
               ),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20),
+                      // _buildTextField(
+                      //   'From',
+                      //   'your@gmail.com',
+                      // ),
+                      const SizedBox(height: 20),
+                      _buildTextField(
+                          '+911234567890',
+                          'Add sender numbers separated with comma, new line or import .xls or .csv file',
+                          Icons.file_open),
+                      // const SizedBox(height: 20),
+                      // _buildTextField('Subject', 'Type here...'),
+                      const SizedBox(height: 20),
+                      _buildBodyField(),
+                      const SizedBox(height: 20),
+                      _buildAttachmentsSection(),
+                      const SizedBox(height: 20),
+                      _buildFooterButtons(),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
@@ -82,14 +84,14 @@ class _BulkMailSenderState extends State<BulkMailSender> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/app_icon/gmail.png',
+                'assets/app_icon/whatsapp.png',
                 width: 50,
               ),
               SizedBox(
                 width: 10,
               ),
               Text(
-                'Bulk Mail Sender',
+                'Bulk WhatsApp Sender',
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
             ],
@@ -101,6 +103,7 @@ class _BulkMailSenderState extends State<BulkMailSender> {
 
   Widget _buildTextField(String label, String hint, [IconData? icon]) {
     return TextField(
+      maxLines: 2,
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
@@ -121,9 +124,9 @@ class _BulkMailSenderState extends State<BulkMailSender> {
 
   Widget _buildBodyField() {
     return TextField(
-      maxLines: 8,
+      maxLines: 4,
       decoration: InputDecoration(
-        labelText: 'Body',
+        labelText: 'Message',
         hintText: 'Write your message here...',
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
@@ -148,11 +151,11 @@ class _BulkMailSenderState extends State<BulkMailSender> {
               },
               color: ColorPage.smallbuttoncolor,
             ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.image),
-              tooltip: 'Insert image',
-            ),
+            // IconButton(
+            //   onPressed: () {},
+            //   icon: Icon(Icons.image),
+            //   tooltip: 'Insert image',
+            // ),
           ],
         )
         // ElevatedButton.icon(
@@ -232,7 +235,7 @@ class _BulkMailSenderState extends State<BulkMailSender> {
             );
           },
           color: ColorPage.green,
-        )
+        ),
         // ElevatedButton(
         //   onPressed: () {
         //     // Send email
