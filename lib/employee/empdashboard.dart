@@ -1,4 +1,7 @@
+import 'package:employee_management/tool/bulk_mail_sender.dart';
+import 'package:employee_management/tool/bulk_whatsApp_sender.dart';
 import 'package:employee_management/tool/googlemap.dart';
+import 'package:employee_management/tool/premiumdashboard.dart';
 import 'package:employee_management/tool/tool.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/empattendance.dart';
@@ -7,6 +10,7 @@ import 'package:employee_management/employee/empdrawer.dart';
 import 'package:employee_management/employee/empleave.dart';
 import 'package:employee_management/employee/empproject.dart';
 import 'package:employee_management/getx/getx.dart';
+import 'package:employee_management/tool/toolui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -36,12 +40,13 @@ class _EmpDashboardState extends State<EmpDashboard> {
       const EmpBreakTime(),
       EmpLeave(),
       BusinessSearchScreen(),
-      Container(),
+      BulkMailSender(),
 
+      BulkWhatsappSender(),
       Container(),
       Container(),
-      Container(),
-      Tools(),
+      Tool(),
+      PremiumDashBoard(),
       HelpPage(),
       // Container(
       //   child: Text('data'),
@@ -59,6 +64,7 @@ class _EmpDashboardState extends State<EmpDashboard> {
       key: _key,
       appBar: !isSmallScreen
           ? AppBar(
+              // backgroundColor: Colors.teal,
               toolbarHeight: 65,
               automaticallyImplyLeading: false,
               title: Row(

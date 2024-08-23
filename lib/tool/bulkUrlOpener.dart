@@ -1,3 +1,5 @@
+import 'package:employee_management/color/color.dart';
+import 'package:employee_management/employee/widget/backbutton.dart';
 import 'package:employee_management/tool/tool.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -44,6 +46,7 @@ class _BulkUrlOpenerScreenState extends State<BulkUrlOpenerScreen> {
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
+            BackButtonWidget(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
               child: Row(

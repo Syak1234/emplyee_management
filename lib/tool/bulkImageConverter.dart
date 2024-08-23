@@ -2,8 +2,10 @@ import 'dart:io';
 import 'dart:ui' as ui;
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:employee_management/color/color.dart';
+import 'package:employee_management/employee/widget/backbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
@@ -19,7 +21,7 @@ class ImageConverterPage extends StatefulWidget {
 }
 
 class _ImageConverterPageState extends State<ImageConverterPage> {
-  List<File>? _imageFiles;
+  List<File>? _imageFiles = [];
   String _selectedFormat = 'JPG';
   final ImagePicker _picker = ImagePicker();
   List<bool> _selectedImages = []; // List to keep track of selected images
@@ -38,7 +40,11 @@ class _ImageConverterPageState extends State<ImageConverterPage> {
         _selectedImages = List<bool>.filled(
             _imageFiles!.length, false); // Initialize selection list
       });
+    } else {
+      _imageFiles = null;
+      setState(() {});
     }
+    // pickedFiles = null;
   }
 
   Future<void> _convertImages(String format) async {
@@ -84,6 +90,7 @@ class _ImageConverterPageState extends State<ImageConverterPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+             BackButtonWidget(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
               child: Row(
@@ -96,6 +103,7 @@ class _ImageConverterPageState extends State<ImageConverterPage> {
                 ],
               ),
             ),
+           
             Container(
               decoration: BoxDecoration(
                   border: Border.all(width: 0.3, color: Colors.grey)),
@@ -254,7 +262,7 @@ class _ImageConverterPageState extends State<ImageConverterPage> {
                 ],
               ),
             ),
-            _imageFiles == null
+            _imageFiles!.isEmpty
                 ? Center(
                     child: Image.asset(
                     'assets/app_icon/nodatafound.png',
@@ -272,37 +280,50 @@ class _ImageConverterPageState extends State<ImageConverterPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              ElevatedButton.icon(
-                                style: ButtonStyle(
-                                  padding: MaterialStatePropertyAll(
-                                      EdgeInsets.all(15)),
-                                  backgroundColor: MaterialStatePropertyAll(
-                                      ColorPage.buttoncolor1),
-                                  shape: MaterialStatePropertyAll(
-                                    ContinuousRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                      side: BorderSide.none,
+                              Row(
+                                children: [
+                                  ElevatedButton.icon(
+                                    style: ButtonStyle(
+                                      padding: MaterialStatePropertyAll(
+                                          EdgeInsets.all(15)),
+                                      backgroundColor: MaterialStatePropertyAll(
+                                          ColorPage.buttoncolor1),
+                                      shape: MaterialStatePropertyAll(
+                                        ContinuousRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                          side: BorderSide.none,
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      ischeckboxvalue = !ischeckboxvalue;
+                                      setState(() {
+                                        _selectedImages = List<bool>.filled(
+                                            _selectedImages.length,
+                                            ischeckboxvalue);
+                                      });
+                                    },
+                                    icon: Icon(
+                                      ischeckboxvalue
+                                          ? Icons.check_box
+                                          : Icons.check_box_outline_blank,
+                                      color: Colors.white,
+                                    ),
+                                    label: Text(
+                                      'Select all',
+                                      style: TextStyle(color: Colors.white),
                                     ),
                                   ),
-                                ),
-                                onPressed: () {
-                                  ischeckboxvalue = !ischeckboxvalue;
-                                  setState(() {
-                                    _selectedImages = List<bool>.filled(
-                                        _selectedImages.length,
-                                        ischeckboxvalue);
-                                  });
-                                },
-                                icon: Icon(
-                                  ischeckboxvalue
-                                      ? Icons.check_box
-                                      : Icons.check_box_outline_blank,
-                                  color: Colors.white,
-                                ),
-                                label: Text(
-                                  'Select all',
-                                  style: TextStyle(color: Colors.white),
-                                ),
+                                  Checkbox(value: true, onChanged: (v) {}),
+                                  Text(
+                                    'Compress Image',
+                                    style: TextStyle(
+                                        color: ColorPage.buttoncolor1,
+                                        fontWeight: ui.FontWeight.bold,
+                                        fontSize: 18),
+                                  )
+                                ],
                               ),
                               false
                                   ? ElevatedButton.icon(

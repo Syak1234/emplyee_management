@@ -1,3 +1,4 @@
+import 'package:employee_management/employee/widget/backbutton.dart';
 import 'package:employee_management/tool/function.dart';
 import 'package:employee_management/tool/tool.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,7 @@ class _RemoveDuplicateLinesState extends State<RemoveDuplicateLines> {
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
+            BackButtonWidget(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
               child: Row(

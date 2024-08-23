@@ -126,7 +126,7 @@ class _AdminEmpCardState extends State<AdminEmpCard> {
                 alignment: Alignment.center,
                 height: 45,
                 child: Text(
-                  'Project ${widget.index}',
+                  'Employee ${widget.index}',
                   style: TextStyle(
                     color: _isHovered ? ColorPage.white : ColorPage.colortheme,
                     fontSize: 18,

@@ -1,5 +1,6 @@
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/empdrawer.dart';
+import 'package:employee_management/employee/logout.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sidebarx/sidebarx.dart';
@@ -19,41 +20,45 @@ class AdminEmpDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SidebarX(
+      showToggleButton: false,
       controller: _controller,
       theme: SidebarXTheme(
-        // padding: EdgeInsets.all(50),
-        margin: EdgeInsets.all(10),
+        // hoverIconTheme: IconThemeData(color: Colors.transparent),
+        hoverTextStyle: TextStyle(color: Colors.white),
+        // hoverColor: Colors.transparent,
+        // ho
+        // height: 30,
+        // margin: EdgeInsets.zero,
+        // padding: EdgeInsets.zero,
+        // itemMargin: EdgeInsets.zero,
+        // // itemPadding: EdgeInsets.zero,
+        // // selectedItemPadding: EdgeInsets.zero,
+        // selectedItemMargin: EdgeInsets.zero,
+        // // margin: const EdgeInsets.all(0),
         decoration: BoxDecoration(
           color: canvasColor,
-          borderRadius: BorderRadius.circular(5),
+          // borderRadius: BorderRadius.circular(20),
         ),
-        hoverColor: scaffoldBackgroundColor,
+        // hoverColor: Colors.green,
         textStyle: TextStyle(color: Colors.white),
         selectedTextStyle: const TextStyle(color: Colors.white),
-        hoverTextStyle: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w500,
-        ),
-
-        // selectedItemPadding: EdgeInsets.symmetric(vertical: 15),
+        // hoverTextStyle: const TextStyle(
+        //   // color: Colors.white,
+        //   fontWeight: FontWeight.w500,
+        // ),
         itemTextPadding: const EdgeInsets.only(left: 30),
         selectedItemTextPadding: const EdgeInsets.only(left: 30),
-        itemDecoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: canvasColor),
-        ),
+
         selectedItemDecoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: actionColor.withOpacity(0.37),
-          ),
+          // borderRadius: BorderRadius.circular(10),
+
           gradient: LinearGradient(
-            colors: [accentCanvasColor, accentCanvasColor],
+            colors: [ColorPage.red, ColorPage.red],
           ),
           boxShadow: [
             BoxShadow(
               color: Color.fromARGB(255, 7, 22, 45).withOpacity(0.28),
-              blurRadius: 30,
+              blurRadius: 0,
             )
           ],
         ),
@@ -61,29 +66,21 @@ class AdminEmpDrawer extends StatelessWidget {
           color: Colors.white.withOpacity(0.7),
           size: 20,
         ),
-        selectedIconTheme: const IconThemeData(
-          color: Colors.white,
-          size: 20,
-        ),
+        selectedIconTheme:
+            const IconThemeData(color: Colors.white, size: 20, weight: 800),
       ),
       extendedTheme: SidebarXTheme(
         width: 200,
-        // height: 500,
-        // height: MediaQuery.sizeOf(context).height,
-        padding: EdgeInsets.all(0),
-        // margin: EdgeInsets.only(left: 10, top: 10, bottom: 10, right: 10),
         decoration: BoxDecoration(
-          // borderRadius: BorderRadius.circular(5),
-          // shape: BoxShape.values[2],
           color: ColorPage.colortheme,
         ),
       ),
       footerDivider: divider,
       // showToggleButton: false,
 
-      headerDivider: Padding(
-        padding: EdgeInsets.only(bottom: 10),
-      ),
+      // headerDivider: Padding(
+      //   // padding: EdgeInsets.only(bottom: 10),
+      // ),
 
       items: [
         SidebarXItem(
@@ -116,6 +113,67 @@ class AdminEmpDrawer extends StatelessWidget {
           },
           label: 'Attendance',
           onTap: () => getx.adminEmpslidebox.value = 2,
+        ),
+        SidebarXItem(
+          icon: Icons.logout,
+          label: 'GMB Extractor',
+          // selectable: ,
+          onTap: () => getx.adminEmpslidebox.value = 3,
+        ),
+        // SidebarXItem(
+        //   icon: Icons.chat,
+        //   label: 'Bulk Whatsapp',
+        //   // selectable: ,
+        //   onTap: () => getx.slidebox.value = 5,
+        // ),
+        SidebarXItem(
+          icon: Icons.logout,
+          label: 'Bulk Email Sender',
+          // selectable: false,
+          onTap: () => getx.adminEmpslidebox.value = 4,
+        ),
+
+        SidebarXItem(
+          icon: Icons.chat,
+          label: 'Bulk WhatsApp Sender',
+          // selectable: false,
+          onTap: () => getx.adminEmpslidebox.value = 5,
+        ),
+        SidebarXItem(
+          icon: Icons.help,
+          label: 'Auto Dialer',
+          // selectable: false,
+          onTap: () => getx.adminEmpslidebox.value = 6,
+        ),
+        SidebarXItem(
+          icon: Icons.help,
+          label: 'Chat',
+          // selectable: false,
+          onTap: () => getx.adminEmpslidebox.value = 7,
+        ),
+        SidebarXItem(
+          icon: Icons.logout,
+          label: 'Tools',
+          // selectable: ,
+          onTap: () => getx.adminEmpslidebox.value = 8,
+        ),
+        SidebarXItem(
+          icon: Icons.logout,
+          label: 'Premium Tools',
+          // selectable: ,
+          onTap: () => getx.adminEmpslidebox.value = 9,
+        ),
+        SidebarXItem(
+          icon: Icons.help,
+          label: 'Help',
+          // selectable: false,
+          onTap: () => getx.adminEmpslidebox.value = 10,
+        ),
+        SidebarXItem(
+          icon: Icons.logout,
+          label: 'Logout',
+          // selectable: false,
+          onTap: () => logout(context),
         ),
       ],
     );

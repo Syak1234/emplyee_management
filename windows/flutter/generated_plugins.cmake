@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  bitsdojo_window_windows
   file_selector_windows
   geolocator_windows
   image_compression_flutter

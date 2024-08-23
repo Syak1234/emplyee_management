@@ -1,6 +1,13 @@
 import 'package:employee_management/admin/adminEmpAttendance.dart';
 import 'package:employee_management/admin/adminEmpList.dart';
 import 'package:employee_management/color/color.dart';
+import 'package:employee_management/employee/emp_helppage.dart';
+import 'package:employee_management/employee/widget/backbutton.dart';
+import 'package:employee_management/tool/bulk_mail_sender.dart';
+import 'package:employee_management/tool/bulk_whatsApp_sender.dart';
+import 'package:employee_management/tool/googlemap.dart';
+import 'package:employee_management/tool/premiumdashboard.dart';
+import 'package:employee_management/tool/toolui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -27,7 +34,19 @@ class _AdminEmphomePageState extends State<AdminEmphomePage> {
 
   @override
   void initState() {
-    page = [AdminEmpList(), AdminEmpAdd(), AdminEmpAttendance()];
+    page = [
+      AdminEmpList(),
+      AdminEmpAdd(),
+      AdminEmpAttendance(),
+      BusinessSearchScreen(),
+      BulkMailSender(),
+      BulkWhatsappSender(),
+      Container(),
+      Container(),
+      Tool(),
+      PremiumDashBoard(),
+      HelpPage(),
+    ];
     super.initState();
   }
 
@@ -39,44 +58,42 @@ class _AdminEmphomePageState extends State<AdminEmphomePage> {
       key: _key,
       appBar: !isSmallScreen
           ? AppBar(
+              // backgroundColor: Colors.teal,
+              toolbarHeight: 65,
               leading: IconButton(
                   onPressed: () {
                     Get.back();
                   },
                   icon: Icon(Icons.arrow_back)),
-              iconTheme: IconThemeData(color: Colors.white),
-              toolbarHeight: 65,
-              automaticallyImplyLeading: false,
-              backgroundColor: ColorPage.canvasColor,
               title: Row(
                 children: [
-                  Image.asset('assets/app_icon/logo.png'),
+                  Image.asset(
+                    'assets/app_icon/logo.png',
+                    // width: 1,
+                  ),
                 ],
               ),
               actions: [
+                // CircleAvatar()
+
                 Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: CircleAvatar(
-                    backgroundColor: Color.fromRGBO(221, 221, 221, 1),
-                    child: Text('SM'),
+                  padding: const EdgeInsets.only(right: 20),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(width: 2, color: ColorPage.buttoncolor1),
+                        borderRadius: BorderRadius.circular(
+                          80,
+                        )),
+                    child: CircleAvatar(
+                      backgroundColor: ColorPage.red,
+                      child: Text(
+                        'SN',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
                   ),
                 ),
-
-                // ElevatedButton.icon(
-                //     style: ButtonStyle(
-                //         padding: MaterialStatePropertyAll(EdgeInsets.all(20)),
-                //         backgroundColor: MaterialStatePropertyAll(Colors.green),
-                //         shape: MaterialStatePropertyAll(
-                //             ContinuousRectangleBorder())),
-                //     onPressed: () {},
-                //     icon: Icon(
-                //       Icons.logout,
-                //       color: Colors.white,
-                //     ),
-                //     label: Text(
-                //       'Log Out',
-                //       style: TextStyle(color: Colors.white),
-                //     ))
               ],
             )
           : AppBar(
@@ -85,10 +102,8 @@ class _AdminEmphomePageState extends State<AdminEmphomePage> {
                     Get.back();
                   },
                   icon: Icon(Icons.arrow_back)),
-              iconTheme: IconThemeData(color: Colors.white),
               toolbarHeight: 65,
-              backgroundColor: ColorPage.canvasColor,
-              // iconTheme: IconThemeData(color: Colors.white),
+              iconTheme: IconThemeData(color: Colors.white),
               title: Row(
                 children: [
                   Image.asset('assets/app_icon/logo.png'),
