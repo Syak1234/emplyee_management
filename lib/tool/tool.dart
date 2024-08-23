@@ -1,10 +1,12 @@
 import 'package:clipboard/clipboard.dart';
 
 import 'package:employee_management/color/color.dart';
+import 'package:employee_management/employee/widget/backbutton.dart';
 import 'package:employee_management/employee/widget/buttonwidget.dart';
 import 'package:employee_management/tool/bulkImageConverter.dart';
 import 'package:employee_management/tool/bulkUrlOpener.dart';
 import 'package:employee_management/tool/function.dart';
+import 'package:employee_management/tool/htmltotextandtexttohtml.dart';
 import 'package:employee_management/tool/removeRemoveDuplicateLines.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +28,10 @@ class Tools extends StatefulWidget {
 }
 
 Widget textFormieldBar(BuildContext context, TextEditingController controller,
-    {hinttext = "Paste your text", line = 5,Widget? suffixIcon}) {
+    {hinttext = "Paste your text",
+    line = 5,
+    Widget? suffixIcon,
+    void Function(String)? onChanged}) {
   return Card(
     elevation: ColorPage.elevation,
     child: Container(
@@ -34,6 +39,7 @@ Widget textFormieldBar(BuildContext context, TextEditingController controller,
       width: MediaQuery.sizeOf(context).width - 300,
       // decoration: BoxDecoration(boxShadow: ),
       child: TextFormField(
+        onChanged: onChanged,
         controller: controller,
         maxLines: line,
         decoration: InputDecoration(
@@ -82,6 +88,7 @@ class _ToolsState extends State<Tools> {
     RemoveNumbersScreen('Remove Numbers From Text'),
     RemoveDuplicateLines('Remove Duplicate Lines'),
     ImageConverterPage('Bulk Image Converter'),
+    HtmlProcessorPage('HTML To Text')
   ];
 
   void _onItemTapped(int index) {
@@ -164,6 +171,11 @@ class _ToolsState extends State<Tools> {
               icon: Icon(Icons.image),
               label: 'Image Converter',
             ),
+            BottomNavigationBarItem(
+              backgroundColor: ColorPage.buttoncolor1,
+              icon: Icon(Icons.open_in_browser),
+              label: 'Text To HTML',
+            ),
           ],
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
@@ -192,6 +204,7 @@ class _ConvertCaseScreenState extends State<ConvertCaseScreen> {
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
+            BackButtonWidget(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Row(
@@ -345,6 +358,7 @@ class _ReplaceNewLinesScreenState extends State<ReplaceNewLinesScreen> {
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
+            BackButtonWidget(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Row(
@@ -493,6 +507,7 @@ class WordCounterScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
+            BackButtonWidget(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Row(
@@ -582,6 +597,7 @@ class _ExtractDomainScreenState extends State<ExtractDomainScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
+            BackButtonWidget(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Row(
@@ -755,6 +771,7 @@ As per the Google webmaster guidelines, the meta title of a web page should not 
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              BackButtonWidget(),
               Container(
                 // color: ColorPage.red,
                 width: 750,
@@ -985,6 +1002,7 @@ class SlugGeneratorScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
+            BackButtonWidget(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Row(
@@ -1155,6 +1173,7 @@ class _ExtractUrlsScreenState extends State<ExtractUrlsScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
+            BackButtonWidget(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Row(
@@ -1291,6 +1310,7 @@ class _ExtractEmailsScreenState extends State<ExtractEmailsScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
+            BackButtonWidget(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Row(
@@ -1390,6 +1410,7 @@ class ReplaceSpacesScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
+            BackButtonWidget(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Row(
@@ -1481,6 +1502,7 @@ class RemoveNumbersScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
+            BackButtonWidget(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Row(

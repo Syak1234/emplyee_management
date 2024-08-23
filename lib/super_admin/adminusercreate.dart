@@ -26,8 +26,8 @@ class _AdminUserCreateState extends State<AdminUserCreate> {
 
   final BoxDecoration decoration = const BoxDecoration(
     gradient: LinearGradient(colors: [
-      Color.fromARGB(255, 5, 103, 249),
-      Colors.blue,
+      ColorPage.red,
+      ColorPage.red,
     ]),
   );
 
@@ -51,6 +51,10 @@ class _AdminUserCreateState extends State<AdminUserCreate> {
     for (int i = 0; i < 10; i++) getx.empaddList.add(empAdd);
   }
 
+  List color = [
+    const Color.fromARGB(255, 181, 209, 232),
+    const Color.fromARGB(255, 239, 205, 153)
+  ];
   @override
   Widget build(BuildContext context) {
     // Mock data for demonstration
@@ -140,7 +144,7 @@ class _AdminUserCreateState extends State<AdminUserCreate> {
                 Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 10),
                   child: Container(
-                    color: Color.fromARGB(255, 57, 161, 247),
+                    color: ColorPage.red,
                     child: ResponsiveRow(
                       children: [
                         buildHeaderCell('User Name'),
@@ -164,6 +168,9 @@ class _AdminUserCreateState extends State<AdminUserCreate> {
                         bool isSelected = selectedIndices.contains(index);
                         return Container(
                           decoration: BoxDecoration(
+                            color: index % 2 != 0
+                                ? Color.fromARGB(248, 232, 234, 241)
+                                : Colors.white,
                             border: Border(
                               bottom: BorderSide(
                                 width: 0.5,
@@ -370,8 +377,8 @@ class _AdminUserCreateState extends State<AdminUserCreate> {
       flex: 2,
       child: Container(
         decoration: BoxDecoration(
-          border: Border(right: BorderSide(width: 0.3)),
-        ),
+            // border: Border(right: BorderSide(width: 0.3)),
+            ),
         padding: EdgeInsets.all(0),
         alignment: Alignment.center,
         child: Text(
@@ -387,8 +394,8 @@ class _AdminUserCreateState extends State<AdminUserCreate> {
       flex: 1,
       child: Container(
         decoration: BoxDecoration(
-          border: Border(right: BorderSide(width: 0.3)),
-        ),
+            // border: Border(right: BorderSide(width: 0.3)),
+            ),
         alignment: Alignment.center,
         child: icon,
       ),

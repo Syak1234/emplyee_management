@@ -10,6 +10,7 @@ class ButtonWidget extends StatelessWidget {
   // Widget child;
   String text;
   void Function()? onPressed;
+  //  void Function()? onChanged;
   Color color;
   double radius = 0.0;
   ButtonWidget(
@@ -18,7 +19,8 @@ class ButtonWidget extends StatelessWidget {
     this.onPressed, {
     this.padding = const EdgeInsets.only(right: 10),
     this.color = ColorPage.red,
-    this.radius=0.0
+    this.radius=0.0,
+  
   });
 
   @override
@@ -31,6 +33,7 @@ class ButtonWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(radius))),
             backgroundColor: MaterialStatePropertyAll(color)),
         onPressed: onPressed,
+        
         child: Text(
           text,
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),

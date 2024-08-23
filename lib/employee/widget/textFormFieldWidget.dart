@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 Flexible buildTextFormField(
     {required TextEditingController controller,
     required String hintText,
-    required IconData icon,
+    IconData? icon,
     required String? Function(String?)? validator,
     bool isPassword = false,
     int flex = 1}) {

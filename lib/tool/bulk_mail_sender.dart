@@ -1,4 +1,5 @@
 import 'package:employee_management/color/color.dart';
+import 'package:employee_management/employee/widget/backbutton.dart';
 import 'package:employee_management/employee/widget/buttonwidget.dart';
 import 'package:employee_management/employee/widget/dialogwidget.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,7 @@ class _BulkMailSenderState extends State<BulkMailSender> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                   BackButtonWidget(),
                   _buildHeader(),
                   const SizedBox(height: 20),
                   _buildTextField(
@@ -212,7 +214,8 @@ class _BulkMailSenderState extends State<BulkMailSender> {
           () {
             dialog(
               context,
-              child: TextFormField(
+              child:
+               TextFormField(
                 decoration: InputDecoration(
                     fillColor: ColorPage.white,
                     filled: true,
@@ -224,6 +227,7 @@ class _BulkMailSenderState extends State<BulkMailSender> {
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(10))),
               ),
+              
               title: 'Set Timer',
               onPressed1: () {
                 Get.back();

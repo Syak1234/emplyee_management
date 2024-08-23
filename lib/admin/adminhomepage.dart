@@ -2,7 +2,13 @@ import 'package:employee_management/admin/adminProjectDrawer.dart';
 import 'package:employee_management/admin/adminprojectcreate.dart';
 import 'package:employee_management/admin/adminprojectshow.dart';
 import 'package:employee_management/color/color.dart';
+import 'package:employee_management/employee/emp_helppage.dart';
 import 'package:employee_management/employee/empdrawer.dart';
+import 'package:employee_management/tool/bulk_mail_sender.dart';
+import 'package:employee_management/tool/bulk_whatsApp_sender.dart';
+import 'package:employee_management/tool/googlemap.dart';
+import 'package:employee_management/tool/premiumdashboard.dart';
+import 'package:employee_management/tool/toolui.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
@@ -26,7 +32,18 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
   @override
   void initState() {
-    page = [AdminprojectShow(), AdminProjectCreate()];
+    page = [
+      AdminprojectShow(),
+      AdminProjectCreate(),
+      BusinessSearchScreen(),
+      BulkMailSender(),
+      BulkWhatsappSender(),
+      Container(),
+      Container(),
+      Tool(),
+      PremiumDashBoard(),
+      HelpPage(),
+    ];
     // TODO: implement initState
     super.initState();
   }
@@ -44,38 +61,38 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     Get.back();
                   },
                   icon: Icon(Icons.arrow_back)),
-              iconTheme: IconThemeData(color: Colors.white),
+              // backgroundColor: Colors.teal,
               toolbarHeight: 65,
               automaticallyImplyLeading: false,
-             
               title: Row(
                 children: [
-                  Image.asset('assets/app_icon/app_icon.jpg'),
+                  Image.asset(
+                    'assets/app_icon/logo.png',
+                    // width: 1,
+                  ),
                 ],
               ),
               actions: [
-                CircleAvatar(
-                  backgroundColor: Color.fromRGBO(221, 221, 221, 1),
-                  child: Text(
-                    'SM',
+                // CircleAvatar()
+
+                Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border:
+                            Border.all(width: 2, color: ColorPage.buttoncolor1),
+                        borderRadius: BorderRadius.circular(
+                          80,
+                        )),
+                    child: CircleAvatar(
+                      backgroundColor: ColorPage.red,
+                      child: Text(
+                        'SN',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
                   ),
                 ),
-
-                // ElevatedButton.icon(
-                //     style: ButtonStyle(
-                //         padding: MaterialStatePropertyAll(EdgeInsets.all(20)),
-                //         backgroundColor: MaterialStatePropertyAll(Colors.green),
-                //         shape: MaterialStatePropertyAll(
-                //             ContinuousRectangleBorder())),
-                //     onPressed: () {},
-                //     icon: Icon(
-                //       Icons.logout,
-                //       color: Colors.white,
-                //     ),
-                //     label: Text(
-                //       'Log Out',
-                //       style: TextStyle(color: Colors.white),
-                //     ))
               ],
             )
           : AppBar(
@@ -84,12 +101,11 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     Get.back();
                   },
                   icon: Icon(Icons.arrow_back)),
-              iconTheme: IconThemeData(color: Colors.white),
               toolbarHeight: 65,
-             
+              iconTheme: IconThemeData(color: Colors.white),
               title: Row(
                 children: [
-                  Image.asset('assets/app_icon/app_icon.jpg'),
+                  Image.asset('assets/app_icon/logo.png'),
                 ],
               ),
             ),

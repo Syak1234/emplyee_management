@@ -1,92 +1,48 @@
-import 'dart:developer';
-
-import 'package:employee_management/admin/AdminSignUp.dart';
-import 'package:employee_management/admin/admindashboard.dart';
 import 'package:employee_management/color/color.dart';
+import 'package:employee_management/employee/Emplogin.dart';
 import 'package:employee_management/employee/empdashboard.dart';
-import 'package:employee_management/employee/showpassword.dart';
-import 'package:employee_management/employee/widget/dialogwidget.dart';
 import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-class EmpLogin extends StatefulWidget {
-  const EmpLogin({super.key});
+class AdminSignUp extends StatefulWidget {
+  const AdminSignUp({super.key});
 
   @override
-  State<EmpLogin> createState() => _EmpLoginState();
+  State<AdminSignUp> createState() => _AdminSignUpState();
 }
 
-class _EmpLoginState extends State<EmpLogin> {
+class _AdminSignUpState extends State<AdminSignUp> {
   double textfieldsize = 400;
-  EdgeInsets padding = EdgeInsets.symmetric(vertical: 1);
-
   Getx getx = Get.put(Getx());
-  GlobalKey<FormState> gk = GlobalKey();
-  GlobalKey<FormState> forgetkey = GlobalKey();
+  EdgeInsets padding = EdgeInsets.symmetric(vertical: 1);
+  TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
+  TextEditingController phno = TextEditingController();
   TextEditingController password = TextEditingController();
-  TextEditingController forgetpasswordemail = TextEditingController();
-
-  forgetPassword() {
-    dialog(
-      buttonname2: 'Continue',
-      context,
-      title: 'Enter your email',
-      onPressed1: () {
-        Get.back();
-      },
-      onPressed2: () {
-        if (forgetkey.currentState!
-            .validate()) if (GetUtils.isEmail(forgetpasswordemail.text)) {
-          Get.back();
-          Get.to(() => ForGetPassword(forgetpasswordemail.text),
-              transition: Transition.leftToRight);
-        }
-      },
-      child: TextFormField(
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) {
-          log(value.toString());
-          if (value!.isEmpty) {
-            return "enter your email";
-          }
-          return null;
-        },
-        controller: forgetpasswordemail,
-        decoration: InputDecoration(
-            fillColor: ColorPage.white,
-            filled: true,
-            hintText: 'Email',
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10)),
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(10))),
-      ),
-    );
-  }
-
+  TextEditingController role = TextEditingController();
+  TextEditingController address = TextEditingController();
+  TextEditingController confirmpassword = TextEditingController();
+  GlobalKey<FormState> gk = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                    'assets/app_icon/loginbackground/1.jpg',
-                  ),
-                  fit: BoxFit.cover)),
-          child: Center(
-              child: Column(
-            mainAxisSize: MainAxisSize.min,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                  'assets/app_icon/loginbackground/1.jpg',
+                ),
+                fit: BoxFit.cover)),
+        child: Center(
+          // Centers the child both vertically and horizontally
+          child: Column(
+            mainAxisSize: MainAxisSize
+                .min, // Ensures the Column takes up the minimum space needed
             children: [
               Form(
-                // key: signupgk,
+                key: gk,
                 child: Container(
                   // height: MediaQuery.sizeOf(context).height,
                   padding: EdgeInsets.all(20),
@@ -94,6 +50,7 @@ class _EmpLoginState extends State<EmpLogin> {
                   decoration: BoxDecoration(
                     color: ColorPage.buttoncolor1,
                     // color: Colors.blue,
+                    borderRadius: BorderRadius.circular(0),
                   ),
                   // padding: const EdgeInsets.all(100),
                   width: textfieldsize + 200,
@@ -107,7 +64,7 @@ class _EmpLoginState extends State<EmpLogin> {
                             alignment: Alignment.center,
                             width: textfieldsize,
                             child: Text(
-                              'Login'.toUpperCase(),
+                              'Admin Sign up'.toUpperCase(),
                               style: const TextStyle(
                                   color: ColorPage.white,
                                   fontWeight: FontWeight.bold),
@@ -134,28 +91,27 @@ class _EmpLoginState extends State<EmpLogin> {
                           ],
                         ),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(vertical: 10),
-                      //   child: SizedBox(
-                      //       width: textfieldsize,
-                      //       child: TextFormField(
-                      //         // controller: fullname,
-                      //         decoration: InputDecoration(
-                      //           contentPadding: padding,
-                      //           filled: true,
-                      //           fillColor: ColorPage.white,
-                      //           border: OutlineInputBorder(
-                      //               borderSide: BorderSide.none),
-                      //           prefixIcon: Icon(
-                      //             Icons.person,
-                      //             color: ColorPage.red,
-                      //           ),
-                      //           hintText: 'Full Name',
-                      //           // helperText: '',
-                      //         ),
-                      //       )),
-                      // ),
-
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: SizedBox(
+                            width: textfieldsize,
+                            child: TextFormField(
+                              controller: name,
+                              decoration: InputDecoration(
+                                contentPadding: padding,
+                                filled: true,
+                                fillColor: ColorPage.white,
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide.none),
+                                prefixIcon: Icon(
+                                  Icons.person,
+                                  color: ColorPage.red,
+                                ),
+                                hintText: 'Full Name',
+                                // helperText: '',
+                              ),
+                            )),
+                      ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Row(
@@ -180,30 +136,30 @@ class _EmpLoginState extends State<EmpLogin> {
                           ],
                         ),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(vertical: 10),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.center,
-                      //     children: [
-                      //       SizedBox(
-                      //           width: textfieldsize,
-                      //           child: TextFormField(
-                      //             // controller: phno,
-                      //             decoration: InputDecoration(
-                      //                 contentPadding: padding,
-                      //                 border: OutlineInputBorder(
-                      //                     borderSide: BorderSide.none),
-                      //                 filled: true,
-                      //                 fillColor: ColorPage.white,
-                      //                 hintText: 'Phone no',
-                      //                 prefixIcon: Icon(
-                      //                   Icons.phone,
-                      //                   color: ColorPage.red,
-                      //                 )),
-                      //           ))
-                      //     ],
-                      //   ),
-                      // ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                                width: textfieldsize,
+                                child: TextFormField(
+                                  controller: phno,
+                                  decoration: InputDecoration(
+                                      contentPadding: padding,
+                                      border: OutlineInputBorder(
+                                          borderSide: BorderSide.none),
+                                      filled: true,
+                                      fillColor: ColorPage.white,
+                                      hintText: 'Phone no',
+                                      prefixIcon: Icon(
+                                        Icons.phone,
+                                        color: ColorPage.red,
+                                      )),
+                                ))
+                          ],
+                        ),
+                      ),
 
                       // Padding(
                       //   padding:
@@ -283,77 +239,32 @@ class _EmpLoginState extends State<EmpLogin> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 2),
-                        child: Container(
-                          width: textfieldsize,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Row(
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        Get.to(() => AdminSignUp());
-                                      },
-                                      child: Checkbox(
-                                          value: true, onChanged: (v) {}),
-                                      autofocus: true,
-                                    ),
-                                    Text(
-                                      'Remember me',
-                                      style: TextStyle(color: ColorPage.white),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Form(
-                                key: forgetkey,
-                                child: MaterialButton(
-                                  onPressed: () {
-                                    forgetPassword();
-                                  },
-                                  child: Text(
-                                    'Forgot Password',
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                                width: textfieldsize,
+                                child: TextFormField(
+                                  controller: confirmpassword,
+                                  decoration: InputDecoration(
+                                      contentPadding: padding,
+                                      filled: true,
+                                      fillColor: ColorPage.white,
+                                      border: OutlineInputBorder(
+                                          borderSide: BorderSide.none),
+                                      suffixIcon: IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(Icons.visibility)),
+                                      hintText: 'Confirm Password',
+                                      prefixIcon: const Icon(
+                                        Icons.password,
+                                        color: ColorPage.red,
+                                      )),
+                                ))
+                          ],
                         ),
                       ),
-
-                      // Padding(
-                      //   padding: const EdgeInsets.symmetric(vertical: 10),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.center,
-                      //     children: [
-                      //       SizedBox(
-                      //           width: textfieldsize,
-                      //           child: TextFormField(
-                      //             // controller: confirmpassword,
-                      //             decoration: InputDecoration(
-                      //                 contentPadding: padding,
-                      //                 filled: true,
-                      //                 fillColor: ColorPage.white,
-                      //                 border: OutlineInputBorder(
-                      //                     borderSide: BorderSide.none),
-                      //                 suffixIcon: IconButton(
-                      //                     onPressed: () {},
-                      //                     icon: const Icon(Icons.visibility)),
-                      //                 hintText: 'Confirm Password',
-                      //                 prefixIcon: const Icon(
-                      //                   Icons.password,
-                      //                   color: ColorPage.red,
-                      //                 )),
-                      //           ))
-                      //     ],
-                      //   ),
-                      // ),
-
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 2),
                         child: Row(
@@ -363,15 +274,16 @@ class _EmpLoginState extends State<EmpLogin> {
                                 width: textfieldsize,
                                 child: InkWell(
                                   onTap: () {
-                                    Get.to(() => AdminSignUp());
+                                    Get.to(() => EmpLogin(),
+                                        transition: Transition.leftToRight);
                                   },
                                   child: Text.rich(
                                       style: TextStyle(color: Colors.white),
                                       TextSpan(
-                                          text: "Don't have account ",
+                                          text: 'Already a member? ',
                                           children: [
                                             TextSpan(
-                                                text: 'Sign Up',
+                                                text: 'Login',
                                                 style: TextStyle(
                                                     color: Colors.red,
                                                     fontWeight:
@@ -405,12 +317,21 @@ class _EmpLoginState extends State<EmpLogin> {
                                               borderRadius:
                                                   BorderRadius.circular(10)))),
                                   onPressed: () {
-                                    getx.loginApi(
-                                        context, email.text, password.text);
-                                    // Get.to(() => EmpDashboard());
+                                    print('object');
+                                    if (password.text == confirmpassword.text) {
+                                      getx.signUpApi(
+                                          context,
+                                          name.text,
+                                          phno.text,
+                                          'employee',
+                                          email.text,
+                                          'West medinipur,721457',
+                                          1,
+                                          password.text);
+                                    }
                                   },
                                   child: Text(
-                                    'Login'.toUpperCase(),
+                                    'Sign up'.toUpperCase(),
                                     style: const TextStyle(color: Colors.white),
                                   )),
                             )
@@ -422,7 +343,9 @@ class _EmpLoginState extends State<EmpLogin> {
                 ),
               ),
             ],
-          ))),
+          ),
+        ),
+      ),
     );
   }
 }
