@@ -18,6 +18,7 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
   TextEditingController fullname = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController ph = TextEditingController();
   BoxDecoration decoration = const BoxDecoration(
       gradient: LinearGradient(colors: [ColorPage.red, ColorPage.red]));
 
@@ -78,11 +79,22 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
                                 return null;
                               },
                             ),
+                            buildTextFormField(
+                              controller: ph,
+                              hintText: 'Phone no',
+                              icon: Icons.phone,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Cannot be blank";
+                                }
+                                return null;
+                              },
+                            ),
                             buildDropdownFormField(
                               hintText: 'Type',
                               items: ["SEO", "Developer", "Content writer"],
                               onChanged: (v) {
-                                getx.projecttype.value = v!;
+                                getx.role.value = v!;
                               },
                               validator: (value) {
                                 if (value == null) {
@@ -127,7 +139,7 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
                 Expanded(
                   child: Obx(
                     () => ListView.builder(
-                      itemCount: getx.empaddList.length,
+                      itemCount: getx.users.length,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return Container(
@@ -140,10 +152,10 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
                               EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                           child: ResponsiveRow(
                             children: [
-                              buildDataCell(getx.empaddList[index].fullname),
-                              buildDataCell(getx.empaddList[index].email),
-                              buildDataCell(getx.empaddList[index].emprole),
-                              buildDataCell(getx.empaddList[index].password),
+                              buildDataCell(getx.users[index].name),
+                              buildDataCell(getx.users[index].email),
+                              buildDataCell(getx.users[index].roles.toString()),
+                              buildDataCell('12345'),
                             ],
                           ),
                         );
@@ -195,7 +207,7 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
   //           ),
   //         ),
   //       ),
-  //     ),
+  //     ),bkh
   //   );
   // }
 
@@ -213,36 +225,39 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
           decoration: ColorPage.decoration1,
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
-              return DropdownButtonFormField<String>(
-                decoration: const InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
-                  ),
-                ),
-                hint: Text(hintText),
-                items: items.map<DropdownMenuItem<String>>((String e) {
-                  return DropdownMenuItem(
-                    value: e,
-                    child: Text(
-                      e,
-                      overflow: TextOverflow.ellipsis,
+              return Obx(
+                () => DropdownButtonFormField<String>(
+                  decoration: const InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
                     ),
-                  );
-                }).toList(),
-                onChanged: onChanged,
-                validator: validator,
-                isExpanded: true, // Ensure the dropdown button takes full width
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
+                    ),
+                  ),
+                  hint: Text(hintText),
+                  items: getx.roles.map<DropdownMenuItem<String>>((String e) {
+                    return DropdownMenuItem(
+                      value: e,
+                      child: Text(
+                        e,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: onChanged,
+                  validator: validator,
+                  isExpanded:
+                      true, // Ensure the dropdown button takes full width
+                ),
               );
             },
           ),
@@ -270,6 +285,8 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
                   password: password.text,
                 );
                 getx.empaddList.add(add);
+                getx.signUpApi(context, fullname.text, ph.text, getx.role.value,
+                    email.text, 'jkjkj', 1, password.text);
               }
             },
             child: Card(

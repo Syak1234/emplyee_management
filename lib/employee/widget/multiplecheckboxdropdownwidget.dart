@@ -1,36 +1,31 @@
 import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:employee_management/color/color.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-Flexible buildMultipleCheckBoxDropdownSearch(
-    {required String hintText,
-    required List<String> items,
-    required void Function(String?) onChanged,
-    required String? Function(String?) validator,
-    required Widget checkbox,
-    required int flex}) {
-  final TextEditingController _dropdownSearchFieldController =
-      TextEditingController();
-
+Flexible buildMultipleCheckBoxDropdownSearch({
+  required String hintText,
+  required List<String> items,
+  required void Function(List<String>) onChanged,
+  required String? Function(List<String?>?) validator,
+  required int flex,
+  required TextEditingController dropdownSearchFieldController,
+}) {
+  List<String> selectedItems = []; // Track selected items
   SuggestionsBoxController suggestionBoxController = SuggestionsBoxController();
+
   return Flexible(
     flex: flex,
     child: Container(
-      // height: 50,
       child: LayoutBuilder(
         builder: (context, constraints) {
-          double width = constraints.maxWidth;
-          bool isSmallScreen = width < 600;
-
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Container(
-              // height: 200,
-              decoration: ColorPage.decoration1,
-              // padding:
-              //     isSmallScreen ? EdgeInsets.all(8.0) : EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                border: Border.all(color: Color.fromARGB(255, 7, 22, 45)),
+                borderRadius: BorderRadius.circular(5),
+                color: ColorPage.white,
+              ),
               child: DropDownSearchFormField(
                 textFieldConfiguration: TextFieldConfiguration(
                   decoration: InputDecoration(
@@ -39,50 +34,71 @@ Flexible buildMultipleCheckBoxDropdownSearch(
                     fillColor: ColorPage.white,
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                          width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
+                        width: 0.5,
+                        color: Color.fromARGB(255, 7, 22, 45),
+                      ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                          width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          width: 0.5, color: Color.fromARGB(255, 7, 22, 45)),
+                        width: 0.5,
+                        color: Color.fromARGB(255, 7, 22, 45),
+                      ),
                     ),
                   ),
-                  controller: _dropdownSearchFieldController,
+                  controller: dropdownSearchFieldController,
                 ),
                 suggestionsCallback: (pattern) {
-                  return getSuggestions(pattern, items);
+                  // Show suggestions only if fewer than 2 items are selected
+                  return selectedItems.length < 2
+                      ? getSuggestions(pattern, items)
+                      : [];
                 },
-                itemBuilder: (context, String suggestion) {
-                  return SizedBox(
-                    // height: 300,
-                    child: ListTile(
-                      leading: checkbox,
-                      title: Text(
-                        overflow: TextOverflow.ellipsis,
-                        suggestion,
-                        style: TextStyle(),
-                      ),
+                itemBuilder: (context, dynamic suggestion) {
+                  // Cast suggestion to String
+                  String item = suggestion as String;
+                  return ListTile(
+                    title: Text(item),
+                    trailing: Checkbox(
+                      value: selectedItems.contains(item),
+                      onChanged: (value) {
+                        if (value != null) {
+                          if (value) {
+                            selectedItems.add(item);
+                          } else {
+                            selectedItems.remove(item);
+                          }
+                          // Update the text in the TextFormField
+                          dropdownSearchFieldController.text =
+                              selectedItems.join(', ');
+                          // Trigger the onChanged callback
+                          onChanged(selectedItems);
+                        }
+                      },
                     ),
                   );
                 },
                 itemSeparatorBuilder: (context, index) {
-                  return const SizedBox(
-                    height: 1,
-                  );
+                  return const Divider();
                 },
                 transitionBuilder: (context, suggestionsBox, controller) {
                   return suggestionsBox;
                 },
-                onSuggestionSelected: (String suggestion) {
-                  _dropdownSearchFieldController.text = suggestion;
-                  onChanged(suggestion);
-                },
                 suggestionsBoxController: suggestionBoxController,
-                validator: validator,
+                validator: (value) =>
+                    validator(selectedItems), // Call the validator
                 displayAllSuggestionWhenTap: true,
+                onSuggestionSelected: (suggestion) {
+                  // Check if the suggestion is already selected
+                  if (!selectedItems.contains(suggestion)) {
+                    // Add the selected suggestion to the list
+                    selectedItems.add(suggestion);
+                    // Update the text in the TextFormField
+                    dropdownSearchFieldController.text =
+                        selectedItems.join(', ');
+                    // Trigger the onChanged callback
+                    onChanged(selectedItems);
+                  }
+                },
               ),
             ),
           );
@@ -92,10 +108,7 @@ Flexible buildMultipleCheckBoxDropdownSearch(
   );
 }
 
-List<String> getSuggestions(
-  String query,
-  List<String> items,
-) {
+List<String> getSuggestions(String query, List<String> items) {
   List<String> matches = <String>[];
   matches.addAll(items);
 

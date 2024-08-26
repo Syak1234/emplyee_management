@@ -329,6 +329,7 @@ class _EmpSignUpState extends State<EmpSignUp> {
                                     //   ),
                                     // ),
 
+
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 10),

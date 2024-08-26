@@ -4,6 +4,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:employee_management/admin/admindashboard.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/Emplogin.dart';
+import 'package:employee_management/employee/empdashboard.dart';
 import 'package:employee_management/employee/splash.dart';
 import 'package:employee_management/employee/widget/themewidget.dart';
 import 'package:employee_management/super_admin/adminusercreate.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Employee Management',
       theme: theme,
-      home: EmpLogin(),
+      home: Dashboard(),
     );
   }
 }

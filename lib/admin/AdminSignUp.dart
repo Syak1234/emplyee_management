@@ -160,53 +160,12 @@ class _AdminSignUpState extends State<AdminSignUp> {
                           ],
                         ),
                       ),
-
                       // Padding(
-                      //   padding:
-                      //       const EdgeInsets.symmetric(vertical: 10),
+                      //   padding: const EdgeInsets.symmetric(vertical: 10),
                       //   child: Row(
                       //     mainAxisAlignment: MainAxisAlignment.center,
                       //     children: [
-                      //       Obx(
-                      //         () => SizedBox(
-                      //             width: MediaQuery.sizeOf(context)
-                      //                     .width -
-                      //                 1100,
-                      //             child:
-                      //                 DropdownButtonFormField<String>(
-                      //               decoration: const InputDecoration(
-                      //                   filled: true,
-                      //                   fillColor: Color.fromARGB(
-                      //                       255, 234, 231, 231),
-                      //                   prefixIcon: Icon(
-                      //                     Icons.type_specimen,
-                      //                     color: Colors.grey,
-                      //                   ),
-                      //                   border: OutlineInputBorder(
-                      //                       borderSide:
-                      //                           BorderSide.none)),
-                      //               value: getx.selectedbutton.value,
-                      //               items: <String>[
-                      //                 'SEO',
-                      //                 'Desiner',
-                      //                 'Developer',
-                      //                 'Manager'
-                      //               ].map<DropdownMenuItem<String>>(
-                      //                   (String e) {
-                      //                 return DropdownMenuItem(
-                      //                     value: e, child: Text(e));
-                      //               }).toList(),
-                      //               onChanged: (v) {
-                      //                 getx.selectedbutton.value = v!;
-                      //               },
-                      //               validator: (value) {
-                      //                 if (value == null) {
-                      //                   return 'Cannot be null';
-                      //                 }
-                      //                 return null;
-                      //               },
-                      //             )),
-                      //       )
+                      //       RoleSelectionWidget(textfieldsize: textfieldsize)
                       //     ],
                       //   ),
                       // ),
@@ -265,6 +224,7 @@ class _AdminSignUpState extends State<AdminSignUp> {
                           ],
                         ),
                       ),
+
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 2),
                         child: Row(
@@ -323,7 +283,7 @@ class _AdminSignUpState extends State<AdminSignUp> {
                                           context,
                                           name.text,
                                           phno.text,
-                                          'employee',
+                                          getx.selectedRole.value,
                                           email.text,
                                           'West medinipur,721457',
                                           1,
@@ -344,6 +304,61 @@ class _AdminSignUpState extends State<AdminSignUp> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class RoleSelectionWidget extends StatelessWidget {
+  final double textfieldsize;
+
+  RoleSelectionWidget({required this.textfieldsize});
+
+  @override
+  Widget build(BuildContext context) {
+    final Getx rolesController = Get.put(Getx());
+
+    return Obx(
+      () => SizedBox(
+        width: textfieldsize,
+        child: DropdownButtonFormField<String>(
+          value: rolesController.selectedRole.value.isEmpty
+              ? null
+              : rolesController.selectedRole.value,
+          items:
+              rolesController.roles.map<DropdownMenuItem<String>>((String e) {
+            return DropdownMenuItem<String>(
+              value: e,
+              child: Text(e),
+            );
+          }).toList(),
+          onChanged: (v) {
+            rolesController.selectedRole.value = v!;
+          },
+          onTap: () async {
+            // Call fetchRoles when the dropdown is tapped
+            await rolesController.fetchRoles();
+          },
+          decoration: const InputDecoration(
+            filled: true,
+            fillColor: Color.fromARGB(255, 234, 231, 231),
+            prefixIcon: Icon(
+              Icons.type_specimen,
+              color: ColorPage.red, // Replace with your actual color
+            ),
+            border: OutlineInputBorder(borderSide: BorderSide.none),
+          ),
+          hint: rolesController.selectedRole.value.isEmpty
+              ? const Text('Role')
+              : null,
+          disabledHint: const Text('Role'),
+          validator: (value) {
+            if (value == null) {
+              return 'Cannot be null';
+            }
+            return null;
+          },
         ),
       ),
     );

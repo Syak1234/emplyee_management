@@ -1,4 +1,5 @@
 import 'package:board_datetime_picker/board_datetime_picker.dart';
+import 'package:employee_management/admin/adminprojectapi/projectcreateapi.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/widget/multiplecheckboxdropdownwidget.dart';
 import 'package:employee_management/employee/widget/searchDropDown.dart';
@@ -6,7 +7,9 @@ import 'package:employee_management/employee/widget/textFormFieldWidget.dart';
 import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class AdminProjectCreate extends StatefulWidget {
   const AdminProjectCreate({super.key});
@@ -20,6 +23,14 @@ class _AdminProjectCreateState extends State<AdminProjectCreate> {
   TextEditingController monthlyprice = TextEditingController();
 
   TextEditingController datePickerController = TextEditingController();
+  TextEditingController projectname = TextEditingController();
+  TextEditingController url = TextEditingController();
+  final TextEditingController dropdownSearchFieldController =
+      TextEditingController();
+  // TextEditingController startdate = TextEditingController();
+
+  TextEditingController clientname = TextEditingController();
+
   bool _isHovered = false;
   @override
   Widget build(BuildContext context) {
@@ -73,7 +84,7 @@ class _AdminProjectCreateState extends State<AdminProjectCreate> {
   List<Widget> _buildFormFields(bool isWide) {
     return [
       buildTextFormField(
-        controller: monthlyprice,
+        controller: projectname,
         hintText: 'Project Name',
         icon: Icons.price_check,
         validator: (value) {
@@ -86,7 +97,7 @@ class _AdminProjectCreateState extends State<AdminProjectCreate> {
       SizedBox(height: isWide ? 10 : 10), // Add spacing for column layout
 
       buildTextFormField(
-        controller: monthlyprice,
+        controller: url,
         hintText: 'Website URL',
         icon: Icons.price_check,
         validator: (value) {
@@ -98,7 +109,7 @@ class _AdminProjectCreateState extends State<AdminProjectCreate> {
       ),
       SizedBox(height: isWide ? 10 : 10),
       buildTextFormField(
-        controller: monthlyprice,
+        controller: clientname,
         hintText: 'Client Name',
         icon: Icons.price_check,
         validator: (value) {
@@ -141,9 +152,23 @@ class _AdminProjectCreateState extends State<AdminProjectCreate> {
                       context: context,
                       pickerType: DateTimePickerType.datetime,
                     );
-                    datePickerController.text =
-                        '${result?.start}${result!.end}';
-                    setState(() {});
+
+// Convert to the desired UTC DateTime format and update the TextEditingController
+                    if (result != null && result.start != null) {
+                      // Convert the DateTime to UTC
+                      DateTime utcTime = result.start.toUtc();
+
+                      // Format the DateTime into the specific string format
+                      String formattedDate =
+                          DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                              .format(utcTime);
+
+                      // Set the formatted date into the TextEditingController
+                      datePickerController.text = formattedDate;
+
+                      // Trigger a rebuild of the UI
+                      setState(() {});
+                    }
                   },
                   icon: Icon(
                     Icons.date_range,
@@ -171,9 +196,10 @@ class _AdminProjectCreateState extends State<AdminProjectCreate> {
 
       SizedBox(height: isWide ? 10 : 10), // Add spacing for column layout
       buildMultipleCheckBoxDropdownSearch(
+        dropdownSearchFieldController: dropdownSearchFieldController,
         flex: 1,
         hintText: ' Alloted Employee',
-        checkbox: Checkbox.adaptive(value: false, onChanged: (v) {}),
+        // checkbox: Checkbox.adaptive(value: false, onChanged: (v) {}),
         items: [
           "Classified ads",
           "Business Listing",
@@ -204,7 +230,7 @@ class _AdminProjectCreateState extends State<AdminProjectCreate> {
           "Infographic",
         ],
         onChanged: (v) {
-          getx.projecttype.value = v!;
+          getx.projecttypelist.value = v;
         },
         validator: (value) {
           if (value == null) {
@@ -223,7 +249,17 @@ class _AdminProjectCreateState extends State<AdminProjectCreate> {
             onEnter: (_) => setState(() => _isHovered = true),
             onExit: (_) => setState(() => _isHovered = false),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                // getx.projecttypelist=dropdownSearchFieldController.text;
+                createProject(
+                    context: context,
+                    projectName: projectname.text,
+                    websiteUrl: url.text,
+                    clientName: clientname.text,
+                    startDate: datePickerController.text,
+                    monthlyPrice: int.parse(monthlyprice.text),
+                    assignedEmployeeIds: getx.projecttypelist);
+              },
               child: Card(
                 margin: EdgeInsets.all(0),
                 elevation: 4,

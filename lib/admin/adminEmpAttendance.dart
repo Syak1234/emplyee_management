@@ -53,7 +53,7 @@ class _AdminEmpAttendanceState extends State<AdminEmpAttendance> {
                       children: [
                         buildDropdownButton(
                           hintText: 'Type',
-                          items: ["SEO", "Developer", "Content writer"],
+                          items: getx.roles,
                           onChanged: (v) {
                             getx.projecttype.value = v!;
                           },

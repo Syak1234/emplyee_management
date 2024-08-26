@@ -1,6 +1,6 @@
 class UrlLink {
-  static const main =
-      "web-nexacrm-001-dnbjchckdperbme8.eastus-01.azurewebsites.net";
+  static const main = "https://localhost:7284";
   static const login = "/api/Account/login";
   static const signup = "/api/Account/register";
+  static const adminprojectcreate = "/api/Project";
 }

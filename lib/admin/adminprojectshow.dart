@@ -1,7 +1,11 @@
+import 'package:employee_management/admin/admin_model/projectlistmodel.dart';
+import 'package:employee_management/admin/adminprojectapi/projectlistapi.dart';
 import 'package:employee_management/admin/adminprojectlist.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/widget/searchWidget.dart';
+import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AdminprojectShow extends StatefulWidget {
   const AdminprojectShow({super.key});
@@ -11,6 +15,16 @@ class AdminprojectShow extends StatefulWidget {
 }
 
 class _AdminprojectShowState extends State<AdminprojectShow> {
+  Getx getx = Get.find<Getx>();
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      getx.projectlist.isEmpty ? projectlist() : null;
+    });
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +40,7 @@ class _AdminprojectShowState extends State<AdminprojectShow> {
 }
 
 class AdminProjectsListScreen extends StatelessWidget {
+  Getx getx = Get.find<Getx>();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -53,23 +68,25 @@ class AdminProjectsListScreen extends StatelessWidget {
           ),
           SearchBarWidget(),
           Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: 7,
-              itemBuilder: (context, index) {
-                return Container(
-                  padding: EdgeInsets.symmetric(vertical: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      AdminProjectCard(index: index),
-                      AdminProjectCard(index: index),
-                      AdminProjectCard(index: index),
-                      AdminProjectCard(index: index),
-                    ],
-                  ),
-                );
-              },
+            child: Obx(
+              () => getx.projectlist.isNotEmpty
+                  ? GridView.builder(
+                      shrinkWrap: true,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 5, // Number of columns
+                        childAspectRatio: 5, // Aspect ratio of each card
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                      ),
+                      itemCount: getx.projectlist.length,
+                      itemBuilder: (context, index) {
+                        return AdminProjectCard(
+                            project: getx.projectlist[index], index: index);
+                      },
+                    )
+                  : Center(
+                      child: CircularProgressIndicator(),
+                    ),
             ),
           ),
         ],
@@ -80,8 +97,9 @@ class AdminProjectsListScreen extends StatelessWidget {
 
 class AdminProjectCard extends StatefulWidget {
   final int index;
-
-  const AdminProjectCard({required this.index, Key? key}) : super(key: key);
+  Project project;
+  AdminProjectCard({required this.project, required this.index, Key? key})
+      : super(key: key);
 
   @override
   _AdminProjectCardState createState() => _AdminProjectCardState();
@@ -91,46 +109,44 @@ class _AdminProjectCardState extends State<AdminProjectCard> {
   bool _isHovered = false;
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 15,
-        ),
-        child: MouseRegion(
-          onEnter: (_) => setState(() => _isHovered = true),
-          onExit: (_) => setState(() => _isHovered = false),
-          child: Card(
-            elevation: ColorPage.elevation,
-            // color: Colors.red,
-            // shadowColor: Colors.red,
-            // surfaceTintColor: Colors.red,
-            child: InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AdminProjectList(),
-                    ));
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 0.5,
-                    color: _isHovered ? Colors.white : ColorPage.buttoncolor1,
-                  ),
-                  borderRadius: BorderRadius.circular(5),
-                  color: _isHovered ? ColorPage.buttoncolor1 : ColorPage.white,
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 15,
+      ),
+      child: MouseRegion(
+        onEnter: (_) => setState(() => _isHovered = true),
+        onExit: (_) => setState(() => _isHovered = false),
+        child: Card(
+          elevation: ColorPage.elevation,
+          // color: Colors.red,
+          // shadowColor: Colors.red,
+          // surfaceTintColor: Colors.red,
+          child: InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AdminProjectList(),
+                  ));
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  width: 0.5,
+                  color: _isHovered ? Colors.white : ColorPage.buttoncolor1,
                 ),
-                padding: const EdgeInsets.all(8),
-                alignment: Alignment.center,
-                height: 45,
-                child: Text(
-                  'Project ${widget.index}',
-                  style: TextStyle(
-                    color: _isHovered ? ColorPage.white : ColorPage.colortheme,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                borderRadius: BorderRadius.circular(5),
+                color: _isHovered ? ColorPage.buttoncolor1 : ColorPage.white,
+              ),
+              padding: const EdgeInsets.all(8),
+              alignment: Alignment.center,
+              height: 45,
+              child: Text(
+                widget.project.projectName,
+                style: TextStyle(
+                  color: _isHovered ? ColorPage.white : ColorPage.colortheme,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
