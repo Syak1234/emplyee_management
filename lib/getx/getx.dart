@@ -7,6 +7,7 @@ import 'package:employee_management/admin/admin_model/usermodel.dart';
 import 'package:employee_management/admin/admindashboard.dart';
 import 'package:employee_management/employee/emp_model/attendancemodel.dart';
 import 'package:employee_management/employee/emp_model/breaktimemodel.dart';
+import 'package:employee_management/employee/emp_model/emploginmodel.dart';
 import 'package:employee_management/employee/emp_model/leavemodel.dart';
 import 'package:employee_management/employee/empdashboard.dart';
 import 'package:employee_management/employee/widget/notification.dart';
@@ -14,6 +15,7 @@ import 'package:employee_management/url/url.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Getx extends GetxController {
   RxList<User> users = <User>[].obs;
@@ -53,9 +55,23 @@ class Getx extends GetxController {
   RxString adminprojectlistselectedemployeebutton = "Abc".obs;
   // RxBool adminEmpAttendence = false.obs;
 
+  Future<String> getuseralldetails(String key) async {
+    late SharedPreferences sp;
+    sp = await SharedPreferences.getInstance();
+    return sp.getString(key) ?? ' ';
+  }
+
+  Future clearSharedPreferences() async {
+    late SharedPreferences sp;
+    sp = await SharedPreferences.getInstance();
+    sp.clear();
+  }
+
   Future<void> loginApi(
       BuildContext context, String email, String password) async {
     try {
+      late SharedPreferences sp;
+      sp = await SharedPreferences.getInstance();
       // Show loading indicator
       showDialog(
         context: context,
@@ -92,7 +108,14 @@ class Getx extends GetxController {
       Get.back();
 
       if (res.statusCode == 200) {
-        Get.to(() => EmpDashboard());
+        UserDetails user = UserDetails.fromJson(jsondata['data']);
+        sp.setString('username', user.username);
+        sp.setString('userid', user.userId);
+        sp.setString('email', user.email);
+        sp.setString('token', user.token);
+        sp.setString('role', user.token);
+        sp.setString('ph', user.mobile);
+        Get.to(() => EmpDashboard(user));
         // Handle successful login (e.g., navigate to a different page, save tokens)
       } else {
         // Handle errors (e.g., show an error message)
@@ -128,7 +151,7 @@ class Getx extends GetxController {
         "phoneNumber": phno,
         "email": email,
         "password": password,
-        "role": "Admin",
+        "role": role,
         "address": address,
         "comapnyId":
             companyId.toString(), // Ensure the ID is sent as a string if needed

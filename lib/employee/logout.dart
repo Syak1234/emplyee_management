@@ -1,5 +1,6 @@
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/Emplogin.dart';
+import 'package:employee_management/employee/emp_api/logoutapi.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,8 +55,7 @@ Future logout(BuildContext context) {
             elevation: 5,
             child: InkWell(
               onTap: () {
-                Get.back();
-                Get.offAll(() => EmpLogin());
+                logoutApi(context);
               },
               child: Container(
                   decoration: BoxDecoration(

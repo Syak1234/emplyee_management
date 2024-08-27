@@ -5,6 +5,7 @@ import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
 import 'package:elegant_notification/resources/stacked_options.dart';
 import 'package:employee_management/color/color.dart';
+import 'package:employee_management/employee/emp_api/breaktime.dart';
 import 'package:employee_management/employee/emp_model/breaktimemodel.dart';
 import 'package:employee_management/getx/getx.dart';
 import 'package:flutter/cupertino.dart';
@@ -121,7 +122,8 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                         child: Card(
                           elevation: 10,
                           child: InkWell(
-                            onTap: () {
+                            onTap: () async {
+                              await breaktime(context, 0);
                               getx.endtime.value = true;
                               _startTime = DateTime(
                                   DateTime.now().year,
@@ -160,7 +162,8 @@ class _EmpBreakTimeState extends State<EmpBreakTime> {
                         child: Card(
                           elevation: 10,
                           child: InkWell(
-                            onTap: () {
+                            onTap: () async {
+                              await breaktime(context, 0);
                               Get.back();
                               getx.endtime.value = false;
                               _endTime = DateTime(

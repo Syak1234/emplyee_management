@@ -272,7 +272,7 @@ class Dashboard extends StatelessWidget {
       required Color color2,
       required IconData icon,
       required void Function()? onTap}) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
       child: Container(
         width: MediaQuery.of(context).size.width *

@@ -1,3 +1,5 @@
+import 'package:employee_management/admin/admin_model/usermodel.dart';
+import 'package:employee_management/employee/emp_model/emploginmodel.dart';
 import 'package:employee_management/tool/bulk_mail_sender.dart';
 import 'package:employee_management/tool/bulk_whatsApp_sender.dart';
 import 'package:employee_management/tool/googlemap.dart';
@@ -19,10 +21,11 @@ import 'package:sidebarx/sidebarx.dart';
 import 'emp_helppage.dart';
 
 class EmpDashboard extends StatefulWidget {
-  const EmpDashboard({super.key});
+  UserDetails user;
+  EmpDashboard(this.user, {super.key});
 
   @override
-  State<EmpDashboard> createState() => _EmpDashboardState();
+  State<EmpDashboard> createState() => _EmpDashboardState(user);
 }
 
 class _EmpDashboardState extends State<EmpDashboard> {
@@ -31,6 +34,8 @@ class _EmpDashboardState extends State<EmpDashboard> {
   final _key = GlobalKey<ScaffoldState>();
 
   List<Widget> page = [];
+  UserDetails user;
+  _EmpDashboardState(this. user);
 
   @override
   void initState() {
