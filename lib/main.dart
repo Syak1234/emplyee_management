@@ -21,6 +21,7 @@ void main() {
     // appWindow.size = initialSize;
     appWindow.alignment = Alignment.center;
     appWindow.show();
+    // appWindow.isVisible=true;
   });
 }
 
@@ -34,23 +35,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Employee Management',
       theme: theme,
-      home: Dashboard(),
+      home: EmpLogin(),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

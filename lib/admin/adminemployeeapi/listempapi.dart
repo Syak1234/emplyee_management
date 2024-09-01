@@ -16,13 +16,11 @@ Future listEmployee(BuildContext context) async {
   //     return Center(child: CircularProgressIndicator());
   //   },
   // );
-
+  String token = await getx.getuseralldetails('token');
+  ;
   var res = await http.get(
     Uri.parse(UrlLink.main + "/api/Account/users"),
-    headers: {
-      'Authorization':
-          'Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNheWFrbWlzaHJhOTk5NTQ4NjQ2NjhAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6InNheWFrbWlzaHJhOTk5NTQ4NjQ2NjhAZ21haWwuY29tIiwic3ViIjoiN2YzN2NkMTMtMDA1NS00NjM0LWE4MGItNzIwOWVjNDM2YTU3IiwibmFtZWlkIjoiN2YzN2NkMTMtMDA1NS00NjM0LWE4MGItNzIwOWVjNDM2YTU3IiwibmJmIjoxNzI0NjkxMjE0LCJleHAiOjE3MjUyOTYwMTQsImlhdCI6MTcyNDY5MTIxNCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo1MDUzIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo1MDUzIn0.ySn7o-FSu1Tt2oxipvitcwwP76gMYwIuExiw_mq9Jdjk5AqsAEnARmO4_DgkmxBQw0y2nHLmNiu-I2vLbfmVVw',
-    },
+    headers: {'Authorization': 'Bearer $token'},
   );
 
   // Navigator.pop(context); // Close the loading dialog

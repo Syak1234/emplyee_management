@@ -62,6 +62,7 @@ class _AdminEmphomePageState extends State<AdminEmphomePage> {
               toolbarHeight: 65,
               leading: IconButton(
                   onPressed: () {
+                    getx.adminEmpslidebox.value = 0;
                     Get.back();
                   },
                   icon: Icon(Icons.arrow_back)),

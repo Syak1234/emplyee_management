@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:employee_management/employee/Emplogin.dart';
@@ -28,8 +29,9 @@ Future logoutApi(context) async {
   );
   print(res.body);
   if (res.statusCode == 200) {
-    await getx.clearSharedPreferences();
+    await getx.clearAllExcept(['passwordid', 'usernameid']);
     showNotification(context, 'Logout', res.body.toString(), 0);
+
     Get.offAll(() => EmpLogin());
   } else {
     showNotification(context, 'Logout', res.body.toString(), 1);

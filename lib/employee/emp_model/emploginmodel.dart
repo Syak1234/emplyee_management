@@ -5,6 +5,7 @@ class UserDetails {
   final String email;
   final String mobile;
   final String token;
+  final String role;
 
   UserDetails({
     required this.name,
@@ -13,6 +14,7 @@ class UserDetails {
     required this.email,
     required this.mobile,
     required this.token,
+    required this.role
   });
 
   // Factory constructor to create a User object from a JSON response
@@ -24,6 +26,7 @@ class UserDetails {
       email: json['email'],
       mobile: json['mobile'],
       token: json['token'],
+      role: json['role']
     );
   }
 }

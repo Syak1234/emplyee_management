@@ -18,6 +18,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Getx extends GetxController {
+  RxList<String> adminattendanceEmplist = <String>[].obs;
   RxList<User> users = <User>[].obs;
   RxList projectlist = <Project>[].obs;
   var projecttypelist = <String>[].obs;
@@ -67,8 +68,36 @@ class Getx extends GetxController {
     sp.clear();
   }
 
-  Future<void> loginApi(
-      BuildContext context, String email, String password) async {
+  Future<void> saveRememberme(String username, String password) async {
+    print('Saving username and password');
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    await sp.setString('usernameid', username);
+    await sp.setString('passwordid', password);
+    // Optionally fetch data after saving
+  }
+
+  Future<void> removedata() async {
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    sp.remove('passwordid');
+    sp.remove('usernameid');
+
+    // Refresh UI with loaded data
+  }
+Future<void> clearAllExcept(List<String> keysToKeep) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  
+  // Get all keys stored in SharedPreferences
+  final allKeys = prefs.getKeys();
+  
+  // Loop through all keys and remove those not in the keysToKeep list
+  for (String key in allKeys) {
+    if (!keysToKeep.contains(key)) {
+      await prefs.remove(key);
+    }
+  }
+}
+  Future<void> loginApi(BuildContext context, String email, String password,
+      bool logincheckbox) async {
     try {
       late SharedPreferences sp;
       sp = await SharedPreferences.getInstance();
@@ -113,9 +142,20 @@ class Getx extends GetxController {
         sp.setString('userid', user.userId);
         sp.setString('email', user.email);
         sp.setString('token', user.token);
-        sp.setString('role', user.token);
+        sp.setString('role', user.role);
         sp.setString('ph', user.mobile);
-        Get.to(() => EmpDashboard(user));
+        if (logincheckbox) {
+          saveRememberme(email, password);
+        } else {
+          removedata();
+        }
+        // var role = jsondata['role'];
+        if (user.role == 'Admin') {
+          Get.offAll(() => Dashboard());
+        } else {
+          Get.offAll(() => EmpDashboard(user));
+        }
+
         // Handle successful login (e.g., navigate to a different page, save tokens)
       } else {
         // Handle errors (e.g., show an error message)
@@ -126,6 +166,8 @@ class Getx extends GetxController {
       Get.back();
     }
   }
+
+ 
 
   Future<void> signUpApi(
       BuildContext context,

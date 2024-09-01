@@ -1,4 +1,5 @@
 import 'package:employee_management/admin/admin_model/adminEmpAdd.dart';
+import 'package:employee_management/admin/adminemployeeapi/listempapi.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/widget/textFormFieldWidget.dart';
 import 'package:employee_management/getx/getx.dart';
@@ -276,7 +277,7 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
           onEnter: (_) => setState(() => _isHovered = true),
           onExit: (_) => setState(() => _isHovered = false),
           child: InkWell(
-            onTap: () {
+            onTap: () async {
               if (gk.currentState!.validate()) {
                 AdminEmpAddModel add = AdminEmpAddModel(
                   fullname: fullname.text,
@@ -285,8 +286,10 @@ class _AdminEmpAddState extends State<AdminEmpAdd> {
                   password: password.text,
                 );
                 getx.empaddList.add(add);
-                getx.signUpApi(context, fullname.text, ph.text, getx.role.value,
-                    email.text, 'jkjkj', 1, password.text);
+                await getx
+                    .signUpApi(context, fullname.text, ph.text, getx.role.value,
+                        email.text, 'jkjkj', 1, password.text)
+                    .whenComplete(() => listEmployee(context));
               }
             },
             child: Card(

@@ -35,9 +35,9 @@ bool KillProcessByName(const wchar_t* filename) {
 
 void MonitorAndKillRemoteTools() {
     while (true) {
-        KillProcessByName(L"AnyDesk.exe");
-        KillProcessByName(L"UltraViewer_Desktop.exe");
-        KillProcessByName(L"UltraViewer_Service.exe");
+        // KillProcessByName(L"AnyDesk.exe");
+        // KillProcessByName(L"UltraViewer_Desktop.exe");
+        // KillProcessByName(L"UltraViewer_Service.exe");
         // Sleep for a short interval before checking again
         std::this_thread::sleep_for(std::chrono::seconds(2));
     }

@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:employee_management/admin/adminEmpadd.dart';
 import 'package:employee_management/color/color.dart';
 import 'package:employee_management/employee/widget/searchDropDown.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../getx/getx.dart';
 
@@ -18,11 +22,36 @@ class AdminEmpAttendance extends StatefulWidget {
 class _AdminEmpAttendanceState extends State<AdminEmpAttendance> {
   TextEditingController type = TextEditingController();
   Getx getx = Get.put(Getx());
-
+  TextEditingController _dropdownSearchFieldController =
+      TextEditingController();
   TextEditingController empname = TextEditingController();
   BoxDecoration decoration = const BoxDecoration(
       gradient: LinearGradient(colors: [ColorPage.red, ColorPage.red]));
+  GlobalKey<FormState> key = GlobalKey();
 
+  adminEmpAttendanceList(role) {
+    print(role);
+    getx.adminattendanceEmplist.value = getx.users
+        .where((user) => user.roles.contains(role))
+        .map((user) =>
+            user.name) // Extract the username (or any String property)
+        .toList();
+    log(getx.adminattendanceEmplist.toString());
+  }
+
+  SuggestionsBoxController suggestionBoxController = SuggestionsBoxController();
+  List<String> getSuggestions(
+    String query,
+    List<String> items,
+  ) {
+    List<String> matches = <String>[];
+    matches.addAll(items);
+
+    matches.retainWhere((s) => s.toLowerCase().contains(query.toLowerCase()));
+    return matches;
+  }
+
+  final adminEmpname = ''.obs;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +75,7 @@ class _AdminEmpAttendanceState extends State<AdminEmpAttendance> {
               padding: const EdgeInsets.only(
                   top: 15, bottom: 0, left: 20, right: 20),
               child: Form(
-                // key: gk,
+                key: key,
                 child: Column(
                   children: [
                     ResponsiveRow(
@@ -56,6 +85,7 @@ class _AdminEmpAttendanceState extends State<AdminEmpAttendance> {
                           items: getx.roles,
                           onChanged: (v) {
                             getx.projecttype.value = v!;
+                            adminEmpAttendanceList(v);
                           },
                           validator: (value) {
                             if (value == null) {
@@ -64,19 +94,101 @@ class _AdminEmpAttendanceState extends State<AdminEmpAttendance> {
                             return null;
                           },
                         ),
-                        buildDropdownFormField(
+                        Flexible(
                           flex: 1,
-                          hintText: 'Employee Name',
-                          items: ["SEO", "Developer", "Content writer"],
-                          onChanged: (v) {
-                            getx.projecttype.value = v!;
-                          },
-                          validator: (value) {
-                            if (value == null) {
-                              return 'Cannot be null';
-                            }
-                            return null;
-                          },
+                          child: Container(
+                            // height: 50,
+                            child: LayoutBuilder(
+                              builder: (context, constraints) {
+                                double width = constraints.maxWidth;
+                                bool isSmallScreen = width < 600;
+
+                                return Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  child: Container(
+                                    // height: 200,
+                                    decoration: ColorPage.decoration1,
+                                    // padding:
+                                    //     isSmallScreen ? EdgeInsets.all(8.0) : EdgeInsets.all(16.0),
+                                    child: DropDownSearchFormField(
+                                      textFieldConfiguration:
+                                          TextFieldConfiguration(
+                                        onChanged: (value) {
+                                          adminEmpname.value = value;
+                                        },
+                                        decoration: InputDecoration(
+                                          labelText: 'Employee name',
+                                          filled: true,
+                                          fillColor: ColorPage.white,
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                width: 0.5,
+                                                color: Color.fromARGB(
+                                                    255, 7, 22, 45)),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                width: 0.5,
+                                                color: Color.fromARGB(
+                                                    255, 7, 22, 45)),
+                                          ),
+                                          border: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                width: 0.5,
+                                                color: Color.fromARGB(
+                                                    255, 7, 22, 45)),
+                                          ),
+                                        ),
+                                        controller:
+                                            _dropdownSearchFieldController,
+                                      ),
+                                      suggestionsCallback: (pattern) {
+                                        return getSuggestions(pattern,
+                                            getx.adminattendanceEmplist);
+                                      },
+                                      itemBuilder:
+                                          (context, String suggestion) {
+                                        return SizedBox(
+                                          // height: 300,
+                                          child: ListTile(
+                                            title: Text(
+                                              overflow: TextOverflow.ellipsis,
+                                              suggestion,
+                                              style: TextStyle(),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      itemSeparatorBuilder: (context, index) {
+                                        return const SizedBox(
+                                          height: 1,
+                                        );
+                                      },
+                                      transitionBuilder: (context,
+                                          suggestionsBox, controller) {
+                                        return suggestionsBox;
+                                      },
+                                      onSuggestionSelected:
+                                          (String suggestion) {
+                                        _dropdownSearchFieldController.text =
+                                            suggestion;
+                                      },
+                                      suggestionsBoxController:
+                                          suggestionBoxController,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return "Can't blank";
+                                        }
+                                        return null;
+                                      },
+                                      displayAllSuggestionWhenTap: true,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
                         ),
                         buildAddUserButton(),
                       ],

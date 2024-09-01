@@ -32,96 +32,98 @@ class _ForGetPasswordState extends State<ForGetPassword> {
               borderRadius: BorderRadius.circular(10)
               // color: Colors.blue,
               ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Forget Password',
-                textScaler: TextScaler.linear(2),
-                style: TextStyle(color: ColorPage.white),
-              ),
-              SizedBox(
-                height: 1,
-              ),
-              Container(
-                // width: ,
-                child: Text(
-                  "A verification code has been sent to ${widget.forgetpassword}. Please check your inbox and follow the instructions to complete the verification process.",
-                  style: TextStyle(color: Color.fromARGB(255, 176, 174, 174)),
-                  textAlign: TextAlign.center,
-                  // textScaler: TextScaler.linear(2),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Forget Password',
+                  textScaler: TextScaler.linear(2),
+                  style: TextStyle(color: ColorPage.white),
                 ),
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              OtpTextField(
-                textStyle: TextStyle(color: ColorPage.white),
-                numberOfFields: 5,
-                borderColor: Color(0xFF512DA8),
-                //set to true to show as box or false to show as dash
-                showFieldAsBox: true,
-                fieldWidth: 50, borderRadius: BorderRadius.circular(10),
-                focusedBorderColor: ColorPage.red,
-                enabledBorderColor: Colors.grey,
-                // enabledBorderColor: ,
-                //runs when a code is typed in
-                onCodeChanged: (String code) {
-                  //handle validation or checks here
-                },
-                //runs when every textfield is filled
-                onSubmit: (String verificationCode) {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text("Verification Code"),
-                          content: Text('Code entered is $verificationCode'),
-                        );
-                      });
-                }, // end onSubmit
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              Container(
-                  width: 300 - 10,
-                  child: ButtonWidget(
-                    'Submit',
-                    () {},
-                    radius: 10,
-                  )),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Didn't receive the email? ",
-                    style: TextStyle(color: ColorPage.white),
+                SizedBox(
+                  height: 1,
+                ),
+                Container(
+                  // width: ,
+                  child: Text(
+                    "A verification code has been sent to ${widget.forgetpassword}. Please check your inbox and follow the instructions to complete the verification process.",
+                    style: TextStyle(color: Color.fromARGB(255, 176, 174, 174)),
+                    textAlign: TextAlign.center,
+                    // textScaler: TextScaler.linear(2),
                   ),
-                  InkWell(
-                    onTap: () {},
-                    child: Text(
-                      ' Click here',
-                      style: TextStyle(
-                          color: ColorPage.red, fontWeight: FontWeight.bold),
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              TextButton.icon(
-                  onPressed: () {
-                    Get.back();
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                OtpTextField(
+                  textStyle: TextStyle(color: ColorPage.white),
+                  numberOfFields: 5,
+                  borderColor: Color(0xFF512DA8),
+                  //set to true to show as box or false to show as dash
+                  showFieldAsBox: true,
+                  fieldWidth: 50, borderRadius: BorderRadius.circular(10),
+                  focusedBorderColor: ColorPage.red,
+                  enabledBorderColor: Colors.grey,
+                  // enabledBorderColor: ,
+                  //runs when a code is typed in
+                  onCodeChanged: (String code) {
+                    //handle validation or checks here
                   },
-                  icon: Icon(Icons.arrow_back),
-                  label: Text('Back to log in'))
-            ],
+                  //runs when every textfield is filled
+                  onSubmit: (String verificationCode) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("Verification Code"),
+                            content: Text('Code entered is $verificationCode'),
+                          );
+                        });
+                  }, // end onSubmit
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                Container(
+                    width: 300 - 10,
+                    child: ButtonWidget(
+                      'Submit',
+                      () {},
+                      radius: 10,
+                    )),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Didn't receive the email? ",
+                      style: TextStyle(color: ColorPage.white),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Text(
+                        ' Click here',
+                        style: TextStyle(
+                            color: ColorPage.red, fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                TextButton.icon(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: Icon(Icons.arrow_back),
+                    label: Text('Back to log in'))
+              ],
+            ),
           ),
         )),
       ),

@@ -14,7 +14,8 @@ Flexible buildDropdownFormField(
       TextEditingController();
 
   SuggestionsBoxController suggestionBoxController = SuggestionsBoxController();
-  return Flexible(
+  return 
+  Flexible(
     flex: flex,
     child: Container(
       // height: 50,
@@ -32,6 +33,7 @@ Flexible buildDropdownFormField(
               //     isSmallScreen ? EdgeInsets.all(8.0) : EdgeInsets.all(16.0),
               child: DropDownSearchFormField(
                 textFieldConfiguration: TextFieldConfiguration(
+                  
                   decoration: InputDecoration(
                     labelText: hintText,
                     filled: true,
@@ -88,6 +90,7 @@ Flexible buildDropdownFormField(
       ),
     ),
   );
+
 }
 
 List<String> getSuggestions(
