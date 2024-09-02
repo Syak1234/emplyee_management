@@ -83,19 +83,21 @@ class Getx extends GetxController {
 
     // Refresh UI with loaded data
   }
-Future<void> clearAllExcept(List<String> keysToKeep) async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  
-  // Get all keys stored in SharedPreferences
-  final allKeys = prefs.getKeys();
-  
-  // Loop through all keys and remove those not in the keysToKeep list
-  for (String key in allKeys) {
-    if (!keysToKeep.contains(key)) {
-      await prefs.remove(key);
+
+  Future<void> clearAllExcept(List<String> keysToKeep) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Get all keys stored in SharedPreferences
+    final allKeys = prefs.getKeys();
+
+    // Loop through all keys and remove those not in the keysToKeep list
+    for (String key in allKeys) {
+      if (!keysToKeep.contains(key)) {
+        await prefs.remove(key);
+      }
     }
   }
-}
+
   Future<void> loginApi(BuildContext context, String email, String password,
       bool logincheckbox) async {
     try {
@@ -166,8 +168,6 @@ Future<void> clearAllExcept(List<String> keysToKeep) async {
       Get.back();
     }
   }
-
- 
 
   Future<void> signUpApi(
       BuildContext context,
